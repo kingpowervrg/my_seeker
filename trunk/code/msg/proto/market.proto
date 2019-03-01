@@ -1,0 +1,193 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "MarketMsg";
+
+import "options.proto";
+import "status.proto";
+
+
+message DiscountInfo{
+
+	int32 discountCost=1; //'折扣后额度',
+	int32 discount=2; //'折扣',
+	int64 discountStart=3; //'折扣开始时间',
+	int64 discountEnd=4; //'折扣结束',
+	string discountIcon=5; //'折扣标签',
+
+}
+
+enum Category{
+
+	CASH = 0; // 纸钞
+	COIN = 1; //金币
+	VIT = 2; //体力
+	COMMON =3; 
+	BLACK=4;
+
+}
+
+enum CostType{
+	COST_CASH = 0; // 纸钞
+	COST_COIN = 1; //金币
+	COST_DOLLAR = 2;
+}
+
+message MarketItemMsg{
+	int64 id = 1;
+	int64 sellId=2; //物品，就是物品ID
+	int32 sellCount=3; //数量
+	CostType costType=4;  //'花费类型',
+	int32 cost=5; //'花费额度',
+	int32 buyLimit=6; //购买次数限制
+	DiscountInfo discountInfo=7; 
+	int32 maxLimit=8;//最大次数限制
+}
+
+message MarketBlack{
+	int64 id = 1;
+	int64 lastUpdateTime =2 ; //最近刷新时间
+	int64 nextUpdateTime =3;//下次刷新时间
+	int32 freshCost=4 ;//刷新花费
+	int32 freshLimit=5 ;//刷新花费
+}
+
+/**商场列表*/
+message MarketRequest{
+	option(messageId) = 1701;
+	option (serverTarget)="player/market/list";
+	Category category=1;
+}
+
+message MarketResponse{
+	option(messageId) = 1702;
+	ResponseStatus responseStatus=1;
+	repeated MarketItemMsg marketItems=2;
+	MarketBlack marketBlack=3;
+	Category category=4;
+}
+
+
+/**购买**/
+message MarkeBuyRequest{
+	option(messageId) = 1703;
+	option (serverTarget)="player/market/buy";
+	int64 marketItemId=1;
+	int32 count=2;
+}
+
+message MarkeBuyResponse{
+	option(messageId) = 1704;
+	ResponseStatus responseStatus=1;
+	PlayerPropMsg props=2;
+}
+
+
+/**fresh**/
+message MarkeFreshRequest{
+	option(messageId) = 1705;
+	option (serverTarget)="player/market/black/fresh";
+}
+
+message MarkeFreshResponse{
+	option(messageId) = 1706;
+	ResponseStatus responseStatus=1;
+	PlayerBaseInfo playerBaseInfo=2;
+	MarketBlack MarketBlack=3;
+	repeated MarketItemMsg marketItems=4;
+}
+
+
+/***lotto***/
+message LottoItemProto{
+	int64 propId=1 ;
+	int32 count=2;
+	bool special=3;
+	int32 lucky=4;
+	int64 id=5;
+}
+
+
+message LottoRequest{
+	option(messageId) = 1707;
+	option (serverTarget)="player/lotto/get";
+	CostType costType=1;
+}
+  
+message LottoResponse{
+	option(messageId) = 1708;
+	ResponseStatus responseStatus=1;
+	CostType costType=2;
+	int32 costValue=3;
+	int64 lottoId = 4;
+	repeated LottoItemProto items=5;
+	int32 lucky=6;
+
+}
+
+
+/***lottoBuy***/
+message LottoBuyRequest{
+	option(messageId) = 1709;
+	option (serverTarget)="player/lotto/buy";
+	int64 lottoId=1;
+}
+
+message LottoBuyResponse{
+	option(messageId) = 1710;
+	ResponseStatus responseStatus=1;
+	repeated PlayerPropMsg props= 2;
+	int64 id =3;
+	int32 lottoCount = 4;
+}
+
+/**商场单个商品信息*/
+message CSMarketItemRequest{
+	option(messageId) = 1711;
+	option (serverTarget)="player/market/item";
+	int64 propId=1;
+}
+
+message SCMarketItemResponse{
+	option(messageId) = 1712;
+	ResponseStatus responseStatus=1;
+	MarketItemMsg marketItems=2;
+}
+
+
+message CSGooglePayChargeRequest{
+	option(messageId) = 1713;
+	option (serverTarget)="player/charge/google";
+	string jsonData=1;
+	string signature=2;
+}
+
+message SCGooglePayChargeResponse{
+	option(messageId) = 1714;
+	ResponseStatus responseStatus=1;
+	string productId=2;
+}
+
+message CSIOSPayChargeRequest{
+	option(messageId) = 1715;
+	option (serverTarget)="player/charge/ios";
+	string jsonData=1;
+}
+
+message SCIOSPayChargeResponse{
+	option(messageId) = 1716;
+	ResponseStatus responseStatus=1;
+	string productId=2;
+	string jsonData=3;
+}
+
+
+
+
+
+
+
+
+
+
+
+

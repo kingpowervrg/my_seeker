@@ -1,0 +1,23 @@
+{
+    "$types": {
+        "GOEditor.GOEPackV5, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": "1",
+        "EngineCore.Editor.PackBundleSetting, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": "2"
+    },
+    "$type": "1",
+    "SrcDir": "Assets/Res/Config",
+    "PackItems": [
+        {
+            "$type": "2",
+            "BundleName": "game_config",
+            "SubFolder": "",
+            "SearchFilters": "*.bytes|*.txt",
+            "NecessaryFilters": "",
+            "ExcludeFilters": "",
+            "SearchSubDir": false,
+            "MinSize": 0,
+            "MaxSize": 2147483647,
+            "PackType": "OneBunlde",
+            "CanForceReleaseBundle": false
+        }
+    ]
+}

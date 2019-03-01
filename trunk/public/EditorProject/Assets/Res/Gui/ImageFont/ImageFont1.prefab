@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1275050739194364}
+  m_IsPrefabParent: 1
+--- !u!1 &1275050739194364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4251367041368892}
+  - component: {fileID: 114828360728412078}
+  m_Layer: 0
+  m_Name: ImageFont1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4251367041368892
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275050739194364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114828360728412078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275050739194364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c00af12a72a19498ff774dd222a9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - sprite: {fileID: 21300000, guid: 1eb80bb78dab51944b96d821a69a1a18, type: 3}
+    value: :Normal0
+  - sprite: {fileID: 21300000, guid: 3a3e4874375d58f42986702ca18a3fb6, type: 3}
+    value: :Normal1
+  - sprite: {fileID: 21300000, guid: 14065a79b9f64934aa7a794aaae2e0de, type: 3}
+    value: :Normal2
+  - sprite: {fileID: 21300000, guid: d43c12f383f953f4ebcf104f02efed48, type: 3}
+    value: :Normal3
+  - sprite: {fileID: 21300000, guid: 2de68b020c37aa540b69b2d38aac140f, type: 3}
+    value: :Normal4
+  - sprite: {fileID: 21300000, guid: de3c6c6a66b5006419e951f14a2864a1, type: 3}
+    value: :Normal5
+  - sprite: {fileID: 21300000, guid: 832cc41a6a768e1498558103edc6dd14, type: 3}
+    value: :Normal6
+  - sprite: {fileID: 21300000, guid: 0cfe5f5422012394f9f56245e3722d8c, type: 3}
+    value: :Normal7
+  - sprite: {fileID: 21300000, guid: 477de35014006164ca7c0387a39634ca, type: 3}
+    value: :Normal8
+  - sprite: {fileID: 21300000, guid: 6f1c62cde566b154e84625a7f9b9dcac, type: 3}
+    value: :Normal9
+  - sprite: {fileID: 21300000, guid: 1373a5642b4f5e54ab3529909a91b65e, type: 3}
+    value: :Normal+
+  - sprite: {fileID: 21300000, guid: cf5b5fa22937fab4cb6e9ad18bd83dd5, type: 3}
+    value: :Normal-
+  - sprite: {fileID: 21300000, guid: eeb77cbdfe3460445a3d7b6086776d98, type: 3}
+    value: :Normal*
+  - sprite: {fileID: 21300000, guid: 92a5be71d7a52954a9ca8451d1170004, type: 3}
+    value: :Normal/

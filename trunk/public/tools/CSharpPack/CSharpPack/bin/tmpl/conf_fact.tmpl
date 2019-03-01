@@ -1,0 +1,47 @@
+using System.Collections.Generic;
+
+namespace SeekerGame
+{
+	public class ConfFact
+	{
+		static bool reloadStarted = false;
+		public static void Register()
+		{
+			@foreach (var m in Model.cls_name_list) 
+			{
+				@: @(m).Init();
+			}
+			
+		}
+		public static bool ResLoaded()
+		{
+			@foreach (var m in Model.cls_name_list) 
+		{
+		@: if(!@(m).resLoaded)
+			@:	return false;
+		}
+		return true;
+		}
+		public static void ReloadConfig()
+		{
+				@foreach (var m in Model.cls_name_list) 
+			{
+				@: @(m).Clear();
+				@: @(m).Init();
+			}
+			reloadStarted = true;
+		}
+		public static bool IsReloadCompleted()
+		{
+			if(reloadStarted)
+			{
+				if(ResLoaded())
+				{
+					reloadStarted = false;
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+}

@@ -1,0 +1,975 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821a9c47e80d5894fa9c9d979478334f, type: 3}
+  m_Name: FaYuanWai_01_0
+  m_EditorClassIdentifier: 
+  lightMapName: 
+  items:
+  - itemID: 10351
+    itemName: exhibit_10351
+    itemPos:
+    - pos: {x: -23.493, y: 0.22, z: -43.199}
+      type: 0
+      rotate: {x: 270, y: 247.1085, z: 0}
+      scale: {x: 3.317746, y: 3.317745, z: 3.317745}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02063095
+      tilingY: 0.02063095
+      offsetX: 0.09464597
+      offsetY: 0.1561466
+    - pos: {x: 199.64, y: 1.22, z: 8.1}
+      type: 0
+      rotate: {x: 270, y: 0, z: 0}
+      scale: {x: 3.347999, y: 3.348, z: 3.348}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02063095
+      tilingY: 0.02063095
+      offsetX: 0.0575366
+      offsetY: 0.6394764
+    - pos: {x: -82.167, y: 0.56, z: -42.59}
+      type: 0
+      rotate: {x: 270, y: 0, z: 0}
+      scale: {x: 2.591811, y: 2.591811, z: 2.591811}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01571882
+      tilingY: 0.01571882
+      offsetX: 0.05755579
+      offsetY: 0.6619565
+  - itemID: 10341
+    itemName: exhibit_10341
+    itemPos:
+    - pos: {x: 403.9, y: 34.3, z: -22.3}
+      type: 0
+      rotate: {x: 270, y: 282.3374, z: 0}
+      scale: {x: 2.534485, y: 2.534487, z: 2.534486}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0462664
+      tilingY: 0.0462664
+      offsetX: 0.05548333
+      offsetY: 0.4377298
+    - pos: {x: -23.6, y: 23.94, z: -41.7}
+      type: 0
+      rotate: {x: 270, y: 183, z: 0}
+      scale: {x: 1.809123, y: 1.809123, z: 1.809123}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03248492
+      tilingY: 0.03248492
+      offsetX: 0.04772467
+      offsetY: 0.937713
+    - pos: {x: -55.3, y: 24, z: -13.3}
+      type: 0
+      rotate: {x: 270, y: 183, z: 0}
+      scale: {x: 1.695157, y: 1.695156, z: 1.695156}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03051614
+      tilingY: 0.03051614
+      offsetX: 0.08874799
+      offsetY: 0.8273399
+    - pos: {x: 177.6, y: 26.96, z: -17.51}
+      type: 0
+      rotate: {x: 270, y: 183, z: 0}
+      scale: {x: 1.980056, y: 1.980057, z: 1.980057}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03642249
+      tilingY: 0.03642249
+      offsetX: -0.0001422753
+      offsetY: 0.9503716
+  - itemID: 10344
+    itemName: exhibit_10344
+    itemPos:
+    - pos: {x: 169.69, y: 6.65, z: -79.807}
+      type: 0
+      rotate: {x: 270, y: 278.136, z: 0}
+      scale: {x: 2.850662, y: 2.850662, z: 2.850662}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.05306505
+      tilingY: 0.05306505
+      offsetX: 0.04764428
+      offsetY: 0.8829697
+    - pos: {x: 3.2519, y: 5.53, z: -49.119}
+      type: 0
+      rotate: {x: 270.5024, y: 275.0553, z: -0.0003897725}
+      scale: {x: 2.39899, y: 2.398992, z: 2.39899}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.04422088
+      tilingY: 0.04422088
+      offsetX: -0.0001727378
+      offsetY: 0.2893713
+  - itemID: 10329
+    itemName: exhibit_10329
+    itemPos:
+    - pos: {x: -151.6, y: 0.9, z: -6.6}
+      type: 0
+      rotate: {x: 270, y: 148.4112, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.1318278
+      tilingY: 0.1318278
+      offsetX: 0.7211081
+      offsetY: 0.7618363
+    - pos: {x: 211.22, y: 1.3, z: -35.6}
+      type: 0
+      rotate: {x: 270, y: 119.9742, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.1318278
+      tilingY: 0.1318278
+      offsetX: -0.0005149525
+      offsetY: -0.0005149525
+  - itemID: 10340
+    itemName: exhibit_10340
+    itemPos:
+    - pos: {x: 111.1569, y: 0.3000002, z: -8.36}
+      type: 0
+      rotate: {x: 0, y: 208.7059, z: 0}
+      scale: {x: 9.294778, y: 9.294772, z: 9.294778}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01970897
+      tilingY: 0.01970897
+      offsetX: 0.05949333
+      offsetY: 0.2772762
+    - pos: {x: -68.29684, y: 0.875, z: -11.07475}
+      type: 0
+      rotate: {x: 357.7218, y: 174.3293, z: 359.9011}
+      scale: {x: 7.225094, y: 7.225087, z: 7.225094}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02069442
+      tilingY: 0.02069442
+      offsetX: 0.08340953
+      offsetY: 0.1327317
+    - pos: {x: -106.29, y: 0.18428, z: -62.5}
+      type: 0
+      rotate: {x: 0, y: 180.5673, z: 0}
+      scale: {x: 8.554964, y: 8.554963, z: 8.554964}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02463621
+      tilingY: 0.02463621
+      offsetX: 0.06435689
+      offsetY: 0.2361165
+    - pos: {x: 252.4144, y: 0.9799995, z: 3.401584}
+      type: 0
+      rotate: {x: 0, y: 184.1778, z: 0}
+      scale: {x: 10.48924, y: 10.48924, z: 10.48924}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0305489
+      tilingY: 0.0305489
+      offsetX: 0.05749786
+      offsetY: 0.6214981
+  - itemID: 10343
+    itemName: exhibit_10343
+    itemPos:
+    - pos: {x: -7.2, y: 62.62, z: -9.6}
+      type: 0
+      rotate: {x: 285.9518, y: 326.9679, z: 277.7392}
+      scale: {x: 24.05695, y: 24.05695, z: 24.05695}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02375785
+      tilingY: 0.02375785
+      offsetX: 0.1024463
+      offsetY: 0.3546192
+    - pos: {x: -56.44, y: 4.73, z: -102.99}
+      type: 0
+      rotate: {x: 341.5389, y: 246.3048, z: 164.6123}
+      scale: {x: 17.32771, y: 17.32769, z: 17.32771}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01682848
+      tilingY: 0.01682848
+      offsetX: 0.1132155
+      offsetY: 0.7503734
+    - pos: {x: -48.11, y: 0.72, z: -142.19}
+      type: 0
+      rotate: {x: 299.8386, y: 58.52881, z: 193.6247}
+      scale: {x: 18.84545, y: 18.84544, z: 18.84544}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0188083
+      tilingY: 0.0188083
+      offsetX: 0.06437965
+      offsetY: 0.8588783
+    - pos: {x: 54.06, y: 12.86, z: -20.31}
+      type: 0
+      rotate: {x: 288.7321, y: 34.91731, z: 220.2728}
+      scale: {x: 20.12843, y: 20.12842, z: 20.12842}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01979821
+      tilingY: 0.01979821
+      offsetX: 0.1073445
+      offsetY: 0.7304584
+  - itemID: 10332
+    itemName: exhibit_10332
+    itemPos:
+    - pos: {x: 181.31, y: 80.5, z: 45.97}
+      type: 0
+      rotate: {x: 270, y: 89.28826, z: 0}
+      scale: {x: 1.689761, y: 1.689761, z: 1.689761}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.06288008
+      tilingY: 0.06288008
+      offsetX: -0.0002456253
+      offsetY: 0.1873197
+    - pos: {x: 309.17, y: 33.14, z: 9.02}
+      type: 0
+      rotate: {x: 270, y: 182.067, z: 0}
+      scale: {x: 1.503101, y: 1.5031, z: 1.503101}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.05600257
+      tilingY: 0.05600257
+      offsetX: -0.00021876
+      offsetY: 0.6213987
+    - pos: {x: 410.1, y: 79.74, z: -11.8}
+      type: 0
+      rotate: {x: 270, y: 288.7208, z: 0}
+      scale: {x: 3.427496, y: 3.427495, z: 3.427496}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.1277252
+      tilingY: 0.1277252
+      offsetX: -0.0004989264
+      offsetY: 0.4923257
+  - itemID: 10333
+    itemName: exhibit_10333
+    itemPos:
+    - pos: {x: 253.62, y: 69.5, z: 44}
+      type: 0
+      rotate: {x: 270, y: 0, z: 0}
+      scale: {x: 2.23445, y: 2.234452, z: 2.234451}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.06882554
+      tilingY: 0.06882554
+      offsetX: -0.0002688497
+      offsetY: 0.7501703
+  - itemID: 10338
+    itemName: exhibit_10338
+    itemPos:
+    - pos: {x: -68.73, y: 0.91, z: -135.732}
+      type: 0
+      rotate: {x: 84.20133, y: 54.20838, z: 143.0997}
+      scale: {x: 1.879535, y: 1.879536, z: 1.879536}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01483966
+      tilingY: 0.01483966
+      offsetX: 0.1200592
+      offsetY: 0.2011792
+    - pos: {x: -46.8, y: 9.31, z: -9.88}
+      type: 0
+      rotate: {x: 13.75135, y: 358.1857, z: 95.35691}
+      scale: {x: 2.123084, y: 2.123083, z: 2.123083}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01681828
+      tilingY: 0.01681828
+      offsetX: 0.1058856
+      offsetY: 0.1327468
+    - pos: {x: 142.7, y: 1.87, z: -4.9}
+      type: 0
+      rotate: {x: 81.97259, y: 38.43185, z: 128.1573}
+      scale: {x: 2.245468, y: 2.245468, z: 2.245468}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01385035
+      tilingY: 0.01385035
+      offsetX: 0.1200631
+      offsetY: 0.2177847
+  - itemID: 10352
+    itemName: exhibit_10352
+    itemPos:
+    - pos: {x: -105.68, y: 1.36, z: -129.7}
+      type: 0
+      rotate: {x: 283.2904, y: 195.1479, z: 250.4088}
+      scale: {x: 2.488194, y: 2.488195, z: 2.488195}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01082611
+      tilingY: 0.01082611
+      offsetX: 0.1151654
+      offsetY: 0.6625559
+    - pos: {x: -57.66, y: 18.1, z: -4.87}
+      type: 0
+      rotate: {x: 358.9916, y: 174.0749, z: 41.53158}
+      scale: {x: 3.132013, y: 3.132012, z: 3.132012}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01377869
+      tilingY: 0.01377869
+      offsetX: 0.1132274
+      offsetY: 0.7658555
+    - pos: {x: 4.92, y: 14.49, z: -18.97}
+      type: 0
+      rotate: {x: 359.7744, y: 188.8771, z: 91.13775}
+      scale: {x: 2.141921, y: 2.141922, z: 2.141922}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.008857727
+      tilingY: 0.008857727
+      offsetX: 0.08345577
+      offsetY: 0.1455606
+    - pos: {x: 67.55, y: 8.34, z: -34.09}
+      type: 0
+      rotate: {x: 298.7335, y: 194.5973, z: 82.38925}
+      scale: {x: 3.118701, y: 3.118702, z: 3.118702}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01377869
+      tilingY: 0.01377869
+      offsetX: 0.117107
+      offsetY: 0.2519088
+    - pos: {x: -64.7, y: 0.51, z: -90.3}
+      type: 0
+      rotate: {x: 284.8318, y: 189.0918, z: 170.657}
+      scale: {x: 3.04704, y: 3.04704, z: 3.04704}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01377869
+      tilingY: 0.01377869
+      offsetX: 0.1171277
+      offsetY: 0.1696845
+  - itemID: 10330
+    itemName: exhibit_10330
+    itemPos:
+    - pos: {x: -48.31, y: -0.16, z: -19.5}
+      type: 0
+      rotate: {x: 270, y: 189.1715, z: 0}
+      scale: {x: 1.865455, y: 1.865456, z: 1.865454}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03637308
+      tilingY: 0.03637308
+      offsetX: -0.0001420823
+      offsetY: 0.2518205
+    - pos: {x: 394.77, y: 1.0752, z: -59.2}
+      type: 0
+      rotate: {x: 270, y: 280.2722, z: 0}
+      scale: {x: 2.766119, y: 2.76612, z: 2.76612}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.05406809
+      tilingY: 0.05406809
+      offsetX: -0.0002112035
+      offsetY: 0.4376993
+    - pos: {x: -128.11, y: 0.64, z: -65.02}
+      type: 0
+      rotate: {x: 270, y: 188.7167, z: 0}
+      scale: {x: 1.57099, y: 1.570989, z: 1.57099}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03047474
+      tilingY: 0.03047474
+      offsetX: 0.0848152
+      offsetY: 0.2518436
+  - itemID: 10331
+    itemName: exhibit_10331
+    itemPos:
+    - pos: {x: -27.89295, y: -0.07, z: -24.89863}
+      type: 0
+      rotate: {x: 270, y: 147.4096, z: 0}
+      scale: {x: 2.272136, y: 2.272137, z: 2.272137}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.06977959
+      tilingY: 0.06977959
+      offsetX: -0.0002725765
+      offsetY: 0.6789123
+    - pos: {x: 250.92, y: 1.52, z: -62.767}
+      type: 0
+      rotate: {x: 270, y: 144.8233, z: 0}
+      scale: {x: 3.310165, y: 3.310166, z: 3.310166}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.1012295
+      tilingY: 0.1012295
+      offsetX: -0.0003954279
+      offsetY: 0.3350265
+  - itemID: 10345
+    itemName: exhibit_10345
+    itemPos:
+    - pos: {x: -76.401, y: 0.94, z: -119.887}
+      type: 0
+      rotate: {x: 279.6528, y: 254.1472, z: 104.9281}
+      scale: {x: 4.145356, y: 4.145356, z: 4.145356}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01087261
+      tilingY: 0.01087261
+      offsetX: 0.1190982
+      offsetY: 0.2895015
+    - pos: {x: -85.1, y: 0.62, z: -69.9}
+      type: 0
+      rotate: {x: 68.49731, y: 97.87141, z: 339.7732}
+      scale: {x: 3.77521, y: 3.775211, z: 3.775211}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.009884193
+      tilingY: 0.009884193
+      offsetX: 0.04976608
+      offsetY: 0.1444926
+  - itemID: 10347
+    itemName: exhibit_10347
+    itemPos:
+    - pos: {x: -100.44, y: 2.38, z: -67.49}
+      type: 0
+      rotate: {x: 324.3453, y: 167.1573, z: 285.6531}
+      scale: {x: 9.729836, y: 9.729834, z: 9.729834}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01087731
+      tilingY: 0.01087731
+      offsetX: 0.1203022
+      offsetY: 0.13277
+    - pos: {x: -7.49, y: 13.6, z: -18.95}
+      type: 0
+      rotate: {x: 349.8073, y: 183.3696, z: 286.2063}
+      scale: {x: 6.648093, y: 6.648095, z: 6.648095}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.007910768
+      tilingY: 0.007910768
+      offsetX: 0.1203138
+      offsetY: 0.1454769
+    - pos: {x: -80.69, y: 10.18, z: -190.4}
+      type: 0
+      rotate: {x: 358.0683, y: 211.4244, z: 288.7508}
+      scale: {x: 5.205344, y: 5.490273, z: 5.205347}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.005933076
+      tilingY: 0.005933076
+      offsetX: 0.1031466
+      offsetY: 0.178665
+    - pos: {x: -36.74, y: 2.62, z: -114.66}
+      type: 0
+      rotate: {x: 342.0094, y: 209.2249, z: 288.2932}
+      scale: {x: 7.487129, y: 7.487136, z: 7.487136}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.008899613
+      tilingY: 0.008899613
+      offsetX: 0.1220355
+      offsetY: 0.2361779
+  - itemID: 10357
+    itemName: exhibit_10357
+    itemPos:
+    - pos: {x: 77.4, y: 0.3, z: -44.07}
+      type: 0
+      rotate: {x: 270, y: 198, z: 0}
+      scale: {x: 1.972195, y: 1.972194, z: 1.972195}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0413541
+      tilingY: 0.0413541
+      offsetX: 0.07015096
+      offsetY: 0.7502776
+    - pos: {x: 310.1, y: 1.18, z: -62.5}
+      type: 0
+      rotate: {x: 270, y: 198, z: 0}
+      scale: {x: 2.971327, y: 2.971326, z: 2.971327}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.06301577
+      tilingY: 0.06301577
+      offsetX: -0.0002461554
+      offsetY: 0.8201254
+  - itemID: 10362
+    itemName: exhibit_10362
+    itemPos:
+    - pos: {x: 26.13, y: 64.65, z: -20.34}
+      type: 0
+      rotate: {x: 270.7616, y: 180.001, z: 269.999}
+      scale: {x: 24.08294, y: 24.08292, z: 24.08292}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02718506
+      tilingY: 0.02718506
+      offsetX: 0.1112219
+      offsetY: 0.8530219
+    - pos: {x: 164.69, y: 56.7, z: 42.59}
+      type: 0
+      rotate: {x: 270, y: 93.56945, z: 0}
+      scale: {x: 26.78252, y: 26.78253, z: 26.78253}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03221933
+      tilingY: 0.03221933
+      offsetX: 0.1024132
+      offsetY: 0.404902
+    - pos: {x: 257.9, y: 36.22, z: 14.31}
+      type: 0
+      rotate: {x: 270, y: 90.40234, z: 0}
+      scale: {x: 29.2974, y: 29.29743, z: 29.29743}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03322618
+      tilingY: 0.03322618
+      offsetX: 0.1033858
+      offsetY: 0.4377807
+  - itemID: 200185
+    itemName: exhibit_200185
+    itemPos:
+    - pos: {x: -64.2, y: 0.35, z: -147.38}
+      type: 0
+      rotate: {x: 282.9485, y: 167.1216, z: 144.775}
+      scale: {x: 9.405457, y: 9.405457, z: 9.405457}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.007857896
+      tilingY: 0.007857896
+      offsetX: 0.1191099
+      offsetY: 0.3022086
+    - pos: {x: -46.15834, y: 56.65, z: -5.6795}
+      type: 0
+      rotate: {x: 1.60649, y: 183.9353, z: 192.1012}
+      scale: {x: 7.430699, y: 7.430703, z: 7.430699}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.005893422
+      tilingY: 0.005893422
+      offsetX: 0.1240004
+      offsetY: 0.3187889
+    - pos: {x: 2.6, y: 49.46, z: -9.17}
+      type: 0
+      rotate: {x: 345.8352, y: 185.5266, z: 322.2214}
+      scale: {x: 9.404155, y: 9.404164, z: 9.404158}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.007857896
+      tilingY: 0.007857896
+      offsetX: 0.09420186
+      offsetY: 0.1455645
+    - pos: {x: -79.71, y: 21.6, z: -191.19}
+      type: 0
+      rotate: {x: 359.1536, y: 263.5085, z: 48.74067}
+      scale: {x: 5.553766, y: 5.55376, z: 5.553765}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.003928948
+      tilingY: 0.003928948
+      offsetX: 0.04002371
+      offsetY: 0.1500983
+  - itemID: 200175
+    itemName: exhibit_200175
+    itemPos:
+    - pos: {x: 56.77, y: 15.16, z: -10.79}
+      type: 0
+      rotate: {x: 270, y: 280.2905, z: 0}
+      scale: {x: 3.960864, y: 3.960866, z: 3.960866}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0120058
+      tilingY: 0.0120058
+      offsetX: 0.1200703
+      offsetY: 0.1875184
+    - pos: {x: -27.39, y: 1.035, z: -129.51}
+      type: 0
+      rotate: {x: 1.062758, y: 124.962, z: 270}
+      scale: {x: 2.257985, y: 2.257983, z: 2.257985}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.007003381
+      tilingY: 0.007003381
+      offsetX: 0.0946992
+      offsetY: 0.1786608
+    - pos: {x: 45.44, y: 49.41, z: -9.71}
+      type: 0
+      rotate: {x: 359.5145, y: 270, z: 282.0242}
+      scale: {x: 4.468512, y: 4.468513, z: 4.46851}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01400676
+      tilingY: 0.01400676
+      offsetX: 0.1171061
+      offsetY: 0.26669
+    - pos: {x: 11.7, y: 1.39, z: -140.44}
+      type: 0
+      rotate: {x: 359.6853, y: 287.3354, z: 293.8915}
+      scale: {x: 3.328226, y: 3.328226, z: 3.328226}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01000483
+      tilingY: 0.01000483
+      offsetX: 0.04976561
+      offsetY: 0.1327734
+  - itemID: 10336
+    itemName: exhibit_10336
+    itemPos:
+    - pos: {x: -23.49, y: 4.53, z: -32.26}
+      type: 0
+      rotate: {x: 356.5529, y: 264.3389, z: 33.34348}
+      scale: {x: 5.495065, y: 5.495063, z: 5.495063}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01998474
+      tilingY: 0.01998474
+      offsetX: 0.03800787
+      offsetY: 0.2518845
+    - pos: {x: -33.89, y: 13, z: -6.36}
+      type: 0
+      rotate: {x: 349.067, y: 179.8125, z: 30.88447}
+      scale: {x: 5.93489, y: 5.934887, z: 5.934887}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02098398
+      tilingY: 0.02098398
+      offsetX: 0.1024571
+      offsetY: 0.33534
+    - pos: {x: 86.69, y: 25.01, z: -5.43}
+      type: 0
+      rotate: {x: 354.766, y: 179.3057, z: 31.03927}
+      scale: {x: 6.320269, y: 6.320272, z: 6.320272}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02298245
+      tilingY: 0.02298245
+      offsetX: 0.06436335
+      offsetY: 0.8202818
+    - pos: {x: 211.31, y: 31.06, z: 14.87}
+      type: 0
+      rotate: {x: 359.2896, y: 182.0627, z: 30.37426}
+      scale: {x: 6.386642, y: 6.38664, z: 6.386638}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02897787
+      tilingY: 0.02897787
+      offsetX: 0.0701993
+      offsetY: 0.7922134
+  - itemID: 200021
+    itemName: exhibit_200021
+    itemPos:
+    - pos: {x: -46.46, y: 4.02, z: -58.96}
+      type: 0
+      rotate: {x: 270, y: 296.7917, z: 0}
+      scale: {x: 11.6117, y: 11.6117, z: 11.6117}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02362653
+      tilingY: 0.02362653
+      offsetX: 0.1073296
+      offsetY: 0.7050674
+    - pos: {x: 17.23, y: 5.16, z: -85.69}
+      type: 0
+      rotate: {x: 270, y: 325.1674, z: 0}
+      scale: {x: 13.15567, y: 13.15567, z: 13.15567}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02756428
+      tilingY: 0.02756428
+      offsetX: 0.1024314
+      offsetY: 0.3756403
+    - pos: {x: -4.7, y: 7.38, z: -39.94}
+      type: 0
+      rotate: {x: 270, y: 289.6067, z: 0}
+      scale: {x: 11.96025, y: 11.96025, z: 11.96025}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02461096
+      tilingY: 0.02461096
+      offsetX: 0.06826324
+      offsetY: 0.1561311
+  - itemID: 200013
+    itemName: exhibit_200013
+    itemPos:
+    - pos: {x: 101.9, y: 85.7, z: -6.57}
+      type: 0
+      rotate: {x: 312.9039, y: 16.9308, z: 247.5823}
+      scale: {x: 12.97416, y: 12.97416, z: 12.97416}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03248015
+      tilingY: 0.03248015
+      offsetX: 0.03405281
+      offsetY: 0.1561004
+    - pos: {x: -66.3, y: 69.5, z: 43.23}
+      type: 0
+      rotate: {x: 314.9811, y: 17.41194, z: 247.3122}
+      scale: {x: 10.53791, y: 10.53789, z: 10.53791}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02657467
+      tilingY: 0.02657467
+      offsetX: 0.1043884
+      offsetY: 0.6790811
+    - pos: {x: -60.6, y: 29.92, z: 10.78}
+      type: 0
+      rotate: {x: 313.4406, y: 105.0607, z: 248.0681}
+      scale: {x: 12.71445, y: 12.71445, z: 12.71445}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0314959
+      tilingY: 0.0314959
+      offsetX: 0.07116603
+      offsetY: 0.6790619
+  - itemID: 200056
+    itemName: exhibit_200056
+    itemPos:
+    - pos: {x: -46.99, y: 2.17, z: -37.494}
+      type: 0
+      rotate: {x: 270, y: 295.2725, z: 0}
+      scale: {x: 4.817801, y: 4.8178, z: 4.757021}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01788397
+      tilingY: 0.01788397
+      offsetX: 0.1034458
+      offsetY: 0.4720204
+    - pos: {x: -12.43, y: 1.7, z: -150.56}
+      type: 0
+      rotate: {x: 270, y: 317.9357, z: 0}
+      scale: {x: 3.666098, y: 3.666103, z: 3.666101}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01390976
+      tilingY: 0.01390976
+      offsetX: 0.1151533
+      offsetY: 0.6215631
+    - pos: {x: -91.46, y: 2.8, z: -45}
+      type: 0
+      rotate: {x: 270, y: 328.065, z: 0}
+      scale: {x: 4.018624, y: 4.018624, z: 4.018624}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01490331
+      tilingY: 0.01490331
+      offsetX: 0.1073637
+      offsetY: 0.3187537
+    - pos: {x: 33.89, y: 2.35, z: -49.94}
+      type: 0
+      rotate: {x: 270, y: 320.8794, z: 0}
+      scale: {x: 4.928122, y: 4.928122, z: 4.928122}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01788397
+      tilingY: 0.01788397
+      offsetX: -0.00006985926
+      offsetY: 0.9309523
+  - itemID: 200200
+    itemName: exhibit_200200
+    itemPos:
+    - pos: {x: -39.1, y: 30.86, z: -136.4952}
+      type: 0
+      rotate: {x: 0, y: 292.6666, z: 0}
+      scale: {x: 3.850061, y: 3.850061, z: 3.850061}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+  - itemID: 200201
+    itemName: exhibit_200201
+    itemPos:
+    - pos: {x: -81.14599, y: 27.85, z: -190.0398}
+      type: 0
+      rotate: {x: 0.1546073, y: 197.9937, z: 359.524}
+      scale: {x: 3.918799, y: 3.918802, z: 3.918802}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+  - itemID: 200202
+    itemName: exhibit_200202
+    itemPos:
+    - pos: {x: -102.4392, y: 0.3, z: -139.13}
+      type: 0
+      rotate: {x: 0, y: 234.088, z: 0}
+      scale: {x: 3.868753, y: 3.868756, z: 3.868756}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+  - itemID: 200203
+    itemName: exhibit_200203
+    itemPos:
+    - pos: {x: 5.1033, y: 0.56, z: -103.09}
+      type: 0
+      rotate: {x: 0.5547349, y: 155.1261, z: 359.9231}
+      scale: {x: 4.169361, y: 4.169361, z: 4.169361}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+    - pos: {x: -72.78, y: 0.04721022, z: -65.15181}
+      type: 0
+      rotate: {x: 2.195193, y: 152.3326, z: 0.2494686}
+      scale: {x: 4.91516, y: 4.915159, z: 4.915159}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+    - pos: {x: -62.7, y: 0.06, z: -159.7}
+      type: 0
+      rotate: {x: 0, y: 273.4148, z: 0}
+      scale: {x: 3.870085, y: 3.870085, z: 3.870085}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+    - pos: {x: 51.641, y: 4.65, z: -36.14052}
+      type: 0
+      rotate: {x: 344.4989, y: 357.9797, z: 0.2122031}
+      scale: {x: 4.142673, y: 4.142672, z: 4.142672}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+    - pos: {x: 244.26, y: 54.36, z: 16.22}
+      type: 0
+      rotate: {x: 348.9795, y: 313.4893, z: 10.5595}
+      scale: {x: 5.868404, y: 5.868408, z: 5.868408}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0
+      tilingY: 0
+      offsetX: 0
+      offsetY: 0
+  - itemID: 10339
+    itemName: exhibit_10339
+    itemPos:
+    - pos: {x: 194.12, y: 4.21, z: 56.29}
+      type: 0
+      rotate: {x: -0.00002561321, y: 127.6502, z: 256.5477}
+      scale: {x: 3.340185, y: 3.340186, z: 3.340186}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.03274397
+      tilingY: 0.03274397
+      offsetX: -0.0001279061
+      offsetY: 0.1560993
+    - pos: {x: 45.08, y: 2.99, z: -125.13}
+      type: 0
+      rotate: {x: 0.000003415095, y: 314.8694, z: 254.4034}
+      scale: {x: 2.764349, y: 2.76435, z: 2.76435}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01686811
+      tilingY: 0.01686811
+      offsetX: 0.05559817
+      offsetY: 0.4757541
+  - itemID: 200096
+    itemName: exhibit_200096
+    itemPos:
+    - pos: {x: 67.47, y: 15.25, z: -20.76}
+      type: 0
+      rotate: {x: 270, y: 20.00776, z: 0}
+      scale: {x: 7.097081, y: 7.09708, z: 7.09708}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.02465441
+      tilingY: 0.02465441
+      offsetX: 0.1004896
+      offsetY: 0.7922303
+    - pos: {x: -105.9, y: 2.76, z: -9.99}
+      type: 0
+      rotate: {x: 270, y: 351.9594, z: 0}
+      scale: {x: 6.143881, y: 6.143882, z: 6.143882}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0207097
+      tilingY: 0.0207097
+      offsetX: 0.06094854
+      offsetY: 0.1327316
+    - pos: {x: -14.63, y: 1.95, z: -97.84}
+      type: 0
+      rotate: {x: 270, y: 50.99026, z: 0}
+      scale: {x: 4.0959, y: 4.095902, z: 4.095902}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01380647
+      tilingY: 0.01380647
+      offsetX: 0.1151537
+      offsetY: 0.6469541
+  - itemID: 200146
+    itemName: exhibit_200146
+    itemPos:
+    - pos: {x: 171.12, y: 6.72, z: 41.81}
+      type: 0
+      rotate: {x: 270, y: 163.2333, z: 0}
+      scale: {x: 4.045261, y: 4.045263, z: 4.045262}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01769951
+      tilingY: 0.01769951
+      offsetX: 0.0380168
+      offsetY: 0.270358
+    - pos: {x: 18.24, y: 4.59, z: -127.4}
+      type: 0
+      rotate: {x: 270, y: 281.0111, z: 0}
+      scale: {x: 2.845953, y: 2.845953, z: 2.845953}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01179967
+      tilingY: 0.01179967
+      offsetX: 0.1083523
+      offsetY: 0.2361666
+    - pos: {x: -62.27014, y: 5.57, z: 18.19981}
+      type: 0
+      rotate: {x: 270, y: 224.4109, z: 0}
+      scale: {x: 3.680409, y: 3.680413, z: 3.680413}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.0157329
+      tilingY: 0.0157329
+      offsetX: 0.08978229
+      offsetY: 0.3187504
+  - itemID: 200161
+    itemName: exhibit_200161
+    itemPos:
+    - pos: {x: -52.2, y: 2.72, z: -127.1}
+      type: 0
+      rotate: {x: 270, y: 231.8167, z: 0}
+      scale: {x: 4.108803, y: 4.108804, z: 4.108804}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01278628
+      tilingY: 0.01278628
+      offsetX: 0.07514079
+      offsetY: 0.661968
+    - pos: {x: 28.09, y: 14.37, z: -17.72}
+      type: 0
+      rotate: {x: 270, y: 106.2576, z: 0}
+      scale: {x: 5.125778, y: 5.125778, z: 5.125778}
+      percent: 100
+      lightIndex: 0
+      tilingX: 0.01672051
+      tilingY: 0.01672051
+      offsetX: 0.01946594
+      offsetY: 0.9309568

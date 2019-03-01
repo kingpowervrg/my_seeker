@@ -1,0 +1,300 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "OfficerMsg";
+
+import "options.proto";
+import "status.proto";
+import "scene.proto";
+
+
+/**查看玩家拥有的警员*/
+message CSOfficerListRequest{
+	option (messageId) = 1501;
+	option (serverTarget)="officer/list";
+	int64 playerId = 1;
+}
+
+message SCOfficerListResponse{
+	option (messageId) = 1502;
+	int64 playerId = 1;
+	repeated OfficerInfo officers = 2;
+}
+
+message OfficerInfo{
+	int64 playerOfficerId = 1;//警员id
+	int64 officerId = 2;//模板id，通过该id去警员配置表获取其他信息
+	int32 level = 3;//等级
+	int32 outsight = 4;//观察力
+	int32 willPower = 5;//意志力
+	int32 attention = 6;//注意力
+	int32 memory = 7;//记忆力
+	int32 vitConsume = 8;//派出一局消耗的体力值
+	int32 secondGain = 9;//派出一局增加的局内时长
+}
+
+/**查看玩家拥有的某个警员的信息*/
+message CSOfficerInfoRequest{
+	option (messageId) = 1503;
+	option (serverTarget)="officer/info";
+	int64 playerId = 1;
+	int64 playerOfficerId = 2;
+
+}
+
+message SCOfficerInfoResponse{
+	option (messageId) = 1504;
+	OfficerInfo office = 1;
+}
+
+message CSEventPhaseFeedbackRequest{
+	option (messageId) = 1507;
+	option (serverTarget)="officer/event/phase/feedback";
+	int64 eventId = 1;
+	repeated int64 playerOfficerId = 2;
+}
+
+
+//回复 事件
+message SCEventPhaseFeedbackResponse{
+	option (messageId) = 1508;
+	ResponseStatus ResponseStatus=1;
+	bool valuation = 2;//false表示普通，true表示完美
+	int32 totalScore = 3;//总得分
+	repeated PhaseInfo phaseInfos=4; //各阶段数据
+}
+//阶段事件体
+message PhaseInfo{
+	int32 phaseId =1;			//阶段
+	int64 officerTemplateId=2;  //警员模板ID
+	int32 phaseScore=3;			//阶段得分
+	int32 officerScore=4;       //警员自身得分
+	bool perfect=5;			    //是否完美
+	int32 perfectScore=6;		//完美加成分数
+	int64 phaseTemplateId =7;
+	repeated MatchWordScoreInfo matchWordScoreInfo=8; //匹配到的关键字，和每个关键字的得分
+}
+//关键字体
+message MatchWordScoreInfo{
+	int32 keyWordId =1;//关键字ID
+	int32 keyWordMatchScore=2;//关键字匹配得到分数
+}
+
+
+/**事件结算请求*/
+message CSEventRewardRequest{
+	option (messageId) = 1509;
+	option (serverTarget)="officer/event/reward";
+	int64 playerId = 1;
+	int64 eventId = 2;//事件id
+}
+
+message SCEventRewardResponse{
+	option (messageId) = 1510;	
+	ResponseStatus ResponseStatus=1;
+	int32 score = 2;//得分
+	int32 valuation = 3;//评价0表示过关失败，1表示过关，2表示完美过关	
+	repeated RewardItem rewards = 4;//掉落奖励
+	int32 exp = 5;
+	int32 vit = 6;
+	int32 coin = 7;
+	int32 cash = 8;
+	repeated SceneRewardComprise sceneRewardComprise = 9;
+}
+
+/**阶段奖励*/
+message RewardItem{
+	int64 propId = 1;
+	int32 num = 2;
+}
+
+/**警员合成*/
+message CSOfficerCombineRequest{
+	option (messageId) = 1505;
+	option (serverTarget)="officer/combine";
+	int64 playerId = 1;
+	int64 officerId = 2;
+}
+
+message SCOfficerCombineResponse{
+	option (messageId) = 1506;
+	int32 result = 1;//是否合成成功
+	int64 officeId =2;
+}
+
+message CSCombineInfoRequest{
+	option (messageId) = 1517;
+	option (serverTarget)="combine/list";
+}
+
+message SCCombineInfoResponse{
+	option (messageId) = 1518;
+	repeated int64 combineId=1;
+	repeated int32 count=2;
+	repeated int32 countLimit=3;
+	
+}
+
+message CSCombineRequest{
+	option (messageId) = 1519;
+	option (serverTarget)="combine/do";
+	int64 combineId=1;
+}
+
+message SCCombineResponse{
+	option (messageId) = 1520;
+	ResponseStatus result=1;
+	bool success=2;
+}
+
+
+
+
+/**警员升级请求*/
+message CSOfficerUpdateRequest{
+	option (messageId) = 1511;
+	option (serverTarget)="officer/update";
+	int64 playerId = 1;
+	int64 playerOfficerId = 2;
+}
+
+message SCOfficerUpdateResponse{
+	option (messageId) = 1512;
+	int32 result = 1;//是否升级成功
+	int64 officeId =2;
+	int32 level=3;
+}
+
+/**进入事件请求*/
+message CSEventEnterRequest{
+	option (messageId) = 1513;
+	option (serverTarget)="officer/event/enter";
+	int64 playerId = 1;
+	int64 eventId = 2;//事件id
+}
+
+message SCEventEnterResponse{
+	option (messageId) = 1514;	
+	int32 result = 1;//服务器验证结果，0表示失败，1表示成功，2表示体力值不足
+}
+
+message CSEventDropInfoRequest{
+	option (messageId) = 1515;
+	option (serverTarget)="officer/event/dropInfo";
+	int64 eventId = 1;
+}
+
+message SCEventDropInfoResponse{
+	option (messageId) = 1516;
+	repeated DropInfo perfectProps = 1;
+	repeated DropInfo normalProps = 2;
+	int64 eventId = 3;
+}
+
+message DropInfo{
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+enum InOrOutScene{
+	OUT_SCENE=0 ;//局外
+	IN_SCENE =1 ;//局内
+	
+}
+
+/**技能触发请求*/
+message CSSkillEmitRequest{
+	option (messageId) = 1601;
+	option (serverTarget)="skill/emit";
+	int64 propId = 1;
+	int32 count = 2;//数量
+	InOrOutScene inOrOutScene = 3 ;//局内还是局外
+}
+message SCSkillEmitResponse{
+	option (messageId) = 1602;
+	int32 result = 1;//服务器验证结果，0表示触发失败，1表示触发成功
+	int64 skillId = 2;//技能id
+	int64 propId = 3;//道具id
+}
+
+message CSSkillTimerEmitReq{
+	option (messageId) = 1603;
+	option (serverTarget)="skill/emit/timer";
+}
+
+message SCSkillTimerEmitResp{
+	option (messageId) = 1604;
+	int32 result = 1;//0表示触发失败，1表示触发成功
+	int64 skillId = 2;//技能id
+	int64 playerOfficerId = 3;//警员id
+}
+
+message CSReasoningRewardReq{
+	option (messageId) = 1605;
+	option (serverTarget)="officer/reasoning/reward";
+	int64 reasoningId = 1;//
+}
+
+
+//尸检 请求
+message CSFindEnterReq{
+	option (messageId) = 1606;
+	option (serverTarget)="officer/find/enter";
+	int64 findId = 1;//尸检id
+}
+
+//尸检 请求 回复
+message SCFindEnterResp{
+	option (messageId) = 1607;	
+	int32 result = 1;//服务器验证结果，0表示失败，1表示成功，2表示体力值不足
+}
+
+
+
+/**尸检结算请求*/
+message CSFindRewardReq{
+	option (messageId) = 1608;
+	option (serverTarget)="officer/find/reward";
+	int64 findId = 1;//尸检id
+	int32 result =2;//1成功 2失败
+	int32 foundNum =3;//找到的线索num
+	int32 totalNum =4;//总共的线索num
+}
+/**尸检结算请求回复*/
+message SCFindRewardResp{
+	option (messageId) = 1609;	
+	ResponseStatus ResponseStatus=1;
+	int32 vit = 2; //获得的体力值
+	repeated SceneRewardComprise sceneRewardComprise = 3;
+}
+
+/**反驳领取奖励请求*/
+message CSSkyEyeRewardReq{
+	option (messageId) = 1610;
+	option (serverTarget)="officer/skyEye/reward";
+	int64 skyEyeId = 1;//天眼id
+}
+/**反驳领取奖励请求返回*/
+message SCSkyEyeRewardReq{
+	option (messageId) = 1611;
+	int64 skyEyeId = 1;//天眼id
+	ResponseStatus ResponseStatus=2;//状态
+	repeated RewardItem items=3;//奖励
+}
+
+/**天眼请求*/
+message CSSkyEyeReq{
+	option (messageId) = 1612;
+	option (serverTarget)="officer/skyEye/list";
+}
+
+
+/**天眼请求返回*/
+message SCSkyEyeReq{
+	option (messageId) = 1613;
+	repeated int64 hasRewarded=1;//已领取了奖励的列表
+}
+
+
+
+
+

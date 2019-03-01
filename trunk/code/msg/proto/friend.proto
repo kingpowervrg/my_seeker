@@ -1,0 +1,291 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "FriendMsg";
+
+import "options.proto";
+import "status.proto";
+
+message PlayerFriendMsg{
+
+	int64 playerId = 1;
+	string name=2;
+	int32 level=3;
+	int32 gender =4;
+	string icon=5;
+	int64 titleId=6;
+	bool gift=7;
+	int64 statusTime=8;
+
+}
+
+enum FriendReqType {
+	APPLYING =0; //发送请求
+	AGREEING =1; //好友申请
+	ADDINFO = 2; //添加成功消息
+	ADDED = 3; //好友列表
+}
+
+/*好友列表*/
+message CSFriendRequest{
+	option (messageId) = 2301;
+	option (serverTarget)="player/friend/list";
+	FriendReqType type=1;
+}
+
+message SCFriendResponse {
+	option (messageId) = 2302;
+	ResponseStatus status= 1;
+	repeated  PlayerFriendMsg friends=2;
+	int32 limit=3;
+	int32 total=4;
+	int32 giftCountLeft=5;
+	FriendReqType Type = 6;
+	bool lastAgree = 7; //好友同意请求
+	bool addSwitch = 8; //true关闭申请
+}
+
+
+/**添加*/
+message CSFriendAddRequest{
+	option (messageId) = 2303;
+	option (serverTarget)="player/friend/add";
+	int64 playerId = 1;
+}
+
+message SCFriendAddResponse{
+	option (messageId) = 2304;
+	ResponseStatus status=1;
+}
+
+
+/**删除*/
+message CSFriendDelRequest{
+	option (messageId) = 2305;
+	option (serverTarget)="player/friend/del";
+	int64 playerId = 1;
+}
+
+message SCFriendDelResponse{
+	option (messageId) = 2306;
+	ResponseStatus status=1;
+}
+
+/**同意*/
+message CSFriendAgreeRequest{
+	option (messageId) = 2307;
+	option (serverTarget)="player/friend/agree";
+	int64 playerId = 1;
+}
+
+message SCFriendAgreeResponse{
+	option (messageId) = 2308;
+	ResponseStatus status=1;
+}
+
+/**删除请求*/
+message CSFriendDelApplyRequest{
+	option (messageId) = 2309;
+	option (serverTarget)="player/friend/delApply";
+	int64 friendId = 1; // 0表示删除全部
+}
+
+message SCFriendDelApplyResponse{
+	option (messageId) = 2310;
+	ResponseStatus status=1;
+}
+
+/**送礼列表**/
+message CSFriendGiftRequest{
+	option (messageId) = 2311;
+	option (serverTarget)="player/friend/gift/list";
+}
+
+message FriendGift{
+	PlayerFriendMsg playerFriends =1;
+	PlayerPropMsg playPropMsg = 2;
+	int64 giftId=3;
+}
+
+message SCFriendGiftResponse{
+	option (messageId) = 2312;
+	ResponseStatus status= 1;
+	repeated FriendGift friendGiftLists=2;
+	int32 limit=3;
+	int32 count=4;
+
+}
+
+/**送礼**/
+message CSFriendGiftSendRequest{
+	option (messageId) = 2313;
+	option (serverTarget)="player/friend/gift/send";
+	int64 friendId = 1;
+}
+
+message SCFriendGiftSendResponse{
+	option (messageId) = 2314;
+	ResponseStatus status=1;
+}
+
+/**送礼删除**/
+// message CSFriendGiftDelRequest{
+// 	option (messageId) = 2314;
+// 	option (serverTarget)="player/friend/gift/del";
+// 	int64 giftId = 1; // 0表示删除全部
+// }
+
+// message SCFriendGiftDelResponse{
+// 	option (messageId) = 2315;
+// 	ResponseStatus status=1;
+// }
+
+
+/**送礼领取**/
+message CSFriendGiftDrawRequest{
+	option (messageId) = 2316;
+	option (serverTarget)="player/friend/gift/draw";
+	int64 giftId = 1; // 0表示全部领取
+}
+message SCFriendGiftDrawResponse{
+	option (messageId) = 2317;
+	ResponseStatus status=1;
+	repeated PlayerPropMsg playerPropMsg=2;
+}
+
+/**好友界面**/
+message CSFriendViewRequest{
+	option (messageId) = 2318;
+	option (serverTarget)="player/friend/view";
+	int64 friendId = 1; // 0表示全部领取
+}
+
+message AchievementFriendMsg{
+	int64 id= 1;  //achievement ID
+	int32 progress = 2; //进度
+	int32 submitStatus =3; // 提交状态
+	int64 finishTime=4; //完成总时间
+	int64 finishTime1=5; // 一阶段时间
+	int64 finishTime2=6; // 二阶段时间
+}
+
+message SCFriendViewResponse{
+	option (messageId) = 2319;
+	ResponseStatus status= 1;
+	PlayerFriendMsg playerFriendMsg = 2;
+	repeated AchievementFriendMsg achievementMsgs = 3;
+}
+
+//添加好友开关
+message CSFriendSwitchRequest{
+	option (messageId) = 2320;
+	option (serverTarget)="player/friend/switch";
+}
+
+message SCFriendSwitchResponse{
+	option (messageId) = 2321;
+	ResponseStatus status= 1;
+}
+
+
+message SCFriendApplyResponse{
+	option (messageId) = 2323;
+	int64 friendId = 1;
+}
+
+message SCFriendNoticeResponse{
+	option (messageId) = 2324;
+	int32 point=1; //1：有新增好友，2：有好友请求 3：有好友礼物
+}
+
+message FriendRecommendMsg{
+	string name=1;
+	//fb绑定 ,0:未绑定，1fb 绑定
+	int32 bind=2;
+	//好友推荐状态，1：推荐，2：加好友
+	int32 status=3;
+	int32 level=4;
+	string icon=5;
+	int64 recommendId=6;
+}
+
+
+//好友推荐列表
+message CSFriendRecommendListRequest{
+	option (messageId) = 2325;
+	option (serverTarget)="player/friend/recommend/list";
+}
+
+message SCFriendRecommendListResponse{
+	option (messageId) = 2326;
+	ResponseStatus status= 1;
+	repeated FriendRecommendMsg recommend=2;
+	int32 timeDown=3;
+}
+
+
+//推荐查看
+message CSFriendRecommendGetRequest{
+	option (messageId) = 2327;
+	option (serverTarget)="player/friend/recommend/get";
+	int64 recommendId=1;
+}
+
+message SCFriendRecommendGetResponse{
+	option (messageId) = 2328;
+	ResponseStatus status= 1;
+	PlayerFriendMsg playerFriendMsg = 2;
+	repeated AchievementFriendMsg achievementMsgs = 3;
+}
+
+
+//推荐申请
+message CSFriendRecommendApplyRequest{
+	option (messageId) = 2329;
+	option (serverTarget)="player/friend/recommend/apply";
+
+	repeated int64 recommendId=1;
+}
+
+message SCFriendRecommendApplyResponse {
+	option (messageId) = 2330;
+	ResponseStatus status= 1;
+	//成功发出申请
+	repeated int64 recommendId=2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// /*好友申请列表*/
+// message CSFriendAddListRequest{
+// 	option (messageId) = 2307;
+// 	option (serverTarget)="player/friend/add/list";
+// }
+
+// message SCFriendAddListResponse{
+// 	option (messageId) = 2308;
+// 	repeated  PlayerFriendMsg friends=1;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

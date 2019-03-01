@@ -1,0 +1,32 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "PlayerFeedback";
+
+import "options.proto";
+import "status.proto";
+
+
+enum FeedbackType{
+
+	ALL=0;
+
+}
+
+message CSPlayerFeedbackRequest{
+	option (messageId) = 2500;
+	option (serverTarget)="player/feedback/submit";
+	 string content = 1;
+	 string platform = 2;
+	 string release = 3;
+	 FeedbackType feedbackType = 4;
+	 string email=5;
+	 string information=6;
+}
+
+
+message SCPlayerFeedbackResponse{
+	option (messageId) = 2501;
+     ResponseStatus status = 1;
+     int64 nextAvailableTime=2;//成功后，下次可提交时间。
+     int32 timeLeft=3;//失败后，可以提交次数
+}

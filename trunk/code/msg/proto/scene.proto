@@ -1,0 +1,184 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "SceneMsg";
+
+import "options.proto";
+import "status.proto";
+
+/**进入场景*/
+message CSSceneEnterRequest{
+	option(messageId) = 1101;
+	option (serverTarget)="scene/enter";
+	int64 playerId = 1;
+	int64 sceneId = 2;//经过计算的小场景ID
+	repeated int64 officerIds = 3;
+}
+message SCSceneEnterResponse{
+	option(messageId) = 1102;
+	ResponseStatus responseStatus = 1;//服务器验证结果，0表示成功
+	repeated int64 sceneExhibits=2;  //展示物品
+	repeated int64 taskExhibits=3; //寻物物品
+	int32 vitConsume = 4;//体力消耗
+	int32 seconds = 5;//这一局的时间长度
+	repeated int64 officerIds = 6;//玩家给当前场景选的警员
+	bool isDropScene = 7;//是否是掉落活动局
+	repeated GiftItem dropItems = 8;//掉落活动：本局掉落的物品
+	int64 multiId =9;//多物玩法物件ID
+}
+
+/**局内结算*/
+message CSSceneRewardRequest{
+	option(messageId) = 1103;
+	option (serverTarget)="scene/reward";
+	int64 playerId = 1;
+	int64 sceneId = 2;
+	int32 result = 3;//客户端判定结果
+	int32 costTime = 4;//客户端用时
+	int32 useClickCount = 5;//用了多少次点击次数
+}
+message SCSceneRewardResponse{
+	option(messageId) = 1104;
+	ResponseStatus responseStatus = 1;
+	int64 sceneId = 2;
+	int32 outputCoin = 3;
+	int32 outputCash = 4;
+	int32 outputVit = 5;
+	int32 outputExp = 6;
+	repeated GiftItem giftItems = 7;
+	repeated SceneRewardComprise sceneRewardComprise = 8;//具体奖励分组
+	
+	int32 difficulty =9;//当前大场景难度
+	int32 exp=10;//当前大场景经验
+	repeated GiftItem upLevelRewards =11;//难度升级奖励
+}
+
+message SceneRewardComprise{
+	int32 type =1 ;//1 基础  2;//警员技能3;//头衔BUFF4;//寻物时间奖励  5//点击次数
+	
+	int32 outputCoin = 2;
+	int32 outputCash = 3;
+	int32 outputVit = 4;
+	int32 outputExp = 5;
+}
+
+/**掉落的物品*/
+message GiftItem{
+	int64 itemId = 1;
+	int32 num = 2;
+}
+
+/**退出场景*/
+message CSSceneQuitRequest{
+	option(messageId) = 1105;
+	option (serverTarget)="scene/quit";
+	int64 playerId = 1;
+	int32 type = 2;//是否正常退出
+}
+message SCSceneQuitResponse{
+	option(messageId) = 1106;
+	int32 result = 1;
+}
+
+/**暂停游戏*/
+message CSSceneSuspendRequest{
+	option(messageId) = 1107;
+	option (serverTarget)="scene/suspend";
+	int64 playerId = 1;
+}
+message SCSceneSuspendResponse{
+	option(messageId) = 1108;
+	int32 result = 1;	
+}
+
+/**恢复游戏*/
+message CSSceneResumeRequest{
+	option(messageId) = 1109;
+	option (serverTarget)="scene/resume";
+	int64 playerId = 1;
+}
+message SCSceneResumeResponse{
+	option(messageId) = 1110;
+	int32 result = 1;
+}
+
+/**计时开始*/
+message CSSceneStartRequest{
+	option(messageId) = 1111;
+	option (serverTarget)="scene/start";
+	int64 playerId = 1;
+
+}
+message SCSceneStartResponse{
+	option(messageId) = 1112;
+	int32 result = 1;
+}
+
+message CSSearchSceneSelectOfficerReq{
+	option(messageId) = 1113;
+	option (serverTarget)="scene/selectofficer";
+	repeated int64 officerIds = 1;//玩家给当前场景选的警员
+}
+
+message SCSearchSceneSelectOfficerResp{
+	option(messageId) = 1114;
+	int32 vitConsume = 1;//总数，覆盖原值即可
+	int32 costSeconds = 2;//总数，覆盖原值即可
+	ResponseStatus responseStatus=3;
+}
+
+
+/**掉线重连*/
+message CSSceneReconnectRequest{
+	option(messageId) = 1115;
+	option (serverTarget)="scene/reconnect";
+	int64 sceneId = 1;
+	int64 startTime=2;
+	int64 endTime =3;	
+}
+
+message SCSceneReconnectResponse{
+	option(messageId) = 1116;
+	ResponseStatus responseStatus=1;
+}
+
+
+
+
+//同步难度
+message CSSceneDifficultyReq{
+	option(messageId) = 1117;
+	option (serverTarget)="scene/getDifficulty";
+	repeated int64 bigIds=1;//场景大ID
+}
+
+message SceneDifficultyInfo{
+	int64 bigId =1;
+	int32 difficulty=2;
+	int32 exp=3;
+}
+
+//同步难度返回
+message SCSceneDifficultyResp{
+	option(messageId) = 1118;
+	repeated SceneDifficultyInfo infos =1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

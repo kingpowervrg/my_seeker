@@ -1,0 +1,86 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "PlayerPropMsgs";
+
+import "options.proto";
+import "status.proto";
+
+// message PlayerPropMsg{
+// 	int64 propId =1;
+// 	int32 count=2;
+// 	int64 expireTime=3;
+// }
+
+/**12开头   */
+/**玩家物品列表*/
+message PlayerPropRequest{
+	option(messageId) = 1201;
+	option (serverTarget)="player/prop/list";
+}
+
+message PlayerPropResponse{
+	option(messageId) = 1202;
+	ResponseStatus reponseStatus=1;
+	repeated PlayerPropMsg playerProps=2;
+	repeated PlayerPropMsg recentProps=3;
+}
+
+
+/**玩家物品，清空最近获取*/
+message PlayerPropRecentRequest{
+	option(messageId) = 1203;
+	option (serverTarget)="player/prop/recent/empty";
+}
+
+message PlayerPropRecentResposne{
+	option(messageId) = 1204;
+	ResponseStatus reponseStatus=1;
+}
+
+
+/**玩家物品，绑定物品*/
+message PlayerPropBindRequest{
+	option(messageId) = 1205;
+	option (serverTarget)="player/prop/bind";
+	repeated PlayerPropMsg PlayerPropMsgs=1;
+}
+
+message PlayerPropBindResposne{
+	option(messageId) = 1206;
+	ResponseStatus reponseStatus=1;
+	repeated PlayerPropMsg PlayerPropMsgs=2;
+}
+
+/**卖物品*/
+message PlayerPropSellRequest{
+	option(messageId) = 1207;
+	option (serverTarget)="player/prop/sell";
+	repeated PlayerPropMsg playerProps=1;
+}
+
+message PlayerPropSellResposne{
+	option(messageId) = 1208;
+	ResponseStatus reponseStatus=1;
+}
+
+message CSDropReq{
+	option(messageId) = 1209;
+	option (serverTarget)="player/prop/drop";
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+message SCDropResp{
+	option(messageId) = 1210;
+	repeated DropInfo dropInfos = 1;
+}
+
+message SCAutoOpenGiftDropResp{
+	option(messageId) = 1211;
+	repeated DropInfo dropInfos = 1;
+}
+
+message DropInfo{
+	int64 propId = 1;
+	int32 count = 2;
+}

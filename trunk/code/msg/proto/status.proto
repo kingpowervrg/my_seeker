@@ -1,0 +1,44 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "Status";
+
+import "options.proto";
+//10 auth
+//11 scene
+//12 playerProp
+//13 jigsaw
+//14 playerInfo
+//15 officer
+//16 skill
+//17 market
+//18 notice
+//19 common 通用消息，明显以后不需要拓展的业务
+//20 活动
+//21 漫画
+//22 邮件
+//23 系统
+
+//24 建筑
+
+
+//28 礼包推送
+message ExceptionResponse{
+	option(messageId) = 400;
+	ResponseStatus status = 1;
+}
+
+message ResponseStatus{
+	int32 code=1;
+	string msg=2;
+}
+
+message PlayerPropMsg{
+	int64 propId =1;
+	int32 count=2;
+	int64 expireTime=3;
+}
+
+message PlayerBaseInfo{
+	int32 coin =1;
+	int32 cash=2;
+}

@@ -1,0 +1,61 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "EmailMsg";
+
+import "options.proto";
+
+/**客户端请求邮件列表*/
+message CSEmailListRequest{
+	option (messageId) = 2201;
+	option (serverTarget)="email/list";
+}
+
+message SCEmailListResponse{
+	option (messageId) = 2202;
+	repeated EmailInfo emails = 1;
+}
+
+message EmailInfo{
+	int64 id = 1;
+	int32 type = 2;//1表示好友邮件，2表示系统邮件
+	int32 status = 3;//0表示未读取，1表示已读，2表示已领奖
+	string title = 4;
+	string content = 5;
+	int64 receiveTime = 6;//收到邮件的时间
+	int64 deadline = 7;//过期时间
+	repeated EmailReward rewards = 8;
+	
+}
+
+message EmailReward{
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+/**邮件奖励*/
+message CSEmailRewardRequest{
+	option (messageId) = 2203;
+	option (serverTarget)="email/reward";
+	
+	int64 id = 1;
+}
+
+message SCEmailRewardResponse{
+	option (messageId) = 2204;	
+	int32 result = 1;//1表示成功，2表示已领取过了，3表示已过期，4表示邮件不存在，5表示该邮件没有奖励
+	int64 id = 2;
+}
+
+/**在邮件为未读取的状态下，玩家点开了邮件 客户端通知服务器*/
+message CSEmailReadRequest{
+	option (messageId) = 2205;
+	option (serverTarget)="email/read";
+	int64 id = 1;
+}
+
+/**服务器通知客户端邮件有更新，客户端收到这个消息后再向服务器请求一遍*/
+message SCEmailChangeNotice{
+	option (messageId) = 2207;
+	int64 switchTime = 1;
+
+}

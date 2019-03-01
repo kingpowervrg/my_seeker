@@ -1,0 +1,64 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "SysMsg";
+
+import "options.proto";
+
+
+
+message ServiceConfigInfo{
+	string key =1;
+	string value=2;
+}
+
+message CSGetServiceConfigRequest{
+	option (messageId) = 2331;
+	option (serverTarget)="sys/getServiceConfig";
+}
+
+
+message SCGetServiceConfigResponse{
+	option (messageId) = 2332;
+	repeated ServiceConfigInfo info =1;
+}
+
+message CSGetServiceConfigSingleRequest{
+	option (messageId) = 2333;
+	option (serverTarget)="sys/getSingleServiceConfig";
+	string key =1;
+}
+
+
+message SCGetServiceConfigSingleResponse{
+	option (messageId) = 2334;
+	string value =1;
+}
+
+
+message GetPathInfo{
+	int64 id =1;//id
+	string path=2;//地址
+	int32 status=3;//状态
+	string version=4; //版本号
+	string plat=5;//平台
+}
+
+message CSGetPathConfigRequest{
+	option (messageId) = 2335;
+	option (serverTarget)="sys/path";
+	string plat=1;//平台
+}
+
+message SCGetPathConfigResponse{
+	option (messageId) = 2336;
+	GetPathInfo infos=1;
+}
+
+message CSClientLogRequest{
+	option (messageId) = 2337;
+	option (serverTarget)="sys/clientLog";
+	string event_name =1;
+	float  value4sum =2;
+	string params =3;
+	int64 playerId =4;
+}

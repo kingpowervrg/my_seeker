@@ -1,0 +1,65 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "GmMsg";
+
+import "options.proto";
+import "email.proto";
+
+
+message GmAddAttr{
+	option(messageId) = 100;
+	option (serverTarget)="gm/addattr";
+	int64 playerId = 1;
+	int32 count = 2;
+	int32 type = 3;//1表示加cash 2表示加coin 3表示加vit 4表示加exp
+}
+
+message GmAddProp{
+	option(messageId) = 101;
+	option (serverTarget)="gm/addprop";
+	int64 playerId = 1;
+	int64 propId = 2;
+	int32 count = 3;
+}
+
+message GmFinishTask{
+	option(messageId) = 102;
+	option (serverTarget)="gm/finishtask";
+	int64 playerId = 1;
+	int64 chapterId = 2;
+	int64 taskId = 3;
+}
+
+message GmOfficer{
+	option(messageId) = 103;
+	option (serverTarget)="gm/officer";
+	int64 playerId = 1;
+	int64 officerId = 2;
+	int32 type = 3;//1得到警员 2警员升级
+}
+
+message GMAddPropJson{
+	option(messageId) = 104;
+	option (serverTarget)="gm/addPropJson";
+	int64 playerId = 1;
+	string propJson = 2;
+}
+message GMSendMail{
+	option(messageId) = 105;
+	option (serverTarget)="gm/sendMail";
+	int64 receiverId = 1;
+	string title = 2;
+	string content = 3;
+	repeated EmailReward rewards = 4;
+	string password=5;
+}
+message GMGetPlayerMessageRequest{
+	option(messageId) = 106;
+	option (serverTarget)="gm/gmPlayerInfo";
+	int64 playerId = 1;
+}
+message GMGetPlayerMessageResponse{
+	option(messageId) = 107;
+	string message = 1;
+}
+

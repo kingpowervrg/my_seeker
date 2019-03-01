@@ -1,0 +1,68 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "CartoonMsg";
+
+import "options.proto";
+import "scene.proto";
+
+/**进入漫画场景*/
+message CSCartoonEnterRequest{
+	option(messageId) = 2101;
+	option (serverTarget)="cartoon/enter";
+	int64 sceneId = 1;
+}
+message SCCartoonEnterResponse{
+	option(messageId) = 2102;
+	int32 result = 1;//服务器验证结果，1表示成功，其他的是错误码（4表示场景不存在）	
+}
+
+message CSCartoonRewardRequest{
+	option(messageId) = 2103;
+	option (serverTarget)="cartoon/reward";
+}
+
+message SCCartoonRewardReqsponse{
+	option(messageId) = 2104;
+	int32 cash = 1;
+	int32 coin = 2;
+	int32 exp = 3;
+	int32 vit = 4;
+	repeated SceneRewardComprise sceneRewardComprise = 5;
+}
+
+/**退出漫画场景*/
+message CSCartoonQuitRequest{
+	option(messageId) = 2105;
+	option (serverTarget)="cartoon/quit";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

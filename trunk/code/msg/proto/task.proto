@@ -1,0 +1,264 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "TaskMsg";
+
+import "options.proto";
+import "status.proto";
+
+/**服务器判断玩家接到新任务后通知客户端*/
+message SCAcceptTaskNotice{
+	option (messageId) = 1820;
+	
+	repeated AcceptTaskInfo acceptTasks = 1;//接到的新任务列表
+}
+
+message AcceptTaskInfo{
+	int64 taskId = 1;//配置id
+	int64 playerTaskId = 2;//唯一标识
+	int32 status = 3;//任务进度状态
+}
+
+message CSTaskListRequest{
+	option (messageId) = 1821;	
+	option (serverTarget)="task/list";
+	
+	int32 type = 1;//0表示所有任务，1表示主线任务。
+	repeated int64 taskIds = 2;//想要请求详细信息的任务的id
+}
+
+message SCTaskListResponse{
+	option (messageId) = 1822;
+	repeated TaskInfo taskInfos = 1;
+}
+
+/**玩家的任务进度*/
+message TaskInfo{
+	int64 playerTaskId = 1;//唯一标识
+	int64 taskId = 2;//任务的配置Id
+	int32 status = 3;//任务总进度，1表示进行中，2表示已完成，3表示已领奖
+	int32 level = 4;//等级（当前等级）
+	repeated TaskPropProgress propProgresss = 5;//物品收集进度
+	int32 dialogueProgress = 6;//对话进度，0表示未完成，大于1表示已完成 dialogueId
+	int32 eventProgress = 7;//事件进度，0表示未完成，大于1表示已完成 eventId
+	int32 sceneProgress = 8;//场景进度，0表示未完成，大于1表示已完成 sceneId
+	repeated TaskExhibitProgress exhibitProgress = 9;
+}
+
+/**任务收集物品的进度*/
+message TaskPropProgress{
+	int64 propId = 1;//物品id
+	int32 count = 2;//进度（目前是背包数据）
+}
+
+/**任务收集物品的进度*/
+message TaskExhibitProgress{
+	int64 exhibitId = 1;//物品id
+	int32 count = 2;//进度（目前是背包数据）
+}
+
+
+message CSTaskCommitRequest{
+	option (messageId) = 1823;	
+	option (serverTarget)="task/commit";
+
+	int64 playerTaskId = 1;//唯一标识
+}
+
+message SCTaskCommitResponse{
+	option (messageId) = 1824;
+	int32 result = 1;//1表示成功，其他的是错误码
+	int32 coin = 2;//金币奖励
+	int32 cash = 3;//现金奖励
+	int32 vit = 4;//体力值奖励
+	int32 exp = 5;//经验奖励
+	int64 titleId = 6;//获得的称号
+	repeated TaskPropReward propRewards = 7;
+	int64 taskId = 8;
+	
+}
+
+/**任务物品奖励*/
+message TaskPropReward{
+	int64 propId = 1;//物品id
+	int32 count = 2;//奖励数量
+}
+
+message SCTaskStatusChangeNotice{
+	option (messageId) = 1825;
+	int64 playerTaskId = 1;//唯一标识
+	int64 taskId = 2;//任务的配置Id
+	int32 status = 3;//任务进度,1表示进行中，2表示已完成，3表示已领奖
+	TaskInfo taskInfo=4;
+}
+
+message CSTriggerTaskActiveRequest{
+	option (messageId) = 1827;	
+	option (serverTarget)="task/trigger";
+	int64 taskId = 1;//想要触发的任务
+}
+
+message SCTriggerTaskActiveResponse{
+	option (messageId) = 1828;
+	int32 result = 1;//1表示成功，其他的是错误码
+	int64 taskId = 2;//想要触发的任务
+}
+
+/**成就获取列表**/
+message CSAchievementRequest{
+	option (messageId) = 1829;
+	option (serverTarget)="/player/achievement/list";
+}
+
+message AchievementMsg{
+	int64 id= 1;
+	int32 progress = 2;
+	int32 submitStatus =3;
+	int64 finishTime=4;
+	int64 finishTime1=5;
+	int64 finishTime2=6;
+}
+
+message SCAchievementResponse{
+	option (messageId) = 1830;
+	ResponseStatus status = 1;
+	repeated AchievementMsg Achievements=2;
+	int32 totalCount=3;
+}
+
+/**成就奖励领取**/
+message CSAchievementSubmitRequest{
+	option (messageId) = 1831;
+	option (serverTarget)="/player/achievement/submit";
+	int64 id= 1;
+	int32 stage = 2;
+}
+
+message SCAchievementSubmitResponse{
+	option (messageId) = 1832;
+	ResponseStatus status = 1;
+}
+
+
+
+
+
+/*头衔*/
+ message TitleMsg {
+ 	int64 titleId =1;
+ 	int64 deadline=2;
+ 	int64 getTime =3;
+ 	bool active =4;
+ }
+
+/*头衔列表*/
+ message CSTitleRequest{
+ 	option (messageId) = 1833;
+	option (serverTarget)="/player/title/list";
+
+ }
+
+message SCTitleResponse{
+ 	option (messageId) = 1834;
+ 	ResponseStatus status = 1;
+	repeated TitleMsg titles = 2;
+ }
+
+/*头衔使用，或者更改*/
+  message CSTitleActiveRequest{
+ 	option (messageId) = 1835;
+	option (serverTarget)="/player/title/active";
+	int64 titleId=1;
+ }
+
+ message SCTitleActiveResponse{
+ 	option (messageId) = 1836;
+ 	ResponseStatus status = 1;
+	TitleMsg title = 2;
+ }
+
+/*当前头衔*/
+  message CSTitleGetRequest{
+ 	option (messageId) = 1837;
+	option (serverTarget)="/player/title/get";
+ }
+
+ message SCTitleGetResponse{
+ 	option (messageId) = 1838;
+ 	ResponseStatus status = 1;
+	TitleMsg title = 2;
+ }
+
+
+
+/**客户端主动向服务器请求玩家当前接受的任务列表*/
+message CSTaskIdListRequest{
+	option (messageId) = 1841;	
+	option (serverTarget)="task/idList";
+}
+
+message SCTaskIdListResponse{
+	option (messageId) = 1842;
+	repeated TaskIdInfo taskIdInfos = 1;
+}
+
+message TaskIdInfo{
+	int64 playerTaskId = 1;
+	int64 taskId = 2;
+}
+
+/**对话完成**/
+message CSChatFinishRequest{
+
+	option (messageId) = 1843;	
+	option (serverTarget)="player/chat/finish";
+	int64 chatId=1;
+
+}
+
+message SCChatFinishResponse{
+	option (messageId) = 1844;
+	ResponseStatus status=1;
+}
+
+message CSGetAllRewardedTasksRequest{
+ 	option (messageId) = 1845;
+	option (serverTarget)="task/getAllRewardedTasks";
+}
+
+
+message SCGetAllRewardedTasksResponse{
+ 	option (messageId) = 1846;
+	repeated TaskIdTypeInfo tasks = 1;
+}
+
+message TaskIdTypeInfo{
+	int64 taskId =1;
+	int64 chapterId =2;
+	int32 taskType =3;
+
+}
+
+
+/**新解锁成就**/
+message SCAchievementUnlockResponse{
+	option (messageId) = 1847;
+	int64 id = 1;
+}
+/**任务能不能做*/
+message CSCanTaskRequest{
+	option (messageId) = 1848;
+	option (serverTarget)="task/canTask";
+	int64 taskId = 1;
+}
+/**任务能不能做*/
+message SCCanTaskResponse{
+	option (messageId) = 1849;
+	bool canTask = 1;
+	int64 taskId = 2;
+}
+
+/**获得新称号*/
+message SCreceiveNewTitle{
+	option (messageId) = 1850;
+	int64 title = 1;
+}

@@ -1,0 +1,2120 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "Msg";
+
+import "options.proto";
+
+message ExceptionResponse{
+	option(messageId) = 400;
+	ResponseStatus status = 1;
+}
+
+message ExceptionRemoteLoginResponse{
+	option(messageId) = 1;
+	ResponseStatus status = 1;
+}
+
+message ResponseStatus{
+	int32 code=1;
+	string msg=2;
+}
+
+//GM消息start
+message GmAddAttr{
+	option(messageId) = 100;
+	option (serverTarget)="gm/addattr";
+	int64 playerId = 1;
+	int32 count = 2;
+	int32 type = 3;//1表示加cash 2表示加coin 3表示加vit 4表示加exp
+}
+
+message GmAddProp{
+	option(messageId) = 101;
+	option (serverTarget)="gm/addprop";
+	int64 playerId = 1;
+	int64 propId = 2;
+	int32 count = 3;
+}
+
+message GmFinishTask{
+	option(messageId) = 102;
+	option (serverTarget)="gm/finishtask";
+	int64 playerId = 1;
+	int64 chapterId = 2;
+	int64 taskId = 3;
+}
+message GmOfficer{
+	option(messageId) = 103;
+	option (serverTarget)="gm/officer";
+	int64 playerId = 1;
+	int64 officerId = 2;
+	int32 type = 3;//1得到警员 2警员升级
+}
+
+message GMGetPlayerMessageRequest{
+	option(messageId) = 106;
+	option (serverTarget)="gm/gmPlayerInfo";
+	int64 playerId = 1;
+}
+message GMGetPlayerMessageResponse{
+	option(messageId) = 107;
+	string message = 1;
+}
+
+
+
+//GM消息end
+
+//start拼图玩法的消息
+/**进入场景*/
+message CSEnterRequest{
+	option(messageId) = 1301;
+	option (serverTarget)="jigsaw/enter";
+	int64 playerId = 1;
+	int64 sceneId = 2;
+	repeated int64 officerIds = 3;
+}
+message SCEnterResponse{
+	option(messageId) = 1302;
+	int32 result = 1;//服务器验证结果，1表示成功，2表示体力值不足，3表示未解锁，4表示场景不存在
+	int32 vitConsume = 2;
+	int32 seconds = 3;
+	repeated int64 fragments = 4;//想要解锁此局必须获取的碎片
+	repeated int64 officerIds = 5;//玩家给当前场景选的警员
+}
+
+/**退出场景*/
+message CSQuitRequest{
+	option(messageId) = 1305;
+	option (serverTarget)="jigsaw/quit";
+	int64 playerId = 1;
+	int64 sceneId = 2;
+}
+message SCQuitResponse{
+	option(messageId) = 1306;
+	int32 result = 1;
+}
+
+message CSSuspendRequest{
+	option(messageId) = 1307;
+	option (serverTarget)="jigsaw/suspend";
+	int64 playerId = 1;
+
+}
+message SCSuspendResponse{
+	option(messageId) = 1308;
+	int32 result = 1;
+
+}
+
+message CSResumeRequest{
+	option(messageId) = 1309;
+	option (serverTarget)="jigsaw/resume";
+	int64 playerId = 1;
+
+}
+message SCResumeResponse{
+	option(messageId) = 1310;
+	int32 result = 1;
+}
+
+message CSStartRequest{
+	option(messageId) = 1311;
+	option (serverTarget)="jigsaw/start";
+	int64 playerId = 1;
+
+}
+message SCStartResponse{
+	option(messageId) = 1312;
+	int32 result = 1;
+}
+
+message CSFinishRequest{
+	option(messageId) = 1313;
+	option (serverTarget)="jigsaw/finish";
+	int64 sceneId = 1;
+	int32 result = 2;//0表示失败，1表示成功
+	int32 restTime = 3;//剩余时间(秒)
+	int32 allTime = 4;//总时间(秒)
+}
+message SCFinishResponse{
+	option(messageId) = 1314;
+	int32 result = 1;//0失败，1成功
+	int64 sceneId = 2;
+	int64 propId = 3;//奖励的物品
+	repeated Reward rewards = 4;//奖励的属性
+	int32 jigsawState = 5;//奖励阶段
+	repeated SceneRewardComprise sceneRewardComprise = 6;
+}
+
+message Reward{
+	int32 percent = 1;//分段百分比
+	int32 type = 2;//奖励类型0=金币1=钞票2经验3体力
+	int32 num = 3;//奖励值
+}
+
+//end拼图玩法的消息
+
+
+//注册
+message CSRegRequest{
+	option (messageId) = 1001;
+	option (serverTarget)="auth/reg";
+
+	string username = 1;//用户名，唯一且不可变，建议使用手机号或邮箱
+	string pwd = 2;//密码
+}
+message SCRegResponse{
+	option (messageId) = 1002;	
+	int32 result = 1;//1表示注册成功，2表示用户名已注册，3表示注册失败（待细化）
+}
+
+//客户端验证请求
+message CSAuthRequest{
+	option (messageId) = 1003;
+	option (serverTarget)="auth/auth";
+	string username = 1;
+	string pwd = 2;
+}
+message SCAuthResponse{
+	option (messageId) = 1004;
+	int32 result = 1;
+	string accessToken = 2;
+	string username = 3;
+}
+
+/**登录请求*/
+message CSloginRequest{
+	option (messageId) = 1007;
+	option (serverTarget)="login/login";
+	string username = 1;//第三方平台返回的用户唯一凭证，第三方保证同一用户的username永不会变并且在该渠道下的唯一性.自有渠道在注册时填写的用户名，不可修改。
+	string pwd = 2;//自有渠道的用户密码或者第三方平台返回的accessToken.
+	int32 platform = 3;//平台标识，客户端根据不同的第三方sdk填约定好的值(自有渠道暂定为0),username+platform即可确定唯一玩家.
+	string nickname = 4;//昵称。第三方平台返回的值，第一次创建玩家信息的时候会使用。
+}
+/**登录返回信息*/
+message SCloginResponse{
+	option (messageId) = 1008;
+	int32 result = 1;//是否登录成功，1表示成功，2表示失败。
+	int64 playerId = 2;
+	string playerName = 3;//用户名
+	string playerIcon = 4;
+	int32 coin = 5;
+	int32 cash = 6;
+	int32 vit = 7;
+	int32 level = 8;
+	int32 exp = 9; //当前等级以获得经验
+	int32 laborUnion = 10;
+	int32 upgradeExp = 11; //当前等级总经验
+	float expMultiple = 12;	//经验加成
+	int32 platform = 13;//平台标识
+	string nickname = 14;//昵称
+	string accessToken = 15;//访问唯一标识
+	int64 lastAddVitTime = 16;//上次增加体力值的时间
+	int64 millisRecoverOneVit = 18;//恢复一点体力值需要的毫秒数
+	int32 hasRenamed = 19;//0表示未修改过，1表示已修改过
+	
+}
+
+//start 章节
+/**请求玩家解锁的章节列表*/
+message CSChapterListRequest{
+	option(messageId) = 1011;
+	option (serverTarget)="chapter/list";
+}
+/**返回玩家解锁的章节列表*/
+message SCChapterListResponse{
+	option(messageId) = 1012;
+	repeated PlayerChapterInfo chapters = 1;
+}
+/**章节信息*/
+message PlayerChapterInfo{
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int32 status = 3;//0表示未解锁(理论上不会有)，1表示已解锁，2表示已完成
+}
+
+/**请求某一章节的详细信息*/
+message CSChapterDetailRequest{
+	option(messageId) = 1013;
+	option (serverTarget)="chapter/detail";
+	int64 playerChapterId = 1;
+}
+/**返回某一章节的详细信息*/
+message SCChapterDetailResponse{
+	option(messageId) = 1014;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int32 status = 3;//0表示未解锁，1表示已解锁，2表示已完成
+	repeated ChapterNpcInfo npcs = 4;
+	repeated ChapterClueInfo clues = 5;
+	repeated ChapterSceneInfo scenes = 6;
+	repeated ChapterTaskInfo tasks = 7;
+}
+
+/**章节包含的npc信息*/
+message ChapterNpcInfo{
+	int64 npcId = 1;
+	int32 status = 2;//0未解锁，1已解锁
+	int64 dialogueId = 3;//当前对话
+}
+
+/**章节包含的线索信息*/
+message ChapterClueInfo{
+	string clueId = 1;
+	int32 status = 2;//0未解锁，1已解锁
+}
+
+/**章节包含的场景信息*/
+message ChapterSceneInfo{
+	int64 sceneId = 1;//场景配置id
+	int32 status = 2;//0未解锁，1表示已解锁
+}
+
+/**章节包含的任务信息*/
+message ChapterTaskInfo{
+	int64 taskId = 1;//任务配置id
+	int32 status = 2;//0未解锁，1表示进行中，2表示已完成
+}
+
+message SCClueUnlockNotice{
+	option(messageId) = 1019;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	string clueId = 3;
+}
+
+message SCNpcUnLockNotice{
+	option(messageId) = 1020;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int64 npcId = 3;
+}
+
+message SCSceneUnLockNotice{
+	option(messageId) = 1021;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int64 sceneId = 3;
+}
+
+message SCChapterTaskStatusChangeNotice{
+	option(messageId) = 1022;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int64 taskId = 3;
+	int32 newStatus = 4;//1表示已接受，2表示已完成
+}
+
+message SCChapterStatusChangeNotice{
+	option(messageId) = 1023;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int32 newStatus = 3;//1表示已接受，2表示已完成
+}
+message SCChapterRedNotice{
+	option(messageId) = 1024;
+	repeated int32 reds = 1; //0 NPC,1CLUE,2SCENE
+}
+
+message CSClearChapterRedRequest{
+	option(messageId) = 1025;
+	option (serverTarget)="chapter/clearRed";
+	int32 clearType=1;//0 NPC,1CLUE,2SCENE
+}
+
+//end 章节
+
+/**start 寻物场景*/
+message CSSceneEnterRequest{
+	option(messageId) = 1101;
+	option (serverTarget)="scene/enter";
+	int64 playerId = 1;
+	int64 sceneId = 2;//经过计算的小场景ID
+	repeated int64 officerIds = 3;
+}
+message SCSceneEnterResponse{
+	option(messageId) = 1102;
+	ResponseStatus responseStatus = 1;//服务器验证结果，0表示成功
+	repeated int64 sceneExhibits=2;  //展示物品
+	repeated int64 taskExhibits=3; //寻物物品
+	int32 vitConsume = 4;//体力消耗
+	int32 seconds = 5;//这一局的时间长度
+	repeated int64 officerIds = 6;//玩家给当前场景选的警员
+	bool isDropScene = 7;//是否是掉落活动局
+	repeated GiftItem dropItems = 8;//掉落活动：本局掉落的物品
+	int64 multiId =9;//多物玩法物件ID
+}
+
+/**局内结算*/
+message CSSceneRewardRequest{
+	option(messageId) = 1103;
+	option (serverTarget)="scene/reward";
+	int64 playerId = 1;
+	int64 sceneId = 2;
+	int32 result = 3;//客户端判定结果
+	int32 costTime = 4;//客户端用时
+	int32 useClickCount = 5;//用了多少次点击次数
+}
+message SCSceneRewardResponse{
+	option(messageId) = 1104;
+	ResponseStatus responseStatus = 1;
+	int64 sceneId = 2;
+	int32 outputCoin = 3;
+	int32 outputCash = 4;
+	int32 outputVit = 5;
+	int32 outputExp = 6;
+	repeated GiftItem giftItems = 7;
+	repeated SceneRewardComprise sceneRewardComprise = 8;//具体奖励分组
+	
+	int32 difficulty =9;//当前大场景难度
+	int32 exp=10;//当前大场景经验
+	repeated GiftItem upLevelRewards =11;//难度升级奖励
+}
+
+/**掉落的物品*/
+message GiftItem{
+	int64 itemId = 1;
+	int32 num = 2;
+}
+
+/**退出场景*/
+message CSSceneQuitRequest{
+	option(messageId) = 1105;
+	option (serverTarget)="scene/quit";
+	int64 playerId = 1;
+	int32 type = 2;//是否正常退出
+}
+message SCSceneQuitResponse{
+	option(messageId) = 1106;
+	int32 result = 1;
+}
+
+/**暂停游戏*/
+message CSSceneSuspendRequest{
+	option(messageId) = 1107;
+	option (serverTarget)="scene/suspend";
+	int64 playerId = 1;
+}
+message SCSceneSuspendResponse{
+	option(messageId) = 1108;
+	int32 result = 1;	
+}
+
+/**恢复游戏*/
+message CSSceneResumeRequest{
+	option(messageId) = 1109;
+	option (serverTarget)="scene/resume";
+	int64 playerId = 1;
+}
+message SCSceneResumeResponse{
+	option(messageId) = 1110;
+	int32 result = 1;
+}
+
+/**计时开始*/
+message CSSceneStartRequest{
+	option(messageId) = 1111;
+	option (serverTarget)="scene/start";
+	int64 playerId = 1;
+
+}
+message SCSceneStartResponse{
+	option(messageId) = 1112;
+	int32 result = 1;
+}
+
+message CSSearchSceneSelectOfficerReq{
+	option(messageId) = 1113;
+	option (serverTarget)="scene/selectofficer";
+	repeated int64 officerIds = 1;//玩家给当前场景选的警员
+}
+
+message SCSearchSceneSelectOfficerResp{
+	option(messageId) = 1114;
+	int32 vitConsume = 1;//总数，覆盖原值即可
+	int32 costSeconds = 2;//总数，覆盖原值即可
+	ResponseStatus responseStatus=3;
+}
+
+//end 寻物场景消息
+
+/**购买道具*/
+message CSBuyItemRequest{
+	option(messageId) = 1121;
+	option (serverTarget)="item/buy";
+	int64 playerId = 1;
+	int64 propId = 2;
+	int32 count = 3;
+}
+message SCBuyItemResponse{
+	option(messageId) = 1122;
+	int64 propId = 1;
+	int32 count = 2;
+	int32 result = 3;
+}
+
+message PlayerPropMsg{
+	int64 propId =1;
+	int32 count=2;
+	int64 expireTime=3;
+}
+
+/**12开头   */
+/**玩家物品列表*/
+message CSPlayerPropRequest{
+	option(messageId) = 1201;
+	option (serverTarget)="player/prop/list";
+}
+
+message SCPlayerPropResponse{
+	option(messageId) = 1202;
+	ReponseStatus reponseStatus=1;
+	repeated PlayerPropMsg playerProps=2;
+	repeated PlayerPropMsg recentProps=3;
+}
+
+
+/**玩家物品，清空最近获取*/
+message CSPlayerPropRecentRequest{
+	option(messageId) = 1203;
+	option (serverTarget)="player/prop/recent/empty";
+}
+
+message SCPlayerPropRecentResposne{
+	option(messageId) = 1204;
+	ReponseStatus reponseStatus=1;
+}
+
+message ReponseStatus{
+	int32 code=1;
+	string msg=2;
+}
+
+/**请求玩家信息*/
+message CSPlayerInfoRequest{
+	option (messageId) = 1401;
+	option (serverTarget)="player/info/info";
+	int64 playerId = 1;
+}
+message SCPlayerInfoResponse{
+	option (messageId) = 1402;
+	int64 playerId = 1;
+	string playerName = 2;
+	string playerIcon = 3;
+	int32 coin = 4;
+	int32 cash = 5;
+	int32 vit = 6;
+	int32 level = 7;
+	int32 exp = 8; //当前等级以获得经验
+	int32 laborUnion = 9;
+	int32 upgradeExp = 10; //升级需要的经验
+	float expMultiple = 11;	//经验加成
+	int64 lastAddVitTime = 12;//上次增加体力值的时间
+	int64 millisRecoverOneVit = 13;//恢复一点体力值需要的毫秒数
+	int32 hasRenamed = 14;//0表示未修改过，1表示已修改过
+	int64 infiniteVitRestTime=15;//无限体力剩余毫秒
+}
+
+/**改名*/
+message CSRenameRequest{
+	option (messageId) = 1403;
+	option (serverTarget)="player/info/rename";
+	int64 playerId = 1;
+	string newName = 2;
+}
+/**
+*result 0表示失败（一般是异常了）
+*1表示成功 2表示不能为空 3表示超过最大字符长度20(utf-8编码的长度) 4表示名字已存在*/
+message SCRenameResponse{
+	option (messageId) = 1404;
+	int64 playerId = 1;
+	int32 result = 2;
+	string newName = 3;
+}
+
+/**查看玩家拥有的警员*/
+message CSOfficerListRequest{
+	option (messageId) = 1501;
+	option (serverTarget)="officer/list";
+	int64 playerId = 1;
+}
+
+message SCOfficerListResponse{
+	option (messageId) = 1502;
+	int64 playerId = 1;
+	repeated OfficerInfo officers = 2;
+}
+
+message OfficerInfo{
+	int64 playerOfficerId = 1;//警员id
+	int64 officerId = 2;//模板id，通过该id去警员配置表获取其他信息
+	int32 level = 3;//等级
+	int32 outsight = 4;//观察力
+	int32 willPower = 5;//意志力
+	int32 attention = 6;//注意力
+	int32 memory = 7;//记忆力
+	int32 vitConsume = 8;//派出一局消耗的体力值
+	int32 secondGain = 9;//派出一局增加的局内时长
+}
+
+/**查看玩家拥有的某个警员的信息*/
+message CSOfficerInfoRequest{
+	option (messageId) = 1503;
+	option (serverTarget)="officer/info";
+	int64 playerId = 1;
+	int64 playerOfficerId = 2;
+
+}
+
+message SCOfficerInfoResponse{
+	option (messageId) = 1504;
+	OfficerInfo office = 1;
+}
+
+// 请求 事件
+message CSEventPhaseFeedbackRequest{
+	option (messageId) = 1507;
+	option (serverTarget)="officer/event/phase/feedback";
+	int64 eventId = 1;
+	repeated int64 playerOfficerId = 2;
+}
+
+
+//回复 事件
+message SCEventPhaseFeedbackResponse{
+	option (messageId) = 1508;
+	ResponseStatus ResponseStatus=1;
+	bool valuation = 2;//false表示普通，true表示完美
+	int32 totalScore = 3;//总得分
+	repeated PhaseInfo phaseInfos=4; //各阶段数据
+}
+//阶段事件体
+
+message PhaseInfo{
+	int32 phaseId =1;			//阶段
+	int64 officerTemplateId=2;  //警员模板ID
+	int32 phaseScore=3;			//阶段得分
+	int32 officerScore=4;       //警员自身得分
+	bool perfect=5;			    //是否完美
+	int32 perfectScore=6;		//完美加成分数
+	int64 phaseTemplateId =7;
+	repeated MatchWordScoreInfo matchWordScoreInfo=8; //匹配到的关键字，和每个关键字的得分
+}
+//关键字体
+message MatchWordScoreInfo{
+	int32 keyWordId =1;//关键字ID
+	int32 keyWordMatchScore=2;//关键字匹配得到分数
+}
+
+
+/**事件结算请求*/
+message CSEventRewardRequest{
+	option (messageId) = 1509;
+	option (serverTarget)="officer/event/reward";
+	int64 playerId = 1;
+	int64 eventId = 2;//事件id
+}
+
+message SCEventRewardResponse{
+	option (messageId) = 1510;	
+	ResponseStatus ResponseStatus=1;
+	int32 score = 2;//得分
+	int32 valuation = 3;//评价0表示过关失败，1表示过关，2表示完美过关	
+	repeated RewardItem rewards = 4;//掉落奖励
+	int32 exp = 5;
+	int32 vit = 6;
+	int32 coin = 7;
+	int32 cash = 8;
+	repeated SceneRewardComprise sceneRewardComprise = 9;
+}
+
+/**阶段奖励*/
+message RewardItem{
+	int64 propId = 1;
+	int32 num = 2;
+}
+
+/**警员合成*/
+message CSOfficerCombineRequest{
+	option (messageId) = 1505;
+	option (serverTarget)="officer/combine";
+	int64 playerId = 1;
+	int64 officerId = 2;
+}
+
+message SCOfficerCombineResponse{
+	option (messageId) = 1506;
+	int32 result = 1;//是否合成成功
+	int64 officeId =2;
+}
+
+/**警员升级请求*/
+message CSOfficerUpdateRequest{
+	option (messageId) = 1511;
+	option (serverTarget)="officer/update";
+	int64 playerId = 1;
+	int64 playerOfficerId = 2;
+}
+
+message SCOfficerUpdateResponse{
+	option (messageId) = 1512;
+	int32 result = 1;//是否升级成功
+	int64 officeId =2;
+	int32 level=3;
+}
+
+/**进入事件请求*/
+message CSEventEnterRequest{
+	option (messageId) = 1513;
+	option (serverTarget)="officer/event/enter";
+	int64 playerId = 1;
+	int64 eventId = 2;//事件id
+}
+
+message SCEventEnterResponse{
+	option (messageId) = 1514;	
+	int32 result = 1;//服务器验证结果，0表示失败，1表示成功，2表示体力值不足
+}
+
+message CSEventDropInfoRequest{
+	option (messageId) = 1515;
+	option (serverTarget)="officer/event/dropInfo";
+	int64 eventId = 1;
+}
+
+message SCEventDropInfoResponse{
+	option (messageId) = 1516;
+	repeated EventDropInfo perfectProps = 1;
+	repeated EventDropInfo normalProps = 2;
+	int64 eventId = 3;
+}
+
+message EventDropInfo{
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+//技能start
+enum InOrOutScene{
+	OUT_SCENE=0 ;//局外
+	IN_SCENE =1 ;//局内	
+}
+
+/**技能触发请求*/
+message CSSkillEmitRequest{
+	option (messageId) = 1601;
+	option (serverTarget)="skill/emit";
+	int64 propId = 1;
+	int32 count = 2;//数量
+	InOrOutScene inOrOutScene = 3 ;//局内还是局外
+}
+message SCSkillEmitResponse{
+	option (messageId) = 1602;
+	int32 result = 1;//服务器验证结果，0表示触发失败，1表示触发成功
+	int64 skillId = 2;//技能id
+	int64 propId = 3;
+}
+
+message CSSkillTimerEmitReq{
+	option (messageId) = 1603;
+	option (serverTarget)="skill/emit/timer";
+}
+
+message SCSkillTimerEmitResp{
+	option (messageId) = 1604;
+	int32 result = 1;//0表示触发失败，1表示触发成功
+	int64 skillId = 2;//技能id
+	int64 playerOfficerId = 3;//警员id
+}
+
+//技能end
+message CSReasoningRewardReq{
+	option (messageId) = 1605;
+	option (serverTarget)="officer/reasoning/reward";
+	int64 reasoningId = 1;//
+}
+
+
+//尸检 请求
+message CSFindEnterReq{
+	option (messageId) = 1606;
+	option (serverTarget)="officer/find/enter";
+	int64 findId = 1;//尸检id
+}
+
+//尸检 请求 回复
+message SCFindEnterResp{
+	option (messageId) = 1607;	
+	int32 result = 1;//服务器验证结果，0表示失败，1表示成功，2表示体力值不足
+}
+
+
+
+/**尸检结算请求*/
+message CSFindRewardReq{
+	option (messageId) = 1608;
+	option (serverTarget)="officer/find/reward";
+	int64 findId = 1;//尸检id
+	int32 result =2;//1成功 2失败
+	int32 foundNum =3;//找到的线索num
+	int32 totalNum =4;//总共的线索num
+}
+/**尸检结算请求回复*/
+message SCFindRewardResp{
+	option (messageId) = 1609;	
+	ResponseStatus ResponseStatus=1;
+	int32 vit = 2; //获得的体力值
+	repeated SceneRewardComprise sceneRewardComprise = 3;
+}
+
+/**反驳领取奖励请求*/
+message CSSkyEyeRewardReq{
+	option (messageId) = 1610;
+	option (serverTarget)="officer/skyEye/reward";
+	int64 skyEyeId = 1;//天眼id
+}
+/**反驳领取奖励请求返回*/
+message SCSkyEyeRewardReq{
+	option (messageId) = 1611;
+	int64 skyEyeId = 1;//天眼id
+	ResponseStatus ResponseStatus=2;//状态
+	repeated RewardItem items=3;//奖励
+}
+
+/**天眼请求*/
+message CSSkyEyeReq{
+	option (messageId) = 1612;
+	option (serverTarget)="officer/skyEye/list";
+}
+
+
+/**天眼请求返回*/
+message SCSkyEyeReq{
+	option (messageId) = 1613;
+	repeated int64 hasRewarded=1;//已领取了奖励的列表
+}
+
+
+
+
+message DiscountInfo{
+
+	int32 discountCost=1; //'折扣后额度',
+	int32 discount=2; //'折扣',
+	int64 discountStart=3; //'折扣开始时间',
+	int64 discountEnd=4; //'折扣结束',
+	string discountIcon=5; //'折扣标签',
+
+}
+
+enum Category{
+
+	CASH = 0; // 纸钞
+	COIN = 1; //金币
+	VIT = 2; //体力
+	COMMON =3; 
+	BLACK=4;
+
+}
+
+enum CostType{
+	COST_CASH = 0; // 纸钞
+	COST_COIN = 1; //金币
+	COST_DOLLAR = 2;
+}
+
+message MarketItemMsg{
+	int64 id = 1;
+	int64 sellId=2; //物品，就是物品ID
+	int32 sellCount=3; //数量
+	CostType costType=4;  //'花费类型',
+	int32 cost=5; //'花费额度',
+	int32 buyLimit=6; //购买次数限制
+	DiscountInfo discountInfo=7; 
+	int32 maxLimit=8;//最大次数限制
+}
+
+message MarketBlack{
+	int64 id = 1;
+	int64 lastUpdateTime =2 ; //最近刷新时间
+	int64 nextUpdateTime =3;//下次刷新时间
+	int32 freshCost=4 ;//刷新花费
+	int32 freshLimit=5 ;//刷新花费
+}
+
+/**商场列表*/
+message MarketRequest{
+	option(messageId) = 1701;
+	option (serverTarget)="player/market/list";
+	Category category=1;
+}
+
+message MarketResponse{
+	option(messageId) = 1702;
+	ResponseStatus responseStatus=1;
+	repeated MarketItemMsg marketItems=2;
+	MarketBlack marketBlack=3;
+	Category category=4;
+}
+
+
+/**购买**/
+message MarkeBuyRequest{
+	option(messageId) = 1703;
+	option (serverTarget)="player/market/buy";
+	int64 marketItemId=1;
+	int32 count=2;
+}
+
+message MarkeBuyResponse{
+	option(messageId) = 1704;
+	ResponseStatus responseStatus=1;
+	PlayerPropMsg props=2;
+}
+
+/**商场单个商品信息*/
+message CSMarketItemRequest{
+	option(messageId) = 1711;
+	option (serverTarget)="player/market/item";
+	int64 propId=1;
+}
+
+message SCMarketItemResponse{
+	option(messageId) = 1712;
+	ResponseStatus responseStatus=1;
+	MarketItemMsg marketItems=2;
+}
+
+
+/**fresh**/
+message MarkeFreshRequest{
+	option(messageId) = 1705;
+	option (serverTarget)="player/market/black/fresh";
+}
+
+message MarkeFreshResponse{
+	option(messageId) = 1706;
+	ResponseStatus responseStatus=1;
+	PlayerBaseInfo playerBaseInfo=2;
+	MarketBlack MarketBlack=3;
+	repeated MarketItemMsg marketItems=4;
+}
+
+
+message PlayerBaseInfo{
+	int32 coin =1;
+	int32 cash=2;
+}
+
+/**填了id就只按id取，填了type就按type取，两个参数二选一*/
+message CSNoticeListRequest{
+	option (messageId) = 1801;
+	option (serverTarget)="notice/list";
+
+	int64 id = 1;//公告id
+	int32 type = 2;//类型
+
+}
+
+message SCNoticeListResponse{
+	option (messageId) = 1802;
+	repeated NoticeInfo notices = 1;
+
+}
+
+message NoticeInfo{
+	int64 id = 1;
+	int32 type = 2;
+    string picture = 3;
+    string title = 4;
+    string content = 5;
+    int32 levelLimit = 6;
+    int64 startTime = 7;
+	int64 endTime = 8;
+	int64 updateTime = 9;
+}
+
+message CSPingRequest{
+	option (messageId) = 1901;
+	option (serverTarget)="ping/ping";
+}
+
+message SCPingResponse{
+	option (messageId) = 1902;
+	int32 count = 1;//需要请求的消息数
+	repeated PingResponseContent content = 2;
+
+}
+
+message PingResponseContent{
+	int32 msgId=1; //相关内容的msgId
+	string data=2; //相关byte[]，base64编码为string
+	bool isEmpty=3; // byte[] 是否为空
+}
+
+message CSMessageRequest{
+	option (messageId) = 1903;
+	option (serverTarget)="ping/message";
+}
+
+
+/***lotto***/
+message LottoItemProto{
+
+	int64 propId=1 ;
+	int32 count=2;
+	bool special=3;
+	int32 lucky=4;
+	int64 id =5; 
+}
+
+
+message LottoRequest{
+	option(messageId) = 1707;
+	option (serverTarget)="player/lotto/get";
+	CostType costType=1;
+}
+  
+message LottoResponse{
+	option(messageId) = 1708;
+	ResponseStatus responseStatus=1;
+	CostType costType=2;
+	int32 costValue=3;
+	int64 lottoId = 4;
+	repeated LottoItemProto items=5;
+	int32 lucky=6;
+
+}
+
+
+/***lottoBuy***/
+message LottoBuyRequest{
+	option(messageId) = 1709;
+	option (serverTarget)="player/lotto/buy";
+	int64 lottoId=1;
+}
+
+message LottoBuyResponse{
+	option(messageId) = 1710;
+	ResponseStatus responseStatus=1;
+	repeated PlayerPropMsg props= 2;
+	int64 id =3;
+	int32 lottoCount = 4;//今日第几次抽奖
+}
+
+/**google charge*/
+message CSGooglePayChargeRequest{
+	option(messageId) = 1713;
+	option (serverTarget)="player/charge/google";
+	string jsonData=1;
+	string signature=2;
+	string productId=3;
+}
+
+message SCGooglePayChargeResponse{
+	option(messageId) = 1714;
+	ResponseStatus responseStatus=1;
+	string productId=2;
+}
+
+message CSIOSPayChargeRequest{
+	option(messageId) = 1715;
+	option (serverTarget)="player/charge/ios";
+	string jsonData=1;
+	string productId=2;
+}
+
+message SCIOSPayChargeResponse{
+	option(messageId) = 1716;
+	ResponseStatus responseStatus=1;
+	string productId=2;
+	string jsonData=3;
+}
+
+
+/**任务*/
+/**服务器判断玩家接到新任务后通知客户端*/
+message SCAcceptTaskNotice{
+	option (messageId) = 1820;
+	
+	repeated AcceptTaskInfo acceptTasks = 1;//接到的新任务列表
+}
+
+message AcceptTaskInfo{
+	int64 taskId = 1;//配置id
+	int64 playerTaskId = 2;//唯一标识
+	int32 status = 3;//任务进度状态
+}
+
+message CSTaskListRequest{
+	option (messageId) = 1821;	
+	option (serverTarget)="task/list";
+	
+	int32 type = 1;//0表示所有任务，1表示主线任务。
+	repeated int64 taskIds = 2;//想要请求详细信息的任务的id
+}
+
+message SCTaskListResponse{
+	option (messageId) = 1822;
+	repeated TaskInfo taskInfos = 1;
+}
+
+/**玩家的任务进度*/
+message TaskInfo{
+	int64 playerTaskId = 1;//唯一标识
+	int64 taskId = 2;//任务的配置Id
+	int32 status = 3;//任务总进度，1表示进行中，2表示已完成，3表示已领奖
+	int32 level = 4;//等级（当前等级）
+	repeated TaskPropProgress propProgresss = 5;//物品收集进度
+	int32 dialogueProgress = 6;//对话进度，0表示未完成，大于1表示已完成 dialogueId
+	int32 eventProgress = 7;//事件进度，0表示未完成，大于1表示已完成 eventId
+	int32 sceneProgress = 8;//场景进度，0表示未完成，大于1表示已完成 sceneId
+	repeated TaskExhibitProgress exhibitProgress = 9;
+}
+
+/**任务收集物品的进度*/
+message TaskPropProgress{
+	int64 propId = 1;//物品id
+	int32 count = 2;//进度（目前是背包数据）
+}
+
+/**任务收集物品的进度*/
+message TaskExhibitProgress{
+	int64 exhibitId = 1;//物品id
+	int32 count = 2;//进度（目前是背包数据）
+}
+
+message CSTaskCommitRequest{
+	option (messageId) = 1823;	
+	option (serverTarget)="task/commit";
+
+	int64 playerTaskId = 1;//唯一标识
+}
+
+message SCTaskCommitResponse{
+	option (messageId) = 1824;
+	int32 result = 1;//1表示成功，其他的是错误码
+	int32 coin = 2;//金币奖励
+	int32 cash = 3;//现金奖励
+	int32 vit = 4;//体力值奖励
+	int32 exp = 5;//经验奖励
+	int64 titleId = 6;//获得的称号
+	repeated TaskPropReward propRewards = 7;
+	int64 taskId = 8;
+	
+}
+
+/**任务物品奖励*/
+message TaskPropReward{
+	int64 propId = 1;//物品id
+	int32 count = 2;//奖励数量
+}
+
+message SCTaskStatusChangeNotice{
+	option (messageId) = 1825;
+	int64 playerTaskId = 1;//唯一标识
+	int64 taskId = 2;//任务的配置Id
+	int32 status = 3;//任务进度,1表示进行中，2表示已完成，3表示已领奖
+	TaskInfo taskInfo=4;
+}
+
+message CSTriggerTaskActiveRequest{
+	option (messageId) = 1827;	
+	option (serverTarget)="task/trigger";
+	int64 taskId = 1;//想要触发的任务
+}
+
+message SCTriggerTaskActiveResponse{
+	option (messageId) = 1828;
+	int32 result = 1;//1表示成功，其他的是错误码
+	int64 taskId = 2;//想要触发的任务
+}
+
+/**客户端主动向服务器请求玩家当前接收的任务列表*/
+message CSTaskIdListRequest{
+	option (messageId) = 1841;	
+	option (serverTarget)="task/idList";
+}
+
+message SCTaskIdListResponse{
+	option (messageId) = 1842;
+	repeated TaskIdInfo taskIdInfos = 1;
+}
+
+message TaskIdInfo{
+	int64 playerTaskId = 1;
+	int64 taskId = 2;
+}
+
+/**成就获取列表**/
+message CSAchievementRequest{
+	option (messageId) = 1829;
+	option (serverTarget)="/player/achievement/list";
+}
+
+message AchievementMsg{
+	int64 id= 1;
+	int32 progress = 2;
+	int32 submitStatus =3;
+	int64 finishTime=4;
+	int64 finishTime1=5;
+	int64 finishTime2=6;
+}
+
+message SCAchievementResponse{
+	option (messageId) = 1830;
+	ResponseStatus status = 1;
+	repeated AchievementMsg Achievements=2;
+	int32 totalCount=3;
+}
+
+/**成就奖励领取**/
+message CSAchievementSubmitRequest{
+	option (messageId) = 1831;
+	option (serverTarget)="/player/achievement/submit";
+	int64 id= 1;
+	int32 stage = 2;
+}
+
+message SCAchievementSubmitResponse{
+	option (messageId) = 1832;
+	ResponseStatus status = 1;
+}
+
+//活动 start
+message CSActivityBaseListRequest{
+	option (messageId) = 2021;	
+	option (serverTarget)="activity/base/list";
+
+}
+
+message SCActivityBaseListResponse{
+	option (messageId) = 2022;
+	repeated ActivityBaseInfo baseInfos = 1;
+}
+
+message ActivityBaseInfo{
+	int64 id = 1;
+	int32 type = 2;
+	string icon = 3;
+	string descs = 4;
+	int32 targetType = 5;
+	string targetPrefab = 6;
+	int64 warmupTime = 7;
+	int64 startTime = 8;
+	int64 endTime = 9;
+	int32 stage = 10;//0无 1预热 2开始
+	int32 timeType =11;//时间类型 0全局的 1 个人的（个人的活动开始时间从他第一次接取任务开始）
+	int32 days =12;//个人活动，当前是他活动的第几天
+	int64 personalBeginTime=13;//个人活动，开始时间
+	int64 personalEndTime=14;//个人活动，结束时间
+}
+
+message PropItem{
+	int64 id = 1;
+	int32 num = 2;
+	int32 hasNum = 3;
+}
+
+message CSActivityRequest{
+	option (messageId) = 2024;
+	option (serverTarget)="activity/base/quest";
+	int64 id = 1; 
+}
+
+message SCActivityDropResponse{
+	option (messageId) = 2025;
+	int64 id = 1;
+	string description = 2;//任务总描述
+	string backgroundSource = 3;//背景图
+	string warmupSource = 4;//预热图
+	int64 rewardid = 5;//奖励ID
+	repeated PropItem items = 6;//要掉落的物品，已有的物品数量
+	repeated int64 sceneId = 7;//有物品掉落的场景ID
+	int32 stage = 8;//0无 1预热 2开始
+	bool hasReward = 9 ;//是否已经领取过奖励
+	string name=10;//名称
+	string collectDes=11;//收集以下物品描述
+	string sceneDes=12;//在以下场景可寻找，描述
+	string rewardSource=13;//奖励背景图路径
+	string tips=14;//tips描述
+		
+}
+
+message CSActivityRewardRequest{
+	option (messageId) = 2026;	
+	option (serverTarget)="activity/reward";
+	int64 id = 1;
+}
+
+message SCActivityRewardResponse{
+	option (messageId) = 2027;	
+	ResponseStatus responseStatus = 1;
+	repeated GiftItem items = 2;
+}
+
+/**进入漫画场景*/
+message CSCartoonEnterRequest{
+	option(messageId) = 2101;
+	option (serverTarget)="cartoon/enter";
+	int64 sceneId = 1;
+}
+message SCCartoonEnterResponse{
+	option(messageId) = 2102;
+	int32 result = 1;//服务器验证结果，1表示成功，其他的是错误码（4表示场景不存在）	
+}
+
+message CSCartoonRewardRequest{
+	option(messageId) = 2103;
+	option (serverTarget)="cartoon/reward";
+}
+
+message SCCartoonRewardReqsponse{
+	option(messageId) = 2104;
+	int32 cash = 1;
+	int32 coin = 2;
+	int32 exp = 3;
+	int32 vit = 4;
+	repeated SceneRewardComprise sceneRewardComprise = 5;
+}
+
+/**退出漫画场景*/
+message CSCartoonQuitRequest{
+	option(messageId) = 2105;
+	option (serverTarget)="cartoon/quit";
+}
+
+//邮件start
+/**客户端请求邮件列表*/
+message CSEmailListRequest{
+	option (messageId) = 2201;
+	option (serverTarget)="email/list";
+}
+
+message SCEmailListResponse{
+	option (messageId) = 2202;
+	repeated EmailInfo emails = 1;
+}
+
+message EmailInfo{
+	int64 id = 1;
+	int32 type = 2;//1表示好友邮件，2表示系统邮件
+	int32 status = 3;//0表示未读取，1表示已读，2表示已领奖
+	string title = 4;
+	string content = 5;
+	int64 receiveTime = 6;//收到邮件的时间
+	int64 deadline = 7;//过期时间
+	repeated EmailReward rewards = 8;
+	
+}
+
+message EmailReward{
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+/**邮件奖励*/
+message CSEmailRewardRequest{
+	option (messageId) = 2203;
+	option (serverTarget)="email/reward";
+	
+	int64 id = 1;
+}
+
+message SCEmailRewardResponse{
+	option (messageId) = 2204;	
+	int32 result = 1;//1表示成功，2表示已领取过了，3表示已过期，4表示邮件不存在，5表示该邮件没有奖励
+	int64 id = 2;
+}
+
+/**在邮件为未读取的状态下，玩家点开了邮件 客户端通知服务器*/
+message CSEmailReadRequest{
+	option (messageId) = 2205;
+	option (serverTarget)="email/read";
+	int64 id = 1;
+}
+/**服务器通知客户端邮件有更新，客户端收到这个消息后再向服务器请求一遍*/
+message SCEmailChangeNotice{
+	option (messageId) = 2207;
+	int64 switchTime = 1;
+
+}
+
+/*头衔*/
+ message TitleMsg {
+ 	int64 titleId =1;
+ 	int64 deadline=2;
+ 	int64 getTime =3;
+ 	bool active =4;
+ }
+
+/*头衔列表*/
+ message CSTitleRequest{
+ 	option (messageId) = 1833;
+	option (serverTarget)="/player/title/list";
+
+ }
+
+message SCTitleResponse{
+ 	option (messageId) = 1834;
+ 	ResponseStatus status = 1;
+	repeated TitleMsg titles = 2;
+ }
+
+/*头衔使用，或者更改*/
+  message CSTitleActiveRequest{
+ 	option (messageId) = 1835;
+	option (serverTarget)="/player/title/active";
+	int64 titleId=1;
+ }
+
+ message SCTitleActiveResponse{
+ 	option (messageId) = 1836;
+ 	ResponseStatus status = 1;
+	TitleMsg title = 2;
+ }
+
+/*当前头衔*/
+  message CSTitleGetRequest{
+ 	option (messageId) = 1837;
+	option (serverTarget)="/player/title/get";
+ }
+
+ message SCTitleGetResponse{
+ 	option (messageId) = 1838;
+ 	ResponseStatus status = 1;
+	TitleMsg title = 2;
+ }
+ 
+message PlayerFriendMsg{
+
+	int64 playerId = 1;
+	string name=2;
+	int32 level=3;
+	int32 gender =4;
+	string icon=5;
+	int64 titleId=6;
+	bool gift=7;
+	int64 statusTime=8;
+
+}
+
+enum FriendReqType {
+	APPLYING =0; //发送请求
+	AGREEING =1; //好友申请
+	ADDINFO = 2; //添加成功消息
+	ADDED = 3; //好友列表
+}
+
+/*好友列表*/
+message CSFriendRequest{
+	option (messageId) = 2301;
+	option (serverTarget)="player/friend/list";
+	FriendReqType type=1;
+}
+
+message SCFriendResponse {
+	option (messageId) = 2302;
+	ResponseStatus status= 1;
+	repeated  PlayerFriendMsg friends=2;
+	int32 limit=3;
+	int32 total=4;
+	int32 giftCountLeft=5;
+	FriendReqType Type = 6;
+	bool lastAgree = 7; //好友同意请求
+	bool addSwitch = 8; //true关闭申请
+}
+
+
+/**添加*/
+message CSFriendAddRequest{
+	option (messageId) = 2303;
+	option (serverTarget)="player/friend/add";
+	int64 playerId = 1;
+}
+
+message SCFriendAddResponse{
+	option (messageId) = 2304;
+	ResponseStatus status=1;
+}
+
+
+/**删除*/
+message CSFriendDelRequest{
+	option (messageId) = 2305;
+	option (serverTarget)="player/friend/del";
+	int64 playerId = 1;
+}
+
+message SCFriendDelResponse{
+	option (messageId) = 2306;
+	ResponseStatus status=1;
+}
+
+/**同意*/
+message CSFriendAgreeRequest{
+	option (messageId) = 2307;
+	option (serverTarget)="player/friend/agree";
+	int64 playerId = 1;
+}
+
+message SCFriendAgreeResponse{
+	option (messageId) = 2308;
+	ResponseStatus status=1;
+}
+
+/**删除请求*/
+message CSFriendDelApplyRequest{
+	option (messageId) = 2309;
+	option (serverTarget)="player/friend/delApply";
+	int64 friendId = 1; // 0表示删除全部
+}
+
+message SCFriendDelApplyResponse{
+	option (messageId) = 2310;
+	ResponseStatus status=1;
+}
+
+/**送礼列表**/
+message CSFriendGiftRequest{
+	option (messageId) = 2311;
+	option (serverTarget)="player/friend/gift/list";
+}
+
+message FriendGift{
+	PlayerFriendMsg playerFriends =1;
+	PlayerPropMsg playPropMsg = 2;
+	int64 giftId=3;
+}
+
+message SCFriendGiftResponse{
+	option (messageId) = 2312;
+	ResponseStatus status= 1;
+	repeated FriendGift friendGiftLists=2;
+	int32 limit=3;
+	int32 count=4;
+
+}
+
+/**送礼**/
+message CSFriendGiftSendRequest{
+	option (messageId) = 2313;
+	option (serverTarget)="player/friend/gift/send";
+	int64 friendId = 1;
+}
+
+message SCFriendGiftSendResponse{
+	option (messageId) = 2314;
+	ResponseStatus status=1;
+}
+
+/**送礼删除**/
+// message CSFriendGiftDelRequest{
+// 	option (messageId) = 2314;
+// 	option (serverTarget)="player/friend/gift/del";
+// 	int64 giftId = 1; // 0表示删除全部
+// }
+
+// message SCFriendGiftDelResponse{
+// 	option (messageId) = 2315;
+// 	ResponseStatus status=1;
+// }
+
+
+/**送礼领取**/
+message CSFriendGiftDrawRequest{
+	option (messageId) = 2316;
+	option (serverTarget)="player/friend/gift/draw";
+	int64 giftId = 1; // 0表示全部领取
+}
+message SCFriendGiftDrawResponse{
+	option (messageId) = 2317;
+	ResponseStatus status=1;
+	repeated PlayerPropMsg playerPropMsg=2;
+}
+
+/**好友界面**/
+message CSFriendViewRequest{
+	option (messageId) = 2318;
+	option (serverTarget)="player/friend/view";
+	int64 friendId = 1; // 0表示全部领取
+}
+
+message AchievementFriendMsg{
+	int64 id= 1;  //achievement ID
+	int32 progress = 2; //进度
+	int32 submitStatus =3; // 提交状态 
+	int64 finishTime=4; //完成总时间
+	int64 finishTime1=5; // 一阶段时间
+	int64 finishTime2=6; // 二阶段时间
+}
+
+message SCFriendViewResponse{
+	option (messageId) = 2319;
+	ResponseStatus status= 1;
+	PlayerFriendMsg playerFriendMsg = 2;
+	repeated AchievementFriendMsg achievementMsgs = 3;
+}
+
+//添加好友开关
+message CSFriendSwitchRequest{
+	option (messageId) = 2320;
+	option (serverTarget)="player/friend/switch";
+}
+
+message SCFriendSwitchResponse{
+	option (messageId) = 2321;
+	ResponseStatus status= 1;
+}
+
+message SCFriendApplyResponse{
+	option (messageId) = 2323;
+	int64 friendId = 1;
+}
+
+message SCFriendNoticeResponse{
+	option (messageId) = 2324;
+	int32 point=1; //1：有新增好友，2：有好友请求 3：有好友礼物
+}
+
+
+
+message FriendRecommendMsg{
+	string name=1;
+	//fb绑定 ,0:未绑定，1fb 绑定
+	int32 bind=2;
+	//好友推荐状态，1：推荐，2：加好友
+	int32 status=3;
+	int32 level=4;
+	string icon=5;
+	int64 recommendId=6;
+}
+
+//好友推荐列表
+message CSFriendRecommendListRequest{
+	option (messageId) = 2325;
+	option (serverTarget)="player/friend/recommend/list";
+}
+
+message SCFriendRecommendListResponse{
+	option (messageId) = 2326;
+	ResponseStatus status= 1;
+	repeated FriendRecommendMsg recommend=2;
+	int32 timeDown=3;
+}
+
+
+//推荐查看
+message CSFriendRecommendGetRequest{
+	option (messageId) = 2327;
+	option (serverTarget)="player/friend/recommend/get";
+	int64 recommendId=1;
+}
+
+message SCFriendRecommendGetResponse{
+	option (messageId) = 2328;
+	ResponseStatus status= 1;
+	PlayerFriendMsg playerFriendMsg = 2;
+	repeated AchievementFriendMsg achievementMsgs = 3;
+}
+
+
+//推荐申请
+message CSFriendRecommendApplyRequest{
+	option (messageId) = 2329;
+	option (serverTarget)="player/friend/recommend/apply";
+
+	repeated int64 recommendId=1;
+}
+
+message SCFriendRecommendApplyResponse {
+	option (messageId) = 2330;
+	ResponseStatus status= 1;
+	//成功发出申请
+	repeated int64 recommendId=2;
+}
+
+
+/**客户端请求玩家的建筑列表*/
+message CSBuildingListReq{
+	option(messageId) = 2401;
+	option (serverTarget)="building/list";
+}
+
+message SCBuildingListResp{
+	option(messageId) = 2402;
+	repeated BuildingInfo infos = 1;
+}
+
+message BuildingInfo{
+	int64 buildingId = 1;
+	int32 status = 2;//1表示已解锁2可解锁的
+}
+
+/**客户端请求解锁某建筑*/
+message CSBuildingUnlockReq{
+	option(messageId) = 2403;
+	option (serverTarget)="building/unlock";
+	int64 buildingId = 1;//配置id
+}
+
+message SCBuildingUnlockResp{
+	option(messageId) = 2404;
+	ResponseStatus responseStatus=1;
+	int64 buildingId = 2; 
+}
+
+/**任务能不能做*/
+message CSCanTaskRequest{
+	option (messageId) = 1848;
+	option (serverTarget)="task/canTask";
+	int64 taskId = 1;
+}
+/**任务能不能做*/
+message SCCanTaskResponse{
+	option (messageId) = 1849;
+	bool canTask = 1;
+	int64 taskId = 2;
+}
+
+/**获得新称号*/
+message SCreceiveNewTitle{
+	option (messageId) = 1850;
+	int64 title = 1;
+}
+
+
+enum OsType{
+	ios=0;
+	andorid=1;
+	web=2;
+}
+
+//游客登录
+message CSRegGuestRequest{
+	option (messageId) = 1040;
+	option (serverTarget)="auth/guest/reg";
+	string deviceId = 1;
+	string osType = 2;
+	string ad =3;//广告投放
+}
+
+message SCRegGuestResponse{
+	option (messageId) = 1041;
+	ResponseStatus status= 1;
+	string guest_identify=2;
+}
+
+//认证
+message CSIdentifyCheckRequest{
+	option (messageId) = 1044;
+	option (serverTarget)="auth/identify/check";
+	string identify=1;
+}
+
+message SCIdentifyCheckRepsonse{
+	option (messageId) = 1045;
+	ResponseStatus status= 1;
+	string accessToken = 2;
+	int64 startTime = 3;
+	int64 deadline=4;
+	int32 thirdBind=5;
+}
+
+
+/*facebook login*/
+message CSFBLoginRequest{
+	option (messageId) = 1046;
+	option (serverTarget)="auth/fb/login";
+
+	string accessToken=1;
+	string fbId=2;
+	int64 expiresIn=3;
+
+	string deviceId = 4;
+	OsType osType = 5;
+	string ad =6;//广告投放
+}
+
+message SCFBLoginResponse{
+	option (messageId) = 1047;
+	ResponseStatus status= 1;
+	string identify=2;
+	string longLifeAcessToken=3;
+}
+
+/*facebook 绑定*/
+message CSFBBindRequest{
+	option (messageId) = 1048;
+	option (serverTarget)="auth/fb/bind";
+	string identify=1;
+	string accessToken=2;
+	string fbId=3;
+	int64 expiresIn=4;
+}
+
+message SCFBBindResponse{
+	option (messageId) = 1049;
+	ResponseStatus status= 1;
+	string identify=2;
+	string longLifeAcessToken=3;
+	bool hasBeenBinded =4;//是否以前绑定过 如果绑定过，上面的identify是以前号的
+	//以下三项，曾经绑定过才有，推的是老号信息
+	int64 id=5;
+	string name=6;
+	int32 level=7;
+	int32 cashCount=8;//奖励钞票个数
+	string icon=9;//头像
+}
+
+message SCIdentifyCheckMuiltyMessage{
+	option (messageId) = 1050;
+	repeated IdentifyCheckResponseContent contents =1;
+	ResponseStatus status= 2;
+}
+
+message IdentifyCheckResponseContent{
+	int32 msgId=1; //相关内容的msgId
+	string data=2; //相关byte[]，base64编码为string
+}
+
+/**卖物品*/
+message PlayerPropSellRequest{
+	option(messageId) = 1207;
+	option (serverTarget)="player/prop/sell";
+	repeated PlayerPropMsg playerProps=1;
+}
+
+message PlayerPropSellResposne{
+	option(messageId) = 1208;
+	ResponseStatus reponseStatus=1;
+}
+
+message CSDropReq{
+	option(messageId) = 1209;
+	option (serverTarget)="player/prop/drop";
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+message SCDropResp{
+	option(messageId) = 1210;
+	repeated DropInfo dropInfos = 1;
+}
+
+message SCAutoOpenGiftDropResp{
+	option(messageId) = 1211;
+	repeated DropInfo dropInfos = 1;
+}
+
+message DropInfo{
+	int64 propId = 1;
+	int32 count = 2;
+}
+
+/**对话完成**/
+message CSChatFinishRequest{
+
+	option (messageId) = 1843;	
+	option (serverTarget)="player/chat/finish";
+	int64 chatId=1;
+
+}
+
+message SCChatFinishResponse{
+	option (messageId) = 1844;
+	ResponseStatus status=1;
+}
+
+
+message CSGetAllRewardedTasksRequest{
+ 	option (messageId) = 1845;
+	option (serverTarget)="task/getAllRewardedTasks";
+}
+
+
+
+message SCGetAllRewardedTasksResponse{
+ 	option (messageId) = 1846;
+	repeated TaskIdTypeInfo tasks = 1;
+}
+
+message TaskIdTypeInfo{
+	int64 taskId =1;
+	int64 chapterId =2;
+	int32 taskType =3;
+
+}
+
+
+
+message CSPlayerCheckInInfoReq{
+	option (messageId) = 1405;
+	option (serverTarget)="checkin/info";
+}
+
+message SCPlayerCheckInInfoResp{
+	option (messageId) = 1406;
+
+	int64 id = 1;
+	int32 day = 2;//当前签到的周期数
+	int32 status = 3;//当天是否已签到
+}
+
+message CSPlayerCheckInReq{
+	option (messageId) = 1407;
+	option (serverTarget)="checkin/checkin";
+}
+
+message SCPlayerCheckInResp{
+	option (messageId) = 1408;
+	int32 result = 1;//1成功，2表示已签到，3表示失败
+}
+
+/**更换头像请求*/
+message CSPlayerRenewIconReq{
+	option (messageId) = 1409;
+	option (serverTarget)="player/info/renewicon";
+	string newIcon = 1;
+}
+/**更换头像结果 0是失败，1是成功*/
+message SCPlayerRenewIconResp{
+	option (messageId) = 1410;
+	int32 result = 1;
+	string newIcon = 2;
+}
+
+message SCPlayerUpLevel{
+	option (messageId) = 1411;
+	int32 oldLevel = 1;//原等级
+	int32 newLevel = 2;//现等级
+	repeated RewardItem rewards =3;//奖励
+	int64 unLockBuildId =4;//解锁建筑
+	Push_Info pushInfo =5;//礼包推送 自动类型
+}
+
+message CSPlayerGuildRequest{
+	option (messageId) = 1412;
+	option (serverTarget)="player/info/guild";
+}
+
+message SCPlayerGuildResponse{
+	option (messageId) = 1413;
+	string guild =1;
+}
+
+message CSPlayerGuildUpdateRequest{
+	option (messageId) = 1414;
+	option (serverTarget)="player/info/guildUpdate";
+	string guild = 1;
+}
+
+
+enum FeedbackType{
+
+	ALL=0;
+
+}
+
+message CSPlayerFeedbackRequest{
+	option (messageId) = 2500;
+	option (serverTarget)="player/feedback/submit";
+	 string content = 1;
+	 string platform = 2;
+	 string release = 3;
+	 FeedbackType feedbackType = 4;
+	 string email=5;
+	 string information=6;
+}
+
+
+message SCPlayerFeedbackResponse{
+	option (messageId) = 2501;
+     ResponseStatus status = 1;
+     int64 nextAvailableTime=2;//成功后，下次可提交时间。
+     int32 timeLeft=3;//失败后，可以提交次数
+}
+
+/**新解锁成就**/
+message SCAchievementUnlockResponse{
+	option (messageId) = 1847;
+	int64 id = 1;
+}
+
+message SCActivityNewResponse{
+	option (messageId) = 2023;
+	int32 haveNew=1; //>1 表示有新活动
+}
+
+
+/**掉线重连*/
+message CSSceneReconnectRequest{
+	option(messageId) = 1115;
+	option (serverTarget)="scene/reconnect";
+	int64 sceneId = 1;
+	int64 startTime=2;
+	int64 endTime =3;	
+}
+
+message SCSceneReconnectResponse{
+	option(messageId) = 1116;
+	ResponseStatus responseStatus=1;
+}
+
+//同步难度
+message CSSceneDifficultyReq{
+	option(messageId) = 1117;
+	option (serverTarget)="scene/getDifficulty";
+	repeated int64 bigIds=1;//场景大ID
+}
+
+message SceneDifficultyInfo{
+	int64 bigId =1;
+	int32 difficulty=2;
+	int32 exp=3;
+}
+
+//同步难度返回
+message SCSceneDifficultyResp{
+	option(messageId) = 1118;
+	repeated SceneDifficultyInfo  infos=1;
+}
+
+
+/**掉线重连*/
+message CSJigsawReconnectRequest{
+	option(messageId) = 1315;
+	option (serverTarget)="jigsaw/reconnect";
+	int64 sceneId = 1;
+	int64 startTime=2;
+	int64 endTime =3;	
+}
+
+message SCJigsawReconnectResponse{
+	option(messageId) = 1316;
+	ResponseStatus responseStatus=1;
+}
+
+
+message ServiceConfigInfo{
+	string key =1;
+	string value=2;
+}
+
+message CSGetServiceConfigRequest{
+	option (messageId) = 2331;
+	option (serverTarget)="sys/getServiceConfig";
+}
+
+
+message SCGetServiceConfigResponse{
+	option (messageId) = 2332;
+	repeated ServiceConfigInfo info =1;
+}
+
+message CSGetServiceConfigSingleRequest{
+	option (messageId) = 2333;
+	option (serverTarget)="sys/getSingleServiceConfig";
+	string key =1;
+}
+
+
+message SCGetServiceConfigSingleResponse{
+	option (messageId) = 2334;
+	string value =1;
+}
+
+message GetPathInfo{
+	int64 id =1;//id
+	string path=2;//地址
+	int32 status=3;//状态
+	string version=4; //版本号
+	string plat=5;//平台
+}
+
+message CSGetPathConfigRequest{
+	option (messageId) = 2335;
+	option (serverTarget)="sys/path";
+	string plat=1;//平台
+}
+
+message SCGetPathConfigResponse{
+	option (messageId) = 2336;
+	GetPathInfo infos=1;
+}
+
+message CSClientLogRequest{
+	option (messageId) = 2337;
+	option (serverTarget)="sys/clientLog";
+	string event_name =1;
+	float  value4sum =2;
+	string params =3;
+	int64 playerId =4;
+}
+
+message SceneRewardComprise{
+	int32 type =1 ;//1 基础  2;//警员技能3;//头衔BUFF4;//寻物时间奖励 5点击次数
+	
+	int32 outputCoin = 2;
+	int32 outputCash = 3;
+	int32 outputVit = 4;
+	int32 outputExp = 5;
+}
+
+message Push_Info{
+	int32 type =1;//类型 1为手动 2为自动
+	int64 pushId =2;//推送ID
+	int64 endTime =3;//结束时间
+	bool buyed =4;//是否已购买
+}
+
+
+message CSGetPushRequest{
+	option (messageId) = 2801;
+	option (serverTarget)="push/getPush";
+}
+
+
+message SCGetPushResponse{
+	option (messageId) = 2802;
+	repeated Push_Info infos =1;
+}
+
+message CSBuyPushRequest{
+	option (messageId) = 2803;
+	option (serverTarget)="push/buyPush";
+	int64 pushId =1;
+}
+message SCBuyPushResponse{
+	option (messageId) = 2804;
+	int64 pushId =1;
+	ResponseStatus reponseStatus=2;
+}
+
+
+//合成
+message CSCombineInfoRequest{
+	option (messageId) = 1517;
+	option (serverTarget)="combine/list";
+}
+
+message SCCombineInfoResponse{
+	option (messageId) = 1518;
+	repeated int64 combineId=1;
+	repeated int32 count=2;
+	repeated int32 countLimit=3;
+	
+}
+
+message CSCombineRequest{
+	option (messageId) = 1519;
+	option (serverTarget)="combine/do";
+	int64 combineId=1;
+}
+
+message SCCombineResponse{
+	option (messageId) = 1520;
+	ResponseStatus result=1;
+	bool success=2;
+}

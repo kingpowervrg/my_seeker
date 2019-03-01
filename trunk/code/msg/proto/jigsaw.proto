@@ -1,0 +1,143 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "JigsawMsg";
+
+import "options.proto";
+import "status.proto";
+import "scene.proto";
+
+
+/**进入场景*/
+message CSEnterRequest{
+	option(messageId) = 1301;
+	option (serverTarget)="jigsaw/enter";
+	int64 playerId = 1;
+	int64 sceneId = 2;
+	repeated int64 officerIds = 3;
+}
+message SCEnterResponse{
+	option(messageId) = 1302;
+	int32 result = 1;//服务器验证结果，1表示成功，2表示体力值不足，3表示未解锁，4表示场景不存在
+	int32 vitConsume = 2;
+	int32 seconds = 3;
+	repeated int64 fragments = 4;//想要解锁此局必须获取的碎片
+	repeated int64 officerIds = 5;//玩家给当前场景选的警员
+	
+}
+
+message CSFinishRequest{
+	option(messageId) = 1313;
+	option (serverTarget)="jigsaw/finish";
+	int64 sceneId = 1;
+	int32 result = 2;//0表示失败，1表示成功
+	int32 restTime = 3;//剩余时间(秒)
+	int32 allTime = 4;//总时间(秒)
+}
+message SCFinishResponse{
+	option(messageId) = 1314;
+	int32 result = 1;//0失败，1成功
+	int64 sceneId = 2;
+	int64 propId = 3;//奖励的物品
+	repeated Reward rewards = 4;//奖励的属性
+	int32 jigsawState = 5;//奖励阶段
+	
+	repeated SceneRewardComprise sceneRewardComprise = 6;
+}
+
+message Reward{
+	int32 percent = 1;//分段百分比
+	int32 type = 2;//奖励类型0=金币1=钞票2经验3体力
+	int32 num = 3;//奖励值
+}
+
+/**进入场景*/
+message CSQuitRequest{
+	option(messageId) = 1305;
+	option (serverTarget)="jigsaw/quit";
+	int64 playerId = 1;
+	int64 sceneId = 2;
+}
+message SCQuitResponse{
+	option(messageId) = 1306;
+	int32 result = 1;
+}
+
+message CSSuspendRequest{
+	option(messageId) = 1307;
+	option (serverTarget)="jigsaw/suspend";
+	int64 playerId = 1;
+
+}
+message SCSuspendResponse{
+	option(messageId) = 1308;
+	int32 result = 1;
+
+}
+
+message CSResumeRequest{
+	option(messageId) = 1309;
+	option (serverTarget)="jigsaw/resume";
+	int64 playerId = 1;
+
+}
+message SCResumeResponse{
+	option(messageId) = 1310;
+	int32 result = 1;
+}
+
+message CSStartRequest{
+	option(messageId) = 1311;
+	option (serverTarget)="jigsaw/start";
+	int64 playerId = 1;
+
+}
+message SCStartResponse{
+	option(messageId) = 1312;
+	int32 result = 1;
+}
+
+/**掉线重连*/
+message CSJigsawReconnectRequest{
+	option(messageId) = 1315;
+	option (serverTarget)="jigsaw/reconnect";
+	int64 sceneId = 1;
+	int64 startTime=2;
+	int64 endTime =3;	
+}
+
+message SCJigsawReconnectResponse{
+	option(messageId) = 1316;
+	ResponseStatus responseStatus=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

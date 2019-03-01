@@ -1,0 +1,31 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "NoticeMsg";
+
+import "options.proto";
+
+/**填了id就只按id取，填了type就按type取，两个参数二选一*/
+message CSNoticeListRequest{
+	option (messageId) = 1801;
+	option (serverTarget)="notice/list";
+	int64 id = 1;//公告id
+	int32 type = 2;//类型	
+}
+
+message SCNoticeListResponse{
+	option (messageId) = 1802;
+	repeated NoticeInfo notices = 1;
+
+}
+
+message NoticeInfo{
+	int64 id = 1;
+	int32 type = 2;
+    string picture = 3;
+    string title = 4;
+    string content = 5;
+    int32 levelLimit = 6;
+    int64 startTime = 7;
+	int64 endTime = 8;
+	int64 updateTime = 9;
+}

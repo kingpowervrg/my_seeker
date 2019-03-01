@@ -1,0 +1,8 @@
+syntax="proto3";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MessageOptions {
+   string serverTarget = 51234;
+   int32 messageId = 51235;
+}

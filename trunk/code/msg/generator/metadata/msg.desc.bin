@@ -1,0 +1,1135 @@
+
+˛˘
+	msg.protooptions.proto"C
+ExceptionResponse'
+status (2.ResponseStatusRstatus:òÇê"M
+ExceptionRemoteLoginResponse'
+status (2.ResponseStatusRstatus:òÇ"6
+ResponseStatus
+code (Rcode
+msg (	Rmsg"e
+	GmAddAttr
+playerId (RplayerId
+count (Rcount
+type (Rtype:òÇdíÇ
+gm/addattr"i
+	GmAddProp
+playerId (RplayerId
+propId (RpropId
+count (Rcount:òÇeíÇ
+gm/addprop"w
+GmFinishTask
+playerId (RplayerId
+	chapterId (R	chapterId
+taskId (RtaskId:òÇfíÇgm/finishtask"m
+	GmOfficer
+playerId (RplayerId
+	officerId (R	officerId
+type (Rtype:òÇgíÇ
+gm/officer"P
+GMGetPlayerMessageRequest
+playerId (RplayerId:òÇjíÇgm/gmPlayerInfo"<
+GMGetPlayerMessageResponse
+message (	Rmessage:òÇk"}
+CSEnterRequest
+playerId (RplayerId
+sceneId (RsceneId
+
+officerIds (R
+officerIds:òÇï
+íÇjigsaw/enter"®
+SCEnterResponse
+result (Rresult
+
+vitConsume (R
+vitConsume
+seconds (Rseconds
+	fragments (R	fragments
+
+officerIds (R
+officerIds:òÇñ
+"[
+CSQuitRequest
+playerId (RplayerId
+sceneId (RsceneId:òÇô
+íÇjigsaw/quit"/
+SCQuitResponse
+result (Rresult:òÇö
+"G
+CSSuspendRequest
+playerId (RplayerId:òÇõ
+íÇjigsaw/suspend"2
+SCSuspendResponse
+result (Rresult:òÇú
+"E
+CSResumeRequest
+playerId (RplayerId:òÇù
+íÇjigsaw/resume"1
+SCResumeResponse
+result (Rresult:òÇû
+"C
+CSStartRequest
+playerId (RplayerId:òÇü
+íÇjigsaw/start"0
+SCStartResponse
+result (Rresult:òÇ†
+"ë
+CSFinishRequest
+sceneId (RsceneId
+result (Rresult
+restTime (RrestTime
+allTime (RallTime:òÇ°
+íÇjigsaw/finish"
+SCFinishResponse
+result (Rresult
+sceneId (RsceneId
+propId (RpropId!
+rewards (2.RewardRrewards 
+jigsawState (RjigsawStateF
+sceneRewardComprise (2.SceneRewardCompriseRsceneRewardComprise:òÇ¢
+"H
+Reward
+percent (Rpercent
+type (Rtype
+num (Rnum"O
+CSRegRequest
+username (	Rusername
+pwd (	Rpwd:òÇÈíÇauth/reg".
+SCRegResponse
+result (Rresult:òÇÍ"Q
+CSAuthRequest
+username (	Rusername
+pwd (	Rpwd:òÇÎíÇ	auth/auth"m
+SCAuthResponse
+result (Rresult 
+accessToken (	RaccessToken
+username (	Rusername:òÇÏ"å
+CSloginRequest
+username (	Rusername
+pwd (	Rpwd
+platform (Rplatform
+nickname (	Rnickname:òÇÔíÇlogin/login"§
+SCloginResponse
+result (Rresult
+playerId (RplayerId
+
+playerName (	R
+playerName
+
+playerIcon (	R
+playerIcon
+coin (Rcoin
+cash (Rcash
+vit (Rvit
+level (Rlevel
+exp	 (Rexp
+
+laborUnion
+ (R
+laborUnion
+
+upgradeExp (R
+upgradeExp 
+expMultiple (RexpMultiple
+platform (Rplatform
+nickname (	Rnickname 
+accessToken (	RaccessToken&
+lastAddVitTime (RlastAddVitTime0
+millisRecoverOneVit (RmillisRecoverOneVit
+
+hasRenamed (R
+hasRenamed:òÇ"-
+CSChapterListRequest:òÇÛíÇchapter/list"N
+SCChapterListResponse.
+chapters (2.PlayerChapterInfoRchapters:òÇÙ"s
+PlayerChapterInfo(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+status (Rstatus"[
+CSChapterDetailRequest(
+playerChapterId (RplayerChapterId:òÇıíÇchapter/detail"†
+SCChapterDetailResponse(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+status (Rstatus#
+npcs (2.ChapterNpcInfoRnpcs&
+clues (2.ChapterClueInfoRclues)
+scenes (2.ChapterSceneInfoRscenes&
+tasks (2.ChapterTaskInfoRtasks:òÇˆ"^
+ChapterNpcInfo
+npcId (RnpcId
+status (Rstatus
+
+dialogueId (R
+dialogueId"A
+ChapterClueInfo
+clueId (	RclueId
+status (Rstatus"D
+ChapterSceneInfo
+sceneId (RsceneId
+status (Rstatus"A
+ChapterTaskInfo
+taskId (RtaskId
+status (Rstatus"{
+SCClueUnlockNotice(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+clueId (	RclueId:òÇ˚"x
+SCNpcUnLockNotice(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+npcId (RnpcId:òÇ¸"~
+SCSceneUnLockNotice(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+sceneId (RsceneId:òÇ˝"¶
+SCChapterTaskStatusChangeNotice(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+taskId (RtaskId
+	newStatus (R	newStatus:òÇ˛"ä
+SCChapterStatusChangeNotice(
+playerChapterId (RplayerChapterId
+	chapterId (R	chapterId
+	newStatus (R	newStatus:òÇˇ"/
+SCChapterRedNotice
+reds (Rreds:òÇÄ"S
+CSClearChapterRedRequest
+	clearType (R	clearType:òÇÅíÇchapter/clearRed"Å
+CSSceneEnterRequest
+playerId (RplayerId
+sceneId (RsceneId
+
+officerIds (R
+officerIds:òÇÕíÇscene/enter"ﬂ
+SCSceneEnterResponse7
+responseStatus (2.ResponseStatusRresponseStatus$
+sceneExhibits (RsceneExhibits"
+taskExhibits (RtaskExhibits
+
+vitConsume (R
+vitConsume
+seconds (Rseconds
+
+officerIds (R
+officerIds 
+isDropScene (RisDropScene'
+	dropItems (2	.GiftItemR	dropItems
+multiId	 (RmultiId:òÇŒ"Ω
+CSSceneRewardRequest
+playerId (RplayerId
+sceneId (RsceneId
+result (Rresult
+costTime (RcostTime$
+useClickCount (RuseClickCount:òÇœíÇscene/reward"√
+SCSceneRewardResponse7
+responseStatus (2.ResponseStatusRresponseStatus
+sceneId (RsceneId
+
+outputCoin (R
+outputCoin
+
+outputCash (R
+outputCash
+	outputVit (R	outputVit
+	outputExp (R	outputExp'
+	giftItems (2	.GiftItemR	giftItemsF
+sceneRewardComprise (2.SceneRewardCompriseRsceneRewardComprise
+
+difficulty	 (R
+difficulty
+exp
+ (Rexp1
+upLevelRewards (2	.GiftItemRupLevelRewards:òÇ–"4
+GiftItem
+itemId (RitemId
+num (Rnum"Y
+CSSceneQuitRequest
+playerId (RplayerId
+type (Rtype:òÇ—íÇ
+scene/quit"4
+SCSceneQuitResponse
+result (Rresult:òÇ“"K
+CSSceneSuspendRequest
+playerId (RplayerId:òÇ”íÇscene/suspend"7
+SCSceneSuspendResponse
+result (Rresult:òÇ‘"I
+CSSceneResumeRequest
+playerId (RplayerId:òÇ’íÇscene/resume"6
+SCSceneResumeResponse
+result (Rresult:òÇ÷"G
+CSSceneStartRequest
+playerId (RplayerId:òÇ◊íÇscene/start"5
+SCSceneStartResponse
+result (Rresult:òÇÿ"]
+CSSearchSceneSelectOfficerReq
+
+officerIds (R
+officerIds:òÇŸíÇscene/selectofficer"¢
+SCSearchSceneSelectOfficerResp
+
+vitConsume (R
+vitConsume 
+costSeconds (RcostSeconds7
+responseStatus (2.ResponseStatusRresponseStatus:òÇ⁄"o
+CSBuyItemRequest
+playerId (RplayerId
+propId (RpropId
+count (Rcount:òÇ·íÇitem/buy"`
+SCBuyItemResponse
+propId (RpropId
+count (Rcount
+result (Rresult:òÇ‚"]
+PlayerPropMsg
+propId (RpropId
+count (Rcount
+
+expireTime (R
+expireTime"0
+CSPlayerPropRequest:òÇ±	íÇplayer/prop/list"∑
+SCPlayerPropResponse4
+reponseStatus (2.ReponseStatusRreponseStatus0
+playerProps (2.PlayerPropMsgRplayerProps0
+recentProps (2.PlayerPropMsgRrecentProps:òÇ≤	">
+CSPlayerPropRecentRequest:!òÇ≥	íÇplayer/prop/recent/empty"Y
+SCPlayerPropRecentResposne4
+reponseStatus (2.ReponseStatusRreponseStatus:òÇ¥	"5
+ReponseStatus
+code (Rcode
+msg (	Rmsg"L
+CSPlayerInfoRequest
+playerId (RplayerId:òÇ˘
+íÇplayer/info/info"È
+SCPlayerInfoResponse
+playerId (RplayerId
+
+playerName (	R
+playerName
+
+playerIcon (	R
+playerIcon
+coin (Rcoin
+cash (Rcash
+vit (Rvit
+level (Rlevel
+exp (Rexp
+
+laborUnion	 (R
+laborUnion
+
+upgradeExp
+ (R
+upgradeExp 
+expMultiple (RexpMultiple&
+lastAddVitTime (RlastAddVitTime0
+millisRecoverOneVit (RmillisRecoverOneVit
+
+hasRenamed (R
+hasRenamed0
+infiniteVitRestTime (RinfiniteVitRestTime:òÇ˙
+"d
+CSRenameRequest
+playerId (RplayerId
+newName (	RnewName:òÇ˚
+íÇplayer/info/rename"g
+SCRenameResponse
+playerId (RplayerId
+result (Rresult
+newName (	RnewName:òÇ¸
+"I
+CSOfficerListRequest
+playerId (RplayerId:òÇ›íÇofficer/list"d
+SCOfficerListResponse
+playerId (RplayerId(
+officers (2.OfficerInfoRofficers:òÇﬁ"õ
+OfficerInfo(
+playerOfficerId (RplayerOfficerId
+	officerId (R	officerId
+level (Rlevel
+outsight (Routsight
+	willPower (R	willPower
+	attention (R	attention
+memory (Rmemory
+
+vitConsume (R
+vitConsume
+
+secondGain	 (R
+secondGain"s
+CSOfficerInfoRequest
+playerId (RplayerId(
+playerOfficerId (RplayerOfficerId:òÇﬂíÇofficer/info"D
+SCOfficerInfoResponse$
+office (2.OfficerInfoRoffice:òÇ‡"à
+CSEventPhaseFeedbackRequest
+eventId (ReventId(
+playerOfficerId (RplayerOfficerId:%òÇ„íÇofficer/event/phase/feedback"»
+SCEventPhaseFeedbackResponse7
+ResponseStatus (2.ResponseStatusRResponseStatus
+	valuation (R	valuation
+
+totalScore (R
+totalScore*
+
+phaseInfos (2
+.PhaseInfoR
+phaseInfos:òÇ‰"ƒ
+	PhaseInfo
+phaseId (RphaseId,
+officerTemplateId (RofficerTemplateId
+
+phaseScore (R
+phaseScore"
+officerScore (RofficerScore
+perfect (Rperfect"
+perfectScore (RperfectScore(
+phaseTemplateId (RphaseTemplateIdC
+matchWordScoreInfo (2.MatchWordScoreInfoRmatchWordScoreInfo"`
+MatchWordScoreInfo
+	keyWordId (R	keyWordId,
+keyWordMatchScore (RkeyWordMatchScore"k
+CSEventRewardRequest
+playerId (RplayerId
+eventId (ReventId:òÇÂíÇofficer/event/reward"∆
+SCEventRewardResponse7
+ResponseStatus (2.ResponseStatusRResponseStatus
+score (Rscore
+	valuation (R	valuation%
+rewards (2.RewardItemRrewards
+exp (Rexp
+vit (Rvit
+coin (Rcoin
+cash (RcashF
+sceneRewardComprise	 (2.SceneRewardCompriseRsceneRewardComprise:òÇÊ"6
+
+RewardItem
+propId (RpropId
+num (Rnum"m
+CSOfficerCombineRequest
+playerId (RplayerId
+	officerId (R	officerId:òÇ·íÇofficer/combine"U
+SCOfficerCombineResponse
+result (Rresult
+officeId (RofficeId:òÇ‚"w
+CSOfficerUpdateRequest
+playerId (RplayerId(
+playerOfficerId (RplayerOfficerId:òÇÁíÇofficer/update"j
+SCOfficerUpdateResponse
+result (Rresult
+officeId (RofficeId
+level (Rlevel:òÇË"i
+CSEventEnterRequest
+playerId (RplayerId
+eventId (ReventId:òÇÈíÇofficer/event/enter"5
+SCEventEnterResponse
+result (Rresult:òÇÍ"S
+CSEventDropInfoRequest
+eventId (ReventId:òÇÎíÇofficer/event/dropInfo"†
+SCEventDropInfoResponse2
+perfectProps (2.EventDropInfoRperfectProps0
+normalProps (2.EventDropInfoRnormalProps
+eventId (ReventId:òÇÏ"=
+EventDropInfo
+propId (RpropId
+count (Rcount"ä
+CSSkillEmitRequest
+propId (RpropId
+count (Rcount1
+inOrOutScene (2.InOrOutSceneRinOrOutScene:òÇ¡íÇ
+skill/emit"f
+SCSkillEmitResponse
+result (Rresult
+skillId (RskillId
+propId (RpropId:òÇ¬"0
+CSSkillTimerEmitReq:òÇ√íÇskill/emit/timer"y
+SCSkillTimerEmitResp
+result (Rresult
+skillId (RskillId(
+playerOfficerId (RplayerOfficerId:òÇƒ"[
+CSReasoningRewardReq 
+reasoningId (RreasoningId:!òÇ≈íÇofficer/reasoning/reward"E
+CSFindEnterReq
+findId (RfindId:òÇ∆íÇofficer/find/enter"0
+SCFindEnterResp
+result (Rresult:òÇ«"ó
+CSFindRewardReq
+findId (RfindId
+result (Rresult
+foundNum (RfoundNum
+totalNum (RtotalNum:òÇ»íÇofficer/find/reward"¨
+SCFindRewardResp7
+ResponseStatus (2.ResponseStatusRResponseStatus
+vit (RvitF
+sceneRewardComprise (2.SceneRewardCompriseRsceneRewardComprise:òÇ…"O
+CSSkyEyeRewardReq
+skyEyeId (RskyEyeId:òÇ íÇofficer/skyEye/reward"í
+SCSkyEyeRewardReq
+skyEyeId (RskyEyeId7
+ResponseStatus (2.ResponseStatusRResponseStatus!
+items (2.RewardItemRitems:òÇÀ"+
+CSSkyEyeReq:òÇÃíÇofficer/skyEye/list"6
+SCSkyEyeReq 
+hasRewarded (RhasRewarded:òÇÕ"∫
+DiscountInfo"
+discountCost (RdiscountCost
+discount (Rdiscount$
+discountStart (RdiscountStart 
+discountEnd (RdiscountEnd"
+discountIcon (	RdiscountIcon"˚
+MarketItemMsg
+id (Rid
+sellId (RsellId
+	sellCount (R	sellCount%
+costType (2	.CostTypeRcostType
+cost (Rcost
+buyLimit (RbuyLimit1
+discountInfo (2.DiscountInfoRdiscountInfo
+maxLimit (RmaxLimit"´
+MarketBlack
+id (Rid&
+lastUpdateTime (RlastUpdateTime&
+nextUpdateTime (RnextUpdateTime
+	freshCost (R	freshCost
+
+freshLimit (R
+freshLimit"S
+MarketRequest%
+category (2	.CategoryRcategory:òÇ•íÇplayer/market/list"Ÿ
+MarketResponse7
+responseStatus (2.ResponseStatusRresponseStatus0
+marketItems (2.MarketItemMsgRmarketItems.
+marketBlack (2.MarketBlackRmarketBlack%
+category (2	.CategoryRcategory:òÇ¶"g
+MarkeBuyRequest"
+marketItemId (RmarketItemId
+count (Rcount:òÇßíÇplayer/market/buy"x
+MarkeBuyResponse7
+responseStatus (2.ResponseStatusRresponseStatus$
+props (2.PlayerPropMsgRprops:òÇ®"J
+CSMarketItemRequest
+propId (RpropId:òÇØíÇplayer/market/item"à
+SCMarketItemResponse7
+responseStatus (2.ResponseStatusRresponseStatus0
+marketItems (2.MarketItemMsgRmarketItems:òÇ∞"7
+MarkeFreshRequest:"òÇ©íÇplayer/market/black/fresh"Ô
+MarkeFreshResponse7
+responseStatus (2.ResponseStatusRresponseStatus7
+playerBaseInfo (2.PlayerBaseInfoRplayerBaseInfo.
+MarketBlack (2.MarketBlackRMarketBlack0
+marketItems (2.MarketItemMsgRmarketItems:òÇ™"8
+PlayerBaseInfo
+coin (Rcoin
+cash (Rcash"O
+CSNoticeListRequest
+id (Rid
+type (Rtype:òÇâíÇnotice/list"D
+SCNoticeListResponse%
+notices (2.NoticeInfoRnotices:òÇä"Ú
+
+NoticeInfo
+id (Rid
+type (Rtype
+picture (	Rpicture
+title (	Rtitle
+content (	Rcontent
+
+levelLimit (R
+levelLimit
+	startTime (R	startTime
+endTime (RendTime
+
+updateTime	 (R
+updateTime"#
+CSPingRequest:òÇÌíÇ	ping/ping"]
+SCPingResponse
+count (Rcount.
+content (2.PingResponseContentRcontent:òÇÓ"Y
+PingResponseContent
+msgId (RmsgId
+data (	Rdata
+isEmpty (RisEmpty")
+CSMessageRequest:òÇÔíÇping/message"~
+LottoItemProto
+propId (RpropId
+count (Rcount
+special (Rspecial
+lucky (Rlucky
+id (Rid"P
+LottoRequest%
+costType (2	.CostTypeRcostType:òÇ´íÇplayer/lotto/get"Î
+LottoResponse7
+responseStatus (2.ResponseStatusRresponseStatus%
+costType (2	.CostTypeRcostType
+	costValue (R	costValue
+lottoId (RlottoId%
+items (2.LottoItemProtoRitems
+lucky (Rlucky:òÇ¨"F
+LottoBuyRequest
+lottoId (RlottoId:òÇ≠íÇplayer/lotto/buy"®
+LottoBuyResponse7
+responseStatus (2.ResponseStatusRresponseStatus$
+props (2.PlayerPropMsgRprops
+id (Rid
+
+lottoCount (R
+lottoCount:òÇÆ"ë
+CSGooglePayChargeRequest
+jsonData (	RjsonData
+	signature (	R	signature
+	productId (	R	productId:òÇ±íÇplayer/charge/google"y
+SCGooglePayChargeResponse7
+responseStatus (2.ResponseStatusRresponseStatus
+	productId (	R	productId:òÇ≤"m
+CSIOSPayChargeRequest
+jsonData (	RjsonData
+	productId (	R	productId:òÇ≥íÇplayer/charge/ios"í
+SCIOSPayChargeResponse7
+responseStatus (2.ResponseStatusRresponseStatus
+	productId (	R	productId
+jsonData (	RjsonData:òÇ¥"N
+SCAcceptTaskNotice1
+acceptTasks (2.AcceptTaskInfoRacceptTasks:òÇú"d
+AcceptTaskInfo
+taskId (RtaskId"
+playerTaskId (RplayerTaskId
+status (Rstatus"U
+CSTaskListRequest
+type (Rtype
+taskIds (RtaskIds:òÇùíÇ	task/list"D
+SCTaskListResponse'
+	taskInfos (2	.TaskInfoR	taskInfos:òÇû"Â
+TaskInfo"
+playerTaskId (RplayerTaskId
+taskId (RtaskId
+status (Rstatus
+level (Rlevel7
+propProgresss (2.TaskPropProgressRpropProgresss*
+dialogueProgress (RdialogueProgress$
+eventProgress (ReventProgress$
+sceneProgress (RsceneProgress>
+exhibitProgress	 (2.TaskExhibitProgressRexhibitProgress"@
+TaskPropProgress
+propId (RpropId
+count (Rcount"I
+TaskExhibitProgress
+	exhibitId (R	exhibitId
+count (Rcount"O
+CSTaskCommitRequest"
+playerTaskId (RplayerTaskId:òÇüíÇtask/commit"Ê
+SCTaskCommitResponse
+result (Rresult
+coin (Rcoin
+cash (Rcash
+vit (Rvit
+exp (Rexp
+titleId (RtitleId1
+propRewards (2.TaskPropRewardRpropRewards
+taskId (RtaskId:òÇ†">
+TaskPropReward
+propId (RpropId
+count (Rcount"ú
+SCTaskStatusChangeNotice"
+playerTaskId (RplayerTaskId
+taskId (RtaskId
+status (Rstatus%
+taskInfo (2	.TaskInfoRtaskInfo:òÇ°"K
+CSTriggerTaskActiveRequest
+taskId (RtaskId:òÇ£íÇtask/trigger"T
+SCTriggerTaskActiveResponse
+result (Rresult
+taskId (RtaskId:òÇ§"+
+CSTaskIdListRequest:òÇ±íÇtask/idList"L
+SCTaskIdListResponse-
+taskIdInfos (2.TaskIdInfoRtaskIdInfos:òÇ≤"H
+
+TaskIdInfo"
+playerTaskId (RplayerTaskId
+taskId (RtaskId"9
+CSAchievementRequest:!òÇ•íÇ/player/achievement/list"ƒ
+AchievementMsg
+id (Rid
+progress (Rprogress"
+submitStatus (RsubmitStatus
+
+finishTime (R
+finishTime 
+finishTime1 (RfinishTime1 
+finishTime2 (RfinishTime2"ú
+SCAchievementResponse'
+status (2.ResponseStatusRstatus3
+Achievements (2.AchievementMsgRAchievements
+
+totalCount (R
+totalCount:òÇ¶"g
+CSAchievementSubmitRequest
+id (Rid
+stage (Rstage:#òÇßíÇ/player/achievement/submit"M
+SCAchievementSubmitResponse'
+status (2.ResponseStatusRstatus:òÇ®"8
+CSActivityBaseListRequest:òÇÂíÇactivity/base/list"T
+SCActivityBaseListResponse/
+	baseInfos (2.ActivityBaseInfoR	baseInfos:òÇÊ"ö
+ActivityBaseInfo
+id (Rid
+type (Rtype
+icon (	Ricon
+descs (	Rdescs
+
+targetType (R
+targetType"
+targetPrefab (	RtargetPrefab
+
+warmupTime (R
+warmupTime
+	startTime (R	startTime
+endTime	 (RendTime
+stage
+ (Rstage
+timeType (RtimeType
+days (Rdays,
+personalBeginTime (RpersonalBeginTime(
+personalEndTime (RpersonalEndTime"D
+PropItem
+id (Rid
+num (Rnum
+hasNum (RhasNum"A
+CSActivityRequest
+id (Rid:òÇËíÇactivity/base/quest"¥
+SCActivityDropResponse
+id (Rid 
+description (	Rdescription*
+backgroundSource (	RbackgroundSource"
+warmupSource (	RwarmupSource
+rewardid (Rrewardid
+items (2	.PropItemRitems
+sceneId (RsceneId
+stage (Rstage
+	hasReward	 (R	hasReward
+name
+ (	Rname
+
+collectDes (	R
+collectDes
+sceneDes (	RsceneDes"
+rewardSource (	RrewardSource
+tips (	Rtips:òÇÈ"C
+CSActivityRewardRequest
+id (Rid:òÇÍíÇactivity/reward"{
+SCActivityRewardResponse7
+responseStatus (2.ResponseStatusRresponseStatus
+items (2	.GiftItemRitems:òÇÎ"I
+CSCartoonEnterRequest
+sceneId (RsceneId:òÇµíÇcartoon/enter"7
+SCCartoonEnterResponse
+result (Rresult:òÇ∂"1
+CSCartoonRewardRequest:òÇ∑íÇcartoon/reward"µ
+SCCartoonRewardReqsponse
+cash (Rcash
+coin (Rcoin
+exp (Rexp
+vit (RvitF
+sceneRewardComprise (2.SceneRewardCompriseRsceneRewardComprise:òÇ∏"-
+CSCartoonQuitRequest:òÇπíÇcartoon/quit")
+CSEmailListRequest:òÇôíÇ
+email/list"@
+SCEmailListResponse"
+emails (2
+.EmailInfoRemails:òÇö"›
+	EmailInfo
+id (Rid
+type (Rtype
+status (Rstatus
+title (	Rtitle
+content (	Rcontent 
+receiveTime (RreceiveTime
+deadline (Rdeadline&
+rewards (2.EmailRewardRrewards";
+EmailReward
+propId (RpropId
+count (Rcount"=
+CSEmailRewardRequest
+id (Rid:òÇõíÇemail/reward"F
+SCEmailRewardResponse
+result (Rresult
+id (Rid:òÇú"9
+CSEmailReadRequest
+id (Rid:òÇùíÇ
+email/read"<
+SCEmailChangeNotice
+
+switchTime (R
+switchTime:òÇü"r
+TitleMsg
+titleId (RtitleId
+deadline (Rdeadline
+getTime (RgetTime
+active (Ractive"-
+CSTitleRequest:òÇ©íÇ/player/title/list"d
+SCTitleResponse'
+status (2.ResponseStatusRstatus!
+titles (2	.TitleMsgRtitles:òÇ™"O
+CSTitleActiveRequest
+titleId (RtitleId:òÇ´íÇ/player/title/active"h
+SCTitleActiveResponse'
+status (2.ResponseStatusRstatus
+title (2	.TitleMsgRtitle:òÇ¨"/
+CSTitleGetRequest:òÇ≠íÇ/player/title/get"e
+SCTitleGetResponse'
+status (2.ResponseStatusRstatus
+title (2	.TitleMsgRtitle:òÇÆ"—
+PlayerFriendMsg
+playerId (RplayerId
+name (	Rname
+level (Rlevel
+gender (Rgender
+icon (	Ricon
+titleId (RtitleId
+gift (Rgift
+
+statusTime (R
+statusTime"R
+CSFriendRequest"
+type (2.FriendReqTypeRtype:òÇ˝íÇplayer/friend/list"†
+SCFriendResponse'
+status (2.ResponseStatusRstatus*
+friends (2.PlayerFriendMsgRfriends
+limit (Rlimit
+total (Rtotal$
+giftCountLeft (RgiftCountLeft"
+Type (2.FriendReqTypeRType
+	lastAgree (R	lastAgree
+	addSwitch (R	addSwitch:òÇ˛"L
+CSFriendAddRequest
+playerId (RplayerId:òÇˇíÇplayer/friend/add"E
+SCFriendAddResponse'
+status (2.ResponseStatusRstatus:òÇÄ"L
+CSFriendDelRequest
+playerId (RplayerId:òÇÅíÇplayer/friend/del"E
+SCFriendDelResponse'
+status (2.ResponseStatusRstatus:òÇÇ"P
+CSFriendAgreeRequest
+playerId (RplayerId:òÇÉíÇplayer/friend/agree"G
+SCFriendAgreeResponse'
+status (2.ResponseStatusRstatus:òÇÑ"V
+CSFriendDelApplyRequest
+friendId (RfriendId:òÇÖíÇplayer/friend/delApply"J
+SCFriendDelApplyResponse'
+status (2.ResponseStatusRstatus:òÇÜ"7
+CSFriendGiftRequest: òÇáíÇplayer/friend/gift/list"é
+
+FriendGift6
+playerFriends (2.PlayerFriendMsgRplayerFriends0
+playPropMsg (2.PlayerPropMsgRplayPropMsg
+giftId (RgiftId"©
+SCFriendGiftResponse'
+status (2.ResponseStatusRstatus5
+friendGiftLists (2.FriendGiftRfriendGiftLists
+limit (Rlimit
+count (Rcount:òÇà"W
+CSFriendGiftSendRequest
+friendId (RfriendId: òÇâíÇplayer/friend/gift/send"J
+SCFriendGiftSendResponse'
+status (2.ResponseStatusRstatus:òÇä"S
+CSFriendGiftDrawRequest
+giftId (RgiftId: òÇåíÇplayer/friend/gift/draw"Ä
+SCFriendGiftDrawResponse'
+status (2.ResponseStatusRstatus4
+playerPropMsg (2.PlayerPropMsgRplayerPropMsg:òÇç"N
+CSFriendViewRequest
+friendId (RfriendId:òÇéíÇplayer/friend/view" 
+AchievementFriendMsg
+id (Rid
+progress (Rprogress"
+submitStatus (RsubmitStatus
+
+finishTime (R
+finishTime 
+finishTime1 (RfinishTime1 
+finishTime2 (RfinishTime2"√
+SCFriendViewResponse'
+status (2.ResponseStatusRstatus:
+playerFriendMsg (2.PlayerFriendMsgRplayerFriendMsg?
+achievementMsgs (2.AchievementFriendMsgRachievementMsgs:òÇè"6
+CSFriendSwitchRequest:òÇêíÇplayer/friend/switch"H
+SCFriendSwitchResponse'
+status (2.ResponseStatusRstatus:òÇë":
+SCFriendApplyResponse
+friendId (RfriendId:òÇì"5
+SCFriendNoticeResponse
+point (Rpoint:òÇî"†
+FriendRecommendMsg
+name (	Rname
+bind (Rbind
+status (Rstatus
+level (Rlevel
+icon (	Ricon 
+recommendId (RrecommendId"E
+CSFriendRecommendListRequest:%òÇïíÇplayer/friend/recommend/list"û
+SCFriendRecommendListResponse'
+status (2.ResponseStatusRstatus1
+	recommend (2.FriendRecommendMsgR	recommend
+timeDown (RtimeDown:òÇñ"e
+CSFriendRecommendGetRequest 
+recommendId (RrecommendId:$òÇóíÇplayer/friend/recommend/get"À
+SCFriendRecommendGetResponse'
+status (2.ResponseStatusRstatus:
+playerFriendMsg (2.PlayerFriendMsgRplayerFriendMsg?
+achievementMsgs (2.AchievementFriendMsgRachievementMsgs:òÇò"i
+CSFriendRecommendApplyRequest 
+recommendId (RrecommendId:&òÇôíÇplayer/friend/recommend/apply"r
+SCFriendRecommendApplyResponse'
+status (2.ResponseStatusRstatus 
+recommendId (RrecommendId:òÇö"+
+CSBuildingListReq:òÇ·íÇbuilding/list"@
+SCBuildingListResp#
+infos (2.BuildingInfoRinfos:òÇ‚"F
+BuildingInfo
+
+buildingId (R
+buildingId
+status (Rstatus"O
+CSBuildingUnlockReq
+
+buildingId (R
+buildingId:òÇ„íÇbuilding/unlock"v
+SCBuildingUnlockResp7
+responseStatus (2.ResponseStatusRresponseStatus
+
+buildingId (R
+buildingId:òÇ‰"A
+CSCanTaskRequest
+taskId (RtaskId:òÇ∏íÇtask/canTask"L
+SCCanTaskResponse
+canTask (RcanTask
+taskId (RtaskId:òÇπ"0
+SCreceiveNewTitle
+title (Rtitle:òÇ∫"p
+CSRegGuestRequest
+deviceId (	RdeviceId
+osType (	RosType
+ad (	Rad:òÇêíÇauth/guest/reg"k
+SCRegGuestResponse'
+status (2.ResponseStatusRstatus%
+guest_identify (	RguestIdentify:òÇë"R
+CSIdentifyCheckRequest
+identify (	Ridentify:òÇîíÇauth/identify/check"√
+SCIdentifyCheckRepsonse'
+status (2.ResponseStatusRstatus 
+accessToken (	RaccessToken
+	startTime (R	startTime
+deadline (Rdeadline
+	thirdBind (R	thirdBind:òÇï"À
+CSFBLoginRequest 
+accessToken (	RaccessToken
+fbId (	RfbId
+	expiresIn (R	expiresIn
+deviceId (	RdeviceId
+osType (2.OsTypeRosType
+ad (	Rad:òÇñíÇauth/fb/login"è
+SCFBLoginResponse'
+status (2.ResponseStatusRstatus
+identify (	Ridentify.
+longLifeAcessToken (	RlongLifeAcessToken:òÇó"ò
+CSFBBindRequest
+identify (	Ridentify 
+accessToken (	RaccessToken
+fbId (	RfbId
+	expiresIn (R	expiresIn:òÇòíÇauth/fb/bind"†
+SCFBBindResponse'
+status (2.ResponseStatusRstatus
+identify (	Ridentify.
+longLifeAcessToken (	RlongLifeAcessToken$
+hasBeenBinded (RhasBeenBinded
+id (Rid
+name (	Rname
+level (Rlevel
+	cashCount (R	cashCount
+icon	 (	Ricon:òÇô"â
+SCIdentifyCheckMuiltyMessage9
+contents (2.IdentifyCheckResponseContentRcontents'
+status (2.ResponseStatusRstatus:òÇö"H
+IdentifyCheckResponseContent
+msgId (RmsgId
+data (	Rdata"d
+PlayerPropSellRequest0
+playerProps (2.PlayerPropMsgRplayerProps:òÇ∑	íÇplayer/prop/sell"V
+PlayerPropSellResposne5
+reponseStatus (2.ResponseStatusRreponseStatus:òÇ∏	"T
+	CSDropReq
+propId (RpropId
+count (Rcount:òÇπ	íÇplayer/prop/drop"<
+
+SCDropResp'
+	dropInfos (2	.DropInfoR	dropInfos:òÇ∫	"H
+SCAutoOpenGiftDropResp'
+	dropInfos (2	.DropInfoR	dropInfos:òÇª	"8
+DropInfo
+propId (RpropId
+count (Rcount"J
+CSChatFinishRequest
+chatId (RchatId:òÇ≥íÇplayer/chat/finish"F
+SCChatFinishResponse'
+status (2.ResponseStatusRstatus:òÇ¥"A
+CSGetAllRewardedTasksRequest:!òÇµíÇtask/getAllRewardedTasks"M
+SCGetAllRewardedTasksResponse%
+tasks (2.TaskIdTypeInfoRtasks:òÇ∂"b
+TaskIdTypeInfo
+taskId (RtaskId
+	chapterId (R	chapterId
+taskType (RtaskType"/
+CSPlayerCheckInInfoReq:òÇ˝
+íÇcheckin/info"Z
+SCPlayerCheckInInfoResp
+id (Rid
+day (Rday
+status (Rstatus:òÇ˛
+".
+CSPlayerCheckInReq:òÇˇ
+íÇcheckin/checkin"4
+SCPlayerCheckInResp
+result (Rresult:òÇÄ"P
+CSPlayerRenewIconReq
+newIcon (	RnewIcon:òÇÅíÇplayer/info/renewicon"P
+SCPlayerRenewIconResp
+result (Rresult
+newIcon (	RnewIcon:òÇÇ"≈
+SCPlayerUpLevel
+oldLevel (RoldLevel
+newLevel (RnewLevel%
+rewards (2.RewardItemRrewards$
+unLockBuildId (RunLockBuildId&
+pushInfo (2
+.Push_InfoRpushInfo:òÇÉ"2
+CSPlayerGuildRequest:òÇÑíÇplayer/info/guild"4
+SCPlayerGuildResponse
+guild (	Rguild:òÇÖ"T
+CSPlayerGuildUpdateRequest
+guild (	Rguild: òÇÜíÇplayer/info/guildUpdate"ı
+CSPlayerFeedbackRequest
+content (	Rcontent
+platform (	Rplatform
+release (	Rrelease1
+feedbackType (2.FeedbackTypeRfeedbackType
+email (	Remail 
+information (	Rinformation:òÇƒíÇplayer/feedback/submit"î
+SCPlayerFeedbackResponse'
+status (2.ResponseStatusRstatus,
+nextAvailableTime (RnextAvailableTime
+timeLeft (RtimeLeft:òÇ≈"4
+SCAchievementUnlockResponse
+id (Rid:òÇ∑"8
+SCActivityNewResponse
+haveNew (RhaveNew:òÇÁ"Ö
+CSSceneReconnectRequest
+sceneId (RsceneId
+	startTime (R	startTime
+endTime (RendTime:òÇ€íÇscene/reconnect"Z
+SCSceneReconnectResponse7
+responseStatus (2.ResponseStatusRresponseStatus:òÇ‹"L
+CSSceneDifficultyReq
+bigIds (RbigIds:òÇ›íÇscene/getDifficulty"]
+SceneDifficultyInfo
+bigId (RbigId
+
+difficulty (R
+difficulty
+exp (Rexp"J
+SCSceneDifficultyResp*
+infos (2.SceneDifficultyInfoRinfos:òÇﬁ"á
+CSJigsawReconnectRequest
+sceneId (RsceneId
+	startTime (R	startTime
+endTime (RendTime:òÇ£
+íÇjigsaw/reconnect"[
+SCJigsawReconnectResponse7
+responseStatus (2.ResponseStatusRresponseStatus:òÇ§
+";
+ServiceConfigInfo
+key (	Rkey
+value (	Rvalue":
+CSGetServiceConfigRequest:òÇõíÇsys/getServiceConfig"K
+SCGetServiceConfigResponse&
+info (2.ServiceConfigInfoRinfo:òÇú"X
+CSGetServiceConfigSingleRequest
+key (	Rkey:#òÇùíÇsys/getSingleServiceConfig"?
+ SCGetServiceConfigSingleResponse
+value (	Rvalue:òÇû"w
+GetPathInfo
+id (Rid
+path (	Rpath
+status (Rstatus
+version (	Rversion
+plat (	Rplat"?
+CSGetPathConfigRequest
+plat (	Rplat:òÇüíÇsys/path"D
+SCGetPathConfigResponse"
+infos (2.GetPathInfoRinfos:òÇ†"ù
+CSClientLogRequest
+
+event_name (	R	eventName
+	value4sum (R	value4sum
+params (	Rparams
+playerId (RplayerId:òÇ°íÇsys/clientLog"•
+SceneRewardComprise
+type (Rtype
+
+outputCoin (R
+outputCoin
+
+outputCash (R
+outputCash
+	outputVit (R	outputVit
+	outputExp (R	outputExp"g
+	Push_Info
+type (Rtype
+pushId (RpushId
+endTime (RendTime
+buyed (Rbuyed")
+CSGetPushRequest:òÇÒíÇpush/getPush"<
+SCGetPushResponse 
+infos (2
+.Push_InfoRinfos:òÇÚ"A
+CSBuyPushRequest
+pushId (RpushId:òÇÛíÇpush/buyPush"i
+SCBuyPushResponse
+pushId (RpushId5
+reponseStatus (2.ResponseStatusRreponseStatus:òÇÙ"-
+CSCombineInfoRequest:òÇÌíÇcombine/list"r
+SCCombineInfoResponse
+	combineId (R	combineId
+count (Rcount
+
+countLimit (R
+countLimit:òÇÓ"E
+CSCombineRequest
+	combineId (R	combineId:òÇÔíÇ
+combine/do"]
+SCCombineResponse'
+result (2.ResponseStatusRresult
+success (Rsuccess:òÇ*+
+InOrOutScene
+	OUT_SCENE 
+IN_SCENE*>
+Category
+CASH 
+COIN
+VIT
+
+COMMON	
+BLACK*9
+CostType
+	COST_CASH 
+	COST_COIN
+COST_DOLLAR*C
+FriendReqType
+APPLYING 
+AGREEING
+ADDINFO	
+ADDED*'
+OsType
+ios 
+andorid
+web*
+FeedbackType
+ALL B&
+com.fotoable.conan.common.protoBMsgbproto3

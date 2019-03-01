@@ -1,0 +1,83 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "ActivityMsg";
+
+import "options.proto";
+import "scene.proto";
+import "status.proto";
+
+message CSActivityBaseListRequest{
+	option (messageId) = 2021;	
+	option (serverTarget)="activity/base/list";
+
+}
+
+message SCActivityBaseListResponse{
+	option (messageId) = 2022;
+	repeated ActivityBaseInfo baseInfos = 1;
+}
+
+message SCActivityNewResponse{
+	option (messageId) = 2023;
+	int32 haveNew=1; //>1 表示有新活动
+}
+
+message ActivityBaseInfo{
+	int64 id = 1;
+	int32 type = 2;
+	string icon = 3;
+	string descs = 4;
+	int32 targetType = 5;
+	string targetPrefab = 6;
+	int64 warmupTime = 7;
+	int64 startTime = 8;
+	int64 endTime = 9;
+	int32 stage = 10;//0无 1预热 2开始
+	int32 timeType =11;//时间类型 0全局的 1 个人的（个人的活动开始时间从他第一次接取任务开始）
+	int32 days =12;//个人活动，当前是他活动的第几天
+	int64 personalBeginTime=13;//个人活动，开始时间
+	int64 personalEndTime=14;//个人活动，结束时间
+}
+
+message PropItem{
+	int64 id = 1;
+	int32 num = 2;
+	int32 hasNum = 3;
+}
+
+message CSActivityRequest{
+	option (messageId) = 2024;
+	option (serverTarget)="activity/base/quest";
+	int64 id = 1; 
+}
+
+message SCActivityDropResponse{
+	option (messageId) = 2025;
+	int64 id = 1;
+	string description = 2;//任务总描述
+	string backgroundSource = 3;//背景图
+	string warmupSource = 4;//预热图
+	int64 rewardid = 5;//奖励ID
+	repeated PropItem items = 6;//要掉落的物品，已有的物品数量
+	repeated int64 sceneId = 7;//有物品掉落的场景ID
+	int32 stage = 8;//0无 1预热 2开始
+	bool hasReward = 9 ;//是否已经领取过奖励
+	string name=10;//名称
+	string collectDes=11;//收集以下物品描述
+	string sceneDes=12;//在以下场景可寻找，描述
+	string rewardSource=13;//奖励背景图路径
+	string tips=14;//tips描述
+		
+}
+
+message CSActivityRewardRequest{
+	option (messageId) = 2026;	
+	option (serverTarget)="activity/reward";
+	int64 id = 1;
+}
+
+message SCActivityRewardResponse{
+	option (messageId) = 2027;	
+	ResponseStatus responseStatus = 1;
+	repeated GiftItem items = 2;
+}

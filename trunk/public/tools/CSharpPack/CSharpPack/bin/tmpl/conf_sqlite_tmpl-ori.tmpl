@@ -1,0 +1,299 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace SeekerGame
+{
+	/// <summary>
+	/// Generated from @(Model.ExcelName)
+	/// </summary>
+	public  class  Conf@(Model.TableName)
+	{
+		public static bool resLoaded = false;
+		
+		public static bool cacheLoaded = false;
+		 
+		private static List<Conf@(Model.TableName)>  cacheArray = new List<Conf@(Model.TableName)>();
+		
+		public static List<Conf@(Model.TableName)> array 
+		{
+			get
+            {
+                GetArrrayList();
+                return cacheArray;
+            }
+		}
+		
+		public Conf@(Model.TableName)()
+		{
+		}
+
+		public static void Init()
+		{
+			if (cacheLoaded)
+			{
+				GetArrrayList();
+			}
+            
+		}
+		@for (var i = 0; i < Model.SheetColumns; i++){
+			@:public readonly @Model.AttributeTypes[@i] @Model.AttributeNames[@i];
+			
+		}
+
+		public Conf@(Model.TableName)( @for (var i = 0; i < Model.SheetColumns -1; i++){@: 		@Model.AttributeTypes[@i] @Model.AttributeNames[@i],
+		} 
+ 		@Model.AttributeTypes[@Model.SheetColumns -1] @Model.AttributeNames[@Model.SheetColumns -1]){
+ 			@for (var i = 0; i < Model.SheetColumns; i++){
+			@: this.@Model.AttributeNames[@i] = @Model.AttributeNames[@i];
+			
+		}
+		}
+			
+		private static Dictionary<@Model.AttributeTypes[0], Conf@(Model.TableName)> dic = new Dictionary<@Model.AttributeTypes[0], Conf@(Model.TableName)>();
+		
+		public static bool GetConfig( @Model.AttributeTypes[0] id, out Conf@(Model.TableName) config )
+		{
+			if (dic.TryGetValue(id, out config))
+            {
+                return config != null;
+            }
+			if(cacheLoaded)
+			{
+				config = null;
+				return false;
+			}
+			GOEGame.DataTable  sqReader= SQLiteHelper.Instance().GetSelectWhere("conf_@(Model.TableName)", id);
+            if (sqReader != null )
+            {
+				try
+                {
+					sqReader.Read();
+					if(sqReader.HasRows)
+						config = GetConfByDic(sqReader);
+					else
+					{
+					    dic[id] = null;
+						config = null;
+						return false;
+					}
+					dic[id] = config;
+				    return true;
+                }
+                catch (Exception ex)
+                {
+#if UNITY_STANDALONE_WIN
+                    D.error("@(Model.TableName) 表找不到SN={0} 的数据\n{1}", id, ex);
+#endif
+                }
+				config = null;
+                return false;
+            }
+            else
+            {
+                config = null;
+                return false;
+            }
+		}
+
+		public static Conf@(Model.TableName) Get(@(Model.AttributeTypes[0]) id)
+        {
+			Conf@(Model.TableName) config;
+             bool _exist = GetConfig(id, out config);
+
+             return config;
+        }
+
+         public static bool GetConfig( string fieldName, object fieldValue, out Conf@(Model.TableName) config )
+        {
+			GOEGame.DataTable sqReader = SQLiteHelper.Instance().GetSelectWhereCondition("conf_@(Model.TableName)", fieldName, fieldValue);
+			if (sqReader != null )
+			{
+				try
+				{
+					sqReader.Read();
+					if(sqReader.HasRows)
+						config = GetConfByDic(sqReader);
+					else
+					{
+						config = null;
+						return false;
+					}
+					return true;
+				}
+				catch (Exception ex)
+				{
+#if UNITY_STANDALONE_WIN
+					D.error("@(Model.TableName) 表找不到列={0} 值={1}的数据\n{2}", fieldName, fieldValue, ex);
+#endif
+				}
+			   config = null;
+			   return false;
+
+			}
+            config = null;
+            return false;
+        }
+
+        public static bool GetConfig(string fieldName, object fieldValue, out List<Conf@(Model.TableName)> list)
+        {
+            list = new List<Conf@(Model.TableName)>();
+
+            GOEGame.DataTable sqReader = SQLiteHelper.Instance().GetSelectWhereCondition("conf_@(Model.TableName)", fieldName, fieldValue);
+            if (sqReader != null)
+            {
+                try
+                {
+                    Conf@(Model.TableName) config;
+                    while (sqReader.Read())
+                    {
+                        if (sqReader.HasRows)
+                        {
+                            config = GetConfByDic(sqReader);
+                            list.Add(config);
+                        }
+                        else
+                        {
+                            config = null;
+#if UNITY_STANDALONE_WIN
+						D.warn("@(Model.TableName) not found key={0} value={1}", fieldName, fieldValue);
+#endif
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+#if UNITY_STANDALONE_WIN
+					D.warn("@(Model.TableName) key={0} value={1} \n {2}", fieldName, fieldValue, ex);
+#endif
+                }
+                return false;
+
+            }
+            return false;
+        }
+
+        public static bool GetConfigByCondition(string condition, out List<Conf@(Model.TableName)> list)
+        {
+            list = new List<Conf@(Model.TableName)>();
+
+            GOEGame.DataTable sqReader = SQLiteHelper.Instance().GetSelectWhereConditionStr("conf_@(Model.TableName)", condition);
+            if (sqReader != null)
+            {
+                try
+                {
+                    Conf@(Model.TableName) config;
+                    while (sqReader.Read())
+                    {
+                        if (sqReader.HasRows)
+                        {
+                            config = GetConfByDic(sqReader);
+                            list.Add(config);
+                        }
+                        else
+                        {
+                            config = null;
+#if UNITY_STANDALONE_WIN
+						D.warn("@(Model.TableName) not found condition={0}", condition);
+#endif
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+#if UNITY_STANDALONE_WIN
+					D.warn("@(Model.TableName) condition={0} \n {2}", condition, ex);
+#endif
+                }
+                return false;
+
+            }
+            return false;
+        }
+
+        public static void Clear()
+        {
+			cacheArray.Clear();
+        }
+		
+		 private static Conf@(Model.TableName) GetConfByDic(GOEGame.DataTable reader)
+         {
+		 
+			@for (var i = 0; i < Model.SheetColumns; i++){
+			
+					if ( @Model.AttributeFlags[@i] >= 11 )
+					{
+						@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = (@Model.AttributeTypes[@i])ConfigUtil.GetArrayData(reader, @i, @Model.AttributeFlags[@i]);
+
+					}
+					else
+					{
+						if(  @Model.AttributeFlags[@i] == 1 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetInt32(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 2 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetString(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 3 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetFloat(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 4 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetBoolean(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 5 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetInt16(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 6 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetByte(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 7 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetInt64(@i);
+						}
+						if(  @Model.AttributeFlags[@i] == 8 )
+						{
+							@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = reader.GetDouble(@i);
+						}
+					}
+
+
+			}
+		
+				Conf@(Model.TableName)	new_obj_Conf@(Model.TableName) = new Conf@(Model.TableName)(@for (var i = 0; i < Model.SheetColumns -1; i++){@: 		 @Model.AttributeNames[@i],
+			}
+			@Model.AttributeNames[Model.SheetColumns -1]
+			);
+		
+                 return new_obj_Conf@(Model.TableName);
+         }
+		 
+		 private static void GetArrrayList()
+        {
+            if(cacheArray.Count <= 0)
+            {
+			    GOEGame.DataTable  sqReader = SQLiteHelper.Instance().GetReadFullTable("conf_@(Model.TableName)");
+                if(sqReader != null)
+                {
+                    while (sqReader.Read())
+                    {
+						Conf@(Model.TableName) _conf= GetConfByDic(sqReader);
+						cacheArray.Add(_conf);
+						dic[_conf.@Model.AttributeNames[0]] = _conf;
+                    }
+                    resLoaded = true;
+                }
+            }
+        }
+
+	}
+}

@@ -1,0 +1,114 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "ChapterMsg";
+
+import "options.proto";
+
+/**请求玩家解锁的章节列表*/
+message CSChapterListRequest{
+	option(messageId) = 1011;
+	option (serverTarget)="chapter/list";
+}
+/**返回玩家解锁的章节列表*/
+message SCChapterListResponse{
+	option(messageId) = 1012;
+	repeated PlayerChapterInfo chapters = 1;
+}
+/**章节信息*/
+message PlayerChapterInfo{
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int32 status = 3;//0表示未解锁(理论上不会有)，1表示已解锁，2表示已完成
+}
+
+/**请求某一章节的详细信息*/
+message CSChapterDetailRequest{
+	option(messageId) = 1013;
+	option (serverTarget)="chapter/detail";
+	int64 playerChapterId = 1;
+}
+/**返回某一章节的详细信息*/
+message SCChapterDetailResponse{
+	option(messageId) = 1014;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int32 status = 3;//0表示未解锁，1表示已解锁，2表示已完成
+	repeated ChapterNpcInfo npcs = 4;
+	repeated ChapterClueInfo clues = 5;
+	repeated ChapterSceneInfo scenes = 6;
+	repeated ChapterTaskInfo tasks = 7;
+}
+
+/**章节包含的npc信息*/
+message ChapterNpcInfo{
+	int64 npcId = 1;
+	int32 status = 2;//0未解锁，1已解锁
+	int64 dialogueId = 3;//当前对话
+}
+
+/**章节包含的线索信息*/
+message ChapterClueInfo{
+	string clueId = 1;
+	int32 status = 2;//0未解锁，1已解锁
+}
+
+/**章节包含的场景信息*/
+message ChapterSceneInfo{
+	int64 sceneId = 1;//场景配置id
+	int32 status = 2;//0未解锁，1表示已解锁
+}
+
+/**章节包含的任务信息*/
+message ChapterTaskInfo{
+	int64 taskId = 1;//任务配置id
+	int32 status = 2;//0未解锁，1表示进行中，2表示已完成
+}
+
+message SCClueUnlockNotice{
+	option(messageId) = 1019;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	string clueId = 3;
+}
+
+message SCNpcUnLockNotice{
+	option(messageId) = 1020;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int64 npcId = 3;
+}
+
+message SCSceneUnLockNotice{
+	option(messageId) = 1021;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int64 sceneId = 3;
+}
+
+message SCChapterTaskStatusChangeNotice{
+	option(messageId) = 1022;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int64 taskId = 3;
+	int32 newStatus = 4;//1表示已接受，2表示已完成
+}
+
+message SCChapterStatusChangeNotice{
+	option(messageId) = 1023;
+	int64 playerChapterId = 1;
+	int64 chapterId = 2;
+	int32 newStatus = 3;//1表示已接受，2表示已完成
+}
+
+message SCChapterRedNotice{
+	option(messageId) = 1024;
+	repeated int32 reds = 1; //0 NPC,1CLUE,2SCENE
+}
+
+message CSClearChapterRedRequest{
+	option(messageId) = 1025;
+	option (serverTarget)="chapter/clearRed";
+	int32 clearType=1;//0 NPC,1CLUE,2SCENE
+}
+
+

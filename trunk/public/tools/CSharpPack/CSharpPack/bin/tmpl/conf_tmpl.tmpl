@@ -1,0 +1,166 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Reflection;
+using System.IO;
+
+namespace SeekerGame
+{
+	/// <summary>
+	/// Generated from @(Model.ExcelName)
+	/// </summary>
+	public  class  Conf@(Model.TableName)
+	{
+		public static bool resLoaded = false;
+		public static List<Conf@(Model.TableName)> array = new List<Conf@(Model.TableName)>();
+		
+		public Conf@(Model.TableName)()
+		{
+		}
+
+		public static void Init()
+		{
+			LoadRes();
+		}
+		@for (var i = 0; i < Model.SheetColumns; i++){
+			@:public readonly @Model.AttributeTypes[@i] @Model.AttributeNames[@i];
+			
+		}
+
+		public Conf@(Model.TableName)( @for (var i = 0; i < Model.SheetColumns -1; i++){@: 		@Model.AttributeTypes[@i] @Model.AttributeNames[@i],
+		} 
+ 		@Model.AttributeTypes[@Model.SheetColumns -1] @Model.AttributeNames[@Model.SheetColumns -1]){
+ 			@for (var i = 0; i < Model.SheetColumns; i++){
+			@: this.@Model.AttributeNames[@i] = @Model.AttributeNames[@i];
+			
+		}
+		}
+		private static Dictionary<@Model.AttributeTypes[0], Conf@(Model.TableName)> dic = new Dictionary<@Model.AttributeTypes[0], Conf@(Model.TableName)>();
+
+		private static void OnLoadFile(string name, UnityEngine.Object obj)
+		{
+			if(name != "@(Model.TableName).bytes"){
+				ConfigUtil.LogWarning("invalid file: " + name + ", need: " + "@(Model.TableName).bytes");
+				return;
+			}
+			TextAsset ta = obj as TextAsset;
+			if(ta == null)
+			{
+				ConfigUtil.LogError("text asset is null");
+				return;
+			}
+			byte[] data = ta.bytes;
+
+			System.IO.MemoryStream ms = new System.IO.MemoryStream(data);
+			System.IO.BinaryReader br = new System.IO.BinaryReader(ms);
+
+			string flag = br.ReadString();
+			if(flag != "Conf@(Model.TableName)")
+			{
+				ConfigUtil.LogWarning("invalid file flag" + flag);
+				return;
+			}
+			int col_cnt = br.ReadInt32();
+
+			Dictionary<string, object> dic_interm_val = new Dictionary<string, object>();
+            List<int> dic_type = new List<int>();
+            List<string> field_list = new List<string>();
+
+            ConfigUtil.ReadColumnData(br,col_cnt,dic_type,field_list);
+			int row_cnt = br.ReadInt32();
+			for(int i = 0; i < row_cnt; i++)
+			{
+				Add_Item(br,col_cnt,dic_interm_val,dic_type,field_list);
+			}
+
+			resLoaded = true;
+			
+			ConfigUtil.ReleaseAsset(name, obj);
+			ConfigUtil.RemoveAsset(name);
+		}
+
+		private static void Add_Item(BinaryReader br, int col_cnt, Dictionary<string,object>dic_interm_val, List<int>dic_type, List<string>field_list)
+		{
+			ConfigUtil.GetRowIntermData(br, col_cnt, dic_interm_val,dic_type,field_list);
+			try
+            {
+				@for (var i = 0; i < Model.SheetColumns; i++){
+					@:	@Model.AttributeTypes[@i] @Model.AttributeNames[@i] = (@Model.AttributeTypes[@i])dic_interm_val["@Model.AttributeNames[@i]"];
+				}
+
+				Conf@(Model.TableName)	new_obj_Conf@(Model.TableName) = new Conf@(Model.TableName)(@for (var i = 0; i < Model.SheetColumns -1; i++){@: 		 @Model.AttributeNames[@i],
+				}
+				@Model.AttributeNames[Model.SheetColumns -1]
+				);
+				if(dic.ContainsKey(@Model.AttributeNames[0]))
+				{
+					ConfigUtil.LogWarning("duplicate key: " + @Model.AttributeNames[0]);
+					return;
+				}
+
+				dic.Add(@Model.AttributeNames[0], new_obj_Conf@(Model.TableName));
+				array.Add(new_obj_Conf@(Model.TableName));
+
+            }catch (KeyNotFoundException knfe)
+            {
+                Debug.LogError(knfe);
+            }
+		}
+		private static void LoadRes()
+		{
+			if(resLoaded) return;
+			ConfigUtil.LoadRes("@(Model.TableName).bytes", OnLoadFile);
+		}
+
+		public static Conf@(Model.TableName) GetConfig( @Model.AttributeTypes[0] id)
+		{
+    		if (dic.ContainsKey(id))
+    			return dic[id];
+    		else
+    			return null;
+		}
+
+		public static Conf@(Model.TableName) Get(@(Model.AttributeTypes[0]) id)
+        {
+			if(dic.ContainsKey(id))
+				return dic[id];
+			else
+				return null;
+        }
+
+         public static Conf@(Model.TableName) GetConfig( string fieldName, object fieldValue)
+        {
+        	Conf@(Model.TableName) config = null;
+            Type type = typeof(Conf@(Model.TableName));
+            FieldInfo fieldInfo = type.GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
+			if (fieldInfo.FieldType != fieldValue.GetType())
+                fieldValue = Convert.ChangeType(fieldValue, fieldInfo.FieldType);
+            if (fieldInfo != null)
+            {
+                for (int i = 0; i < array.Count; i++)
+                {
+                    if (fieldInfo.GetValue(array[i]).Equals(fieldValue))
+                    {
+                        config = array[i];
+                        break;
+                    }
+                }
+            }
+            config = new Conf@(Model.TableName)();
+        	return config;
+        }
+        /*
+		public static Conf@(Model.TableName)[] GetArray()
+		{
+			return array.ToArray();
+		}
+		*/
+        public static void Clear()
+        {
+            dic.Clear();
+            array.Clear();
+            resLoaded = false;
+        }
+
+	}
+}

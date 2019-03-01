@@ -1,0 +1,190 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "AuthMsg";
+
+import "options.proto";
+import "status.proto";
+import "playerInfo.proto";
+
+enum OsType{
+	ios=0;
+	andorid=1;
+	web=2;
+}
+
+//注册
+message CSRegRequest{
+	option (messageId) = 1001;
+	option (serverTarget)="auth/reg";
+
+	string username = 1;//用户名，唯一且不可变，建议使用手机号或邮箱
+	string pwd = 2;//密码
+}
+message SCRegResponse{
+	option (messageId) = 1002;	
+	int32 result = 1;//1表示注册成功，2表示用户名已注册，3表示注册失败（待细化）
+}
+
+
+//游客登录
+message CSRegGuestRequest{
+	option (messageId) = 1040;
+	option (serverTarget)="auth/guest/reg";
+	string deviceId = 1;
+	string osType = 2;
+	string ad =3;//广告投放
+}
+
+message SCRegGuestResponse{
+	option (messageId) = 1041;
+	ResponseStatus status= 1;
+	string guest_identify=2;
+}
+
+//验证token
+message CSTockenCheckRequest{
+	option (messageId) = 1042;
+	option (serverTarget)="auth/token/check";
+}
+
+message SCTockenCheckRepsonse{
+	option (messageId) = 1043;
+	ResponseStatus status= 1;
+	int64 startTime = 2;
+	int64 deadline=3;
+	int32 thirdBind=4;
+}
+
+
+//认证
+message CSIdentifyCheckRequest{
+	option (messageId) = 1044;
+	option (serverTarget)="auth/identify/check";
+	string identify=1;
+}
+
+message SCIdentifyCheckRepsonse{
+	option (messageId) = 1045;
+	ResponseStatus status= 1;
+	string accessToken = 2;
+	int64 startTime = 3;
+	int64 deadline=4;
+	int32 thirdBind=5;
+}
+
+/*facebook login*/
+message CSFBLoginRequest{
+	option (messageId) = 1046;
+	option (serverTarget)="auth/fb/login";
+
+	string accessToken=1;
+	string fbId=2;
+	int64 expiresIn=3;
+
+	string deviceId = 4;
+	OsType osType = 5;
+	string ad =6;//广告投放
+}
+
+message SCFBLoginResponse{
+	option (messageId) = 1047;
+	ResponseStatus status= 1;
+	string identify=2;
+	string longLifeAcessToken=3;
+}
+
+/*facebook 绑定*/
+message CSFBBindRequest{
+	option (messageId) = 1048;
+	option (serverTarget)="auth/fb/bind";
+	string identify=1;
+	string accessToken=2;
+	string fbId=3;
+	int64 expiresIn=4;
+}
+
+message SCFBBindResponse{
+	option (messageId) = 1049;
+	ResponseStatus status= 1;
+	string identify=2;
+	string longLifeAcessToken=3;
+	bool hasBeenBinded =4;//是否以前绑定过 如果绑定过，上面的identify是以前号的
+	//以下三项，曾经绑定过才有，推的是老号信息
+	int64 id=5;
+	string name=6;
+	int32 level=7;
+	int32 cashCount=8;//奖励钞票个数
+	string icon=9;//头像
+}
+
+message SCIdentifyCheckMuiltyMessage{
+	option (messageId) = 1050;
+	repeated IdentifyCheckResponseContent contents =1;
+	ResponseStatus status= 2;
+}
+
+message IdentifyCheckResponseContent{
+	int32 msgId=1; //相关内容的msgId
+	string data=2; //相关byte[]，base64编码为string
+}
+
+
+
+//客户端验证请求
+message CSAuthRequest{
+	option (messageId) = 1003;
+	option (serverTarget)="auth/auth";
+	string username = 1;
+	string pwd = 2;
+}
+
+message SCAuthResponse{
+	option (messageId) = 1004;
+	int32 result = 1;
+	string accessToken = 2;
+	string username = 3;
+}
+
+// *登录请求
+message CSloginRequest{
+	option (messageId) = 1007;
+	option (serverTarget)="login/login";
+	string username = 1;//第三方平台返回的用户唯一凭证，第三方保证同一用户的username永不会变并且在该渠道下的唯一性.自有渠道在注册时填写的用户名，不可修改。
+	string pwd = 2;//自有渠道的用户密码或者第三方平台返回的accessToken.
+	int32 platform = 3;//平台标识，客户端根据不同的第三方sdk填约定好的值(自有渠道暂定为0),username+platform即可确定唯一玩家.
+	string nickname = 4;//昵称。第三方平台返回的值，第一次创建玩家信息的时候会使用。
+}
+// /**登录返回信息
+message SCloginResponse{
+	option (messageId) = 1008;
+	int32 result = 1;//是否登录成功，1表示成功，2表示失败。
+	int64 playerId = 2;
+	string playerName = 3;//用户名
+	string playerIcon = 4;
+	int32 coin = 5;
+	int32 cash = 6;
+	int32 vit = 7;
+	int32 level = 8;
+	int32 exp = 9; //当前等级以获得经验
+	int32 laborUnion = 10;
+	int32 upgradeExp = 11; //升到下一等级需要的经验
+	float expMultiple = 12;	//经验加成
+	int32 platform = 13;//平台标识
+	string nickname = 14;//昵称
+	string accessToken = 15;//访问唯一标识
+	int64 lastAddVitTime = 16;//上次增加体力值的时间
+	int64 millisRecoverOneVit = 18;//恢复一点体力值需要的毫秒数
+	int32 hasRenamed = 19;//0表示未修改过，1表示已修改过
+
+}
+
+message CSAuthCheck{
+	option (messageId) = 1050;
+	option (serverTarget)="auth/check";
+	string deviceId = 1;
+	string osType = 2;
+}
+message SCAuthCheck{
+	option (messageId) = 1051;
+	string identify = 1;
+}

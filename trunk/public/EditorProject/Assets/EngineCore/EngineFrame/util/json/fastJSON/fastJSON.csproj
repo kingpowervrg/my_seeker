@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>807446bc-00f1-4c15-99d6-3d1c99a42b9c</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">DebugUtil</Configuration>
+    <AssemblyName>fastJSON</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugUtil|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\DebugUtil\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="fastJSON\SafeDictionary!2.cs" />
+    <Compile Include="fastJSON\Formatter.cs" />
+    <Compile Include="fastJSON\Getters.cs" />
+    <Compile Include="fastJSON\myPropInfoType.cs" />
+    <Compile Include="fastJSON\myPropInfoFlags.cs" />
+    <Compile Include="fastJSON\myPropInfo.cs" />
+    <Compile Include="fastJSON\Reflection.cs" />
+    <Compile Include="fastJSON\Serialize.cs" />
+    <Compile Include="fastJSON\Deserialize.cs" />
+    <Compile Include="fastJSON\JSONParameters.cs" />
+    <Compile Include="fastJSON\JSON.cs" />
+    <Compile Include="fastJSON\deserializer.cs" />
+    <Compile Include="fastJSON\JSONSerializer.cs" />
+    <Compile Include="fastJSON\DatasetSchema.cs" />
+    <Compile Include="fastJSON\JsonParser.cs" />
+  </ItemGroup>
+</Project>

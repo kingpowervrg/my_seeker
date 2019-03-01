@@ -1,0 +1,92 @@
+require "game/utils/functions"
+
+--<summary>
+--Generated from @(Model.ExcelName)
+@for (var i = 0; i < Model.SheetColumns; i++){@: --@Model.AttributeTypes[@i]  @Model.AttributeNames[@i]
+}
+--</summary>
+
+--local resLoaded = false
+local array = nil
+
+Conf@(Model.TableName) = {}
+
+function Conf@(Model.TableName):New(o)
+        o = o or {}
+        setmetatable(o, self)
+        self.__index = self
+        return o
+end
+	
+function Conf@(Model.TableName).Init(loadfunc)
+	Conf@(Model.TableName).resLoaded = false
+	Conf@(Model.TableName).loadfunc = loadfunc
+    Conf@(Model.TableName).LoadRes()
+end
+
+function Conf@(Model.TableName).LoadRes()
+    if Conf@(Model.TableName).resLoaded == true then 
+    	return 
+    end
+    ConfigUtil.LoadRes("@(Model.TableName).bytes", Conf@(Model.TableName).OnLoadFile)
+end
+
+
+function Conf@(Model.TableName).OnLoadFile(name, obj)
+    array = {}
+
+    if obj == nil then
+    	return
+    end
+
+    local ms = System.IO.MemoryStream.New(obj.bytes)
+    local br = System.IO.BinaryReader.New(ms)
+    local flag = br:ReadString()
+   
+    if flag ~= "Conf@(Model.TableName)" then 
+        return
+    end
+
+    local col_cnt = br:ReadInt32()
+    local field_list, dic_type = ConfigReadColumnData(br, col_cnt)
+
+    local row_cnt = br:ReadInt32()
+    local item = nil
+    for i=1,row_cnt do
+        item = Conf@(Model.TableName).AddItem(br, col_cnt, field_list, dic_type)
+        array[item.sn] = item
+    end
+    array["count"] = row_cnt
+    Conf@(Model.TableName).resLoaded = true
+	
+	if Conf@(Model.TableName).loadfunc then
+		Conf@(Model.TableName).loadfunc(name)
+	end
+end
+
+function Conf@(Model.TableName).AddItem(br, col_cnt, field_list, dic_type)
+    local item = Conf@(Model.TableName):New()
+    for i=1,col_cnt do
+            item[field_list[i]] = ConfigGetIntermData( br, dic_type[i])
+    end
+    return item
+end
+
+function Conf@(Model.TableName).Get(id)
+	if array == nil then
+		return {}
+	end
+    return array[id]
+end
+
+function Conf@(Model.TableName).GetCount()
+    return array.count
+end
+
+function Conf@(Model.TableName).GetArray()
+    return array
+end
+
+--Conf@(Model.TableName).Init()
+
+return Conf@(Model.TableName)

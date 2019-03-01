@@ -1,0 +1,6 @@
+public final class MessageDefine{
+@foreach (var m in Model) 
+        {
+            @:public final int @(m.MessageType)= @(m.MessageId);
+        }
+}

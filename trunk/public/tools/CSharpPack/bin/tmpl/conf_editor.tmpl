@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Reflection;
+
+namespace conf
+{
+	[ConfigAttribute("Conf@(Model.TableName)")]
+	public class Conf@(Model.TableName)
+	{
+		private const string EXCEL_FILE = "../../../../config/@(Model.ExcelName).xlsx";
+		private const int SHEET_INDEX = 0;
+		private static List<Conf@(Model.TableName)> _datas;
+        private static PropertyInfo[] _fieldInfos;
+        public static List<Conf@(Model.TableName)> Datas {
+            get
+            {
+                if (_datas == null)
+                {
+                    conf.ConfHelper.LoadFromExcel<Conf@(Model.TableName)>(EXCEL_FILE, SHEET_INDEX, out _datas, out _fieldInfos);
+                }
+                return _datas;
+            }
+        }
+        public static bool Save(){
+            if (_datas == null)
+                return false;
+            conf.ConfHelper.SaveToExcel<Conf@(Model.TableName)>(EXCEL_FILE, SHEET_INDEX, _datas, _fieldInfos);
+            return true;
+        }
+        @for (var i = 0; i < Model.SheetColumns; i++){
+			@:public @Model.AttributeTypes[@i] @Model.AttributeNames[@i] { get; set;}
+			
+		}
+		public override string ToString()
+        {
+            return sn.ToString()  + "-" + name;
+        }
+	}
+}

@@ -1,0 +1,111 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "PlayerInfoMsg";
+
+import "options.proto";
+import "officer.proto";
+import "push.proto";
+
+message CSPlayerInfoRequest{
+	option (messageId) = 1401;
+	option (serverTarget)="player/info/info";
+	int64 playerId = 1;
+}
+
+message SCPlayerInfoResponse{
+	option (messageId) = 1402;
+	int64 playerId = 1;
+	string playerName = 2;
+	string playerIcon = 3;
+	int32 coin = 4;
+	int32 cash = 5;
+	int32 vit = 6;
+	int32 level = 7;
+	int32 exp = 8; //当前等级以获得经验
+	int32 laborUnion = 9;
+	int32 upgradeExp = 10; //当前等级总经验
+	float expMultiple = 11;	//经验加成
+	int64 lastAddVitTime = 12;//上次增加体力值的时间
+	int64 millisRecoverOneVit = 13;//恢复一点体力值需要的毫秒数
+	int32 hasRenamed = 14;//0表示未修改过，1表示已修改过
+	int64 infiniteVitRestTime=15;//无限体力剩余毫秒
+}
+
+message CSRenameRequest{
+	option (messageId) = 1403;
+	option (serverTarget)="player/info/rename";
+	int64 playerId = 1;
+	string newName = 2;
+
+}
+/**
+*result 0表示失败（一般是异常了）
+*1表示成功 2表示不能为空 3表示超过最大字符长度20(utf-8编码的长度) 4表示名字已存在 5表示钞票不足*/
+message SCRenameResponse{
+	option (messageId) = 1404;
+	int64 playerId = 1;
+	int32 result = 2;
+	string newName = 3;
+}
+
+message CSPlayerCheckInInfoReq{
+	option (messageId) = 1405;
+	option (serverTarget)="checkin/info";
+}
+
+message SCPlayerCheckInInfoResp{
+	option (messageId) = 1406;
+
+	int64 id = 1;
+	int32 day = 2;//当前签到的周期数
+	int32 status = 3;//当天是否已签到（0未签到，1已签到）
+}
+
+message CSPlayerCheckInReq{
+	option (messageId) = 1407;
+	option (serverTarget)="checkin/checkin";
+}
+
+message SCPlayerCheckInResp{
+	option (messageId) = 1408;
+	int32 result = 1;//1成功，2表示已签到，3表示失败
+}
+
+message CSPlayerRenewIconReq{
+	option (messageId) = 1409;
+	option (serverTarget)="player/info/renewicon";
+	string newIcon = 1;
+}
+
+/**0是失败，1是成功*/
+message SCPlayerRenewIconResp{
+	option (messageId) = 1410;
+	int32 result = 1;
+	string newIcon = 2;
+}
+
+
+message SCPlayerUpLevel{
+	option (messageId) = 1411;
+	int32 oldLevel = 1;//原等级
+	int32 newLevel = 2;//现等级
+	repeated RewardItem rewards =3;//奖励
+	int64 unLockBuildId =4;//解锁建筑
+	Push_Info pushInfo =5;//礼包推送 自动类型
+}
+
+message CSPlayerGuildRequest{
+	option (messageId) = 1412;
+	option (serverTarget)="player/info/guild";
+}
+
+message SCPlayerGuildResponse{
+	option (messageId) = 1413;
+	string guild =1;
+}
+
+message CSPlayerGuildUpdateRequest{
+	option (messageId) = 1414;
+	option (serverTarget)="player/info/guildUpdate";
+	string guild = 1;
+}

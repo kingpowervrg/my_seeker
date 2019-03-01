@@ -1,0 +1,37 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "PushMsg";
+
+import "options.proto";
+import "status.proto";
+
+
+message Push_Info{
+	int32 type =1;//类型 1为手动 2为自动
+	int64 pushId =2;//推送ID
+	int64 endTime =3;//结束时间
+	bool buyed =4;//是否已购买
+}
+
+
+message CSGetPushRequest{
+	option (messageId) = 2801;
+	option (serverTarget)="push/getPush";
+}
+
+
+message SCGetPushResponse{
+	option (messageId) = 2802;
+	repeated Push_Info infos =1;
+}
+
+message CSBuyPushRequest{
+	option (messageId) = 2803;
+	option (serverTarget)="push/buyPush";
+	int64 pushId =1;
+}
+message SCBuyPushResponse{
+	option (messageId) = 2804;
+	int64 pushId =1;
+	ResponseStatus reponseStatus=2;
+}

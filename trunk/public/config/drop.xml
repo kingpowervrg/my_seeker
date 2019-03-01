@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropGifts>
+    <PropGift>
+        <id>1</id><!--掉落id-->
+        <name></name><!--名字-->
+        <icon></icon><!--图标路径-->
+        <description></description><!--描述-->
+        <fixed type="1"><!--固定掉落组-->
+            <!--掉落物品的配置-->
+            <PropGiftItem >
+                <value>100001</value>
+                <count>5</count>
+                <rate>5000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100002</value>
+                <count>2</count>
+                <rate>5000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100003</value>
+                <count>3</count>
+                <rate>5000</rate>
+            </PropGiftItem>
+        </fixed>
+        
+        <numRate type="2" ><!--随机掉落数量的配置-->
+            <PropGiftItem>
+                <count>0</count>
+                <rate>500</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <count>1</count>
+                <rate>1000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <count>2</count>
+                <rate>1000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <count>3</count>
+                <rate>3000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <count>4</count>
+                <rate>2000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <count>5</count>
+                <rate>2500</rate>
+            </PropGiftItem>
+        </numRate>
+    
+        <merge type="1"><!--合并掉落组--><!--掉落物品的配置-->
+            <PropGiftItem>
+                <value>100011</value>
+                <count>1</count>
+                <rate>5000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100012</value>
+                <count>1</count>
+                <rate>3000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100013</value>
+                <count>1</count>
+                <rate>2000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100014</value>
+                <count>1</count>
+                <rate>1000</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100015</value>
+                <count>1</count>
+                <rate>500</rate>
+            </PropGiftItem>
+            <PropGiftItem>
+                <value>100016</value>
+                <count>1</count>
+                <rate>100</rate>
+            </PropGiftItem>
+        </merge>        
+    </PropGift>
+</PropGifts>

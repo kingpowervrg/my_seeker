@@ -1,0 +1,29 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "CommonMsg";
+
+import "options.proto";
+
+message CSPingRequest{
+	option (messageId) = 1901;
+	option (serverTarget)="ping/ping";
+}
+
+message SCPingResponse{
+	option (messageId) = 1902;
+	int32 count = 1;//需要请求的消息数
+	repeated PingResponseContent content = 2;
+
+}
+
+message PingResponseContent{
+	int32 msgId=1; //相关内容的msgId
+	string data=2; //相关byte[]，base64编码为string
+	bool isEmpty=3; // byte[] 是否为空
+}
+
+
+message CSMessageRequest{
+	option (messageId) = 1903;
+	option (serverTarget)="ping/message";
+}

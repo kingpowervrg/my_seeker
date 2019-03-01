@@ -1,0 +1,35 @@
+syntax = "proto3";
+option java_package = "com.fotoable.conan.common.proto";
+option java_outer_classname = "BuildingMsg";
+
+import "options.proto";
+import "status.proto";
+
+/**客户端请求玩家的建筑列表*/
+message CSBuildingListReq{
+	option(messageId) = 2401;
+	option (serverTarget)="building/list";
+}
+
+message SCBuildingListResp{
+	option(messageId) = 2402;
+	repeated BuildingInfo infos = 1;
+}
+
+message BuildingInfo{
+	int64 buildingId = 1;
+	int32 status = 2;//1表示已解锁2可解锁的
+}
+
+/**客户端请求解锁某建筑*/
+message CSBuildingUnlockReq{
+	option(messageId) = 2403;
+	option (serverTarget)="building/unlock";
+	int64 buildingId = 1;//配置id
+}
+
+message SCBuildingUnlockResp{
+	option(messageId) = 2404;
+	ResponseStatus responseStatus=1;
+	int64 buildingId = 2; 
+}
